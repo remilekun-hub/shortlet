@@ -1,5 +1,6 @@
 import Modal from "./Modal";
 import RegisterModalState from "../../zustand/useRegisterModal";
+import axios from "axios";
 
 function RegisterModal(): JSX.Element {
   const registerModal = RegisterModalState();
@@ -25,13 +26,26 @@ function RegisterModal(): JSX.Element {
       />
     </div>
   );
-  const handleSubmit = () => {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ name: "remi", isAdmin: "true" })
-    );
-    alert("details submitted");
-    registerModal.onClose();
+  const handleSubmit = async () => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/v1/auth/register",
+        {
+          name: "remi",
+          email: "atandaremilekun@gmail.com",
+          password: "remilekun",
+        }
+      );
+      console.log({ data });
+    } catch (error) {
+      console.log(error);
+    }
+    // localStorage.setItem(
+    //   "user",
+    //   JSON.stringify({ name: "remi", isAdmin: "true" })
+    // );
+    // alert("details submitted");
+    // registerModal.onClose();
   };
 
   return (
@@ -40,7 +54,6 @@ function RegisterModal(): JSX.Element {
       onClose={registerModal.onClose}
       title="Register"
       actionLabel="Submit"
-      body={body}
       onSubmit={handleSubmit}
     />
   );

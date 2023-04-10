@@ -34,6 +34,7 @@ const loginUser = async (req, res) => {
   res.status(StatusCodes.OK).json({
     name: user.name,
     isAdmin: user.isAdmin,
+    id: user._id,
     token,
   });
 };

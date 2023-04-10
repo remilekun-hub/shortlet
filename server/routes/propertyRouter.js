@@ -11,11 +11,13 @@ const {
 } = require("../controller/property");
 
 router.route("/").get(getProperties).post(createProperty);
+
 router
   .route("/:id")
   .get(getProperty)
   .patch(updateProperty)
   .delete(deleteProperty);
+
 router.route("/:id/review").post(createPropertyReview);
 router.route("/:id/review/:reviewID").delete(deletePropertyReview);
 

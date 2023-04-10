@@ -13,19 +13,24 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const location = useLocation();
   const setUser = userSlice((state) => state.setUser);
-  const User = userSlice((state) => state);
+  const user = userSlice((state) => state);
   const registerModal = useRegisterModalState();
   const navigate = useNavigate();
 
   const logout = async () => {
-    await localStorage.removeItem("user");
-    User.removeUser();
+    localStorage.removeItem("user");
+    user.removeUser();
+    navigate(0);
   };
   useEffect(() => {
     let storageUser = localStorage.getItem("user");
     if (storageUser != null) {
-      const parsedUser: { name: string; isAdmin: boolean } =
-        JSON.parse(storageUser);
+      const parsedUser: {
+        name: string;
+        isAdmin: boolean;
+        id: string;
+        token: string;
+      } = JSON.parse(storageUser);
       setUser({ ...parsedUser });
       return;
     }
@@ -36,7 +41,6 @@ function App() {
       {!location.pathname.startsWith("/dashboard") && <NavBar />}
       <RegisterModal />
       <LoginModal />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/apartments" element={<Apartments />} />
@@ -60,6 +64,8 @@ function App() {
 
         <Route path="*" element={"route does not exist"} />
       </Routes>
+      welcome{""}
+      {user?.user?.name}
       <button onClick={logout}>logout</button>
     </>
   );
