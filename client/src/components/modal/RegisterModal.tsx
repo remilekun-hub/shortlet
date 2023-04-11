@@ -7,6 +7,8 @@ import { useState } from "react";
 
 function RegisterModal(): JSX.Element {
   const [first, setfirst] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [resMessage, setResMessage] = useState({ message: "", color: "" });
   const registerModal = RegisterModalState();
 
   const form = useForm({
@@ -44,7 +46,7 @@ function RegisterModal(): JSX.Element {
         <TextInput
           withAsterisk
           label="Name"
-          placeholder="Enter your name here"
+          placeholder="Michael"
           {...form.getInputProps("name")}
           mb={10}
           autoComplete="no"
@@ -61,11 +63,12 @@ function RegisterModal(): JSX.Element {
           withAsterisk
           label="Password"
           autoComplete="no"
-          placeholder="Enter your password here"
+          placeholder="Password"
           {...form.getInputProps("password")}
         />
       </form>
-      <p>{first}</p>
+      {isLoading && "...Loading"}
+      <p className="text-center">{first}</p>
     </>
   );
 
@@ -74,6 +77,7 @@ function RegisterModal(): JSX.Element {
     email: string;
     password: string;
   }) => {
+    setIsLoading(true);
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/auth/register",
@@ -85,6 +89,7 @@ function RegisterModal(): JSX.Element {
       );
     } catch (error: any) {
       setfirst(error?.message);
+      setIsLoading(false);
     } finally {
       setTimeout(() => {
         form.reset(), setfirst("");

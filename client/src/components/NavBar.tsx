@@ -5,7 +5,7 @@ function NavBar() {
   const [isMenu, setIsMenu] = useState(false);
   return (
     <header className="border-b border-black/20 stciky top-0">
-      <nav className="flex items-center justify-between max-w-[1300px] mx-auto px-4 py-5 md:px-[48px] lg:px-[50px] relative">
+      <nav className="flex items-center justify-between max-w-[1400px] mx-auto px-4 py-4 md:px-[48px] lg:px-[50px] relative">
         <div>logohere</div>
         <button
           onClick={() => setIsMenu(!isMenu)}

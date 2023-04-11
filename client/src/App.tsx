@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Home, Apartment, Dashboard } from "./pages";
+import { Home, Apartment, Dashboard, UserListings } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
 import Apartments from "./pages/Apartments";
 import { useEffect, useState } from "react";
@@ -12,9 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 function App() {
   const location = useLocation();
-  const setUser = userSlice((state) => state.setUser);
   const user = userSlice((state) => state);
-  const registerModal = useRegisterModalState();
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -31,7 +29,7 @@ function App() {
         id: string;
         token: string;
       } = JSON.parse(storageUser);
-      setUser({ ...parsedUser });
+      user.setUser({ ...parsedUser });
       return;
     }
   }, []);
@@ -45,11 +43,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/apartments" element={<Apartments />} />
         <Route path="/apartment/:id" element={<Apartment />} />
+        {user.user && (
+          <Route path="/user/me/listings" element={<UserListings />} />
+        )}
 
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute user={"remi"}>
+            <ProtectedRoute user={"wale"}>
               <Dashboard />
             </ProtectedRoute>
           }
@@ -64,7 +65,6 @@ function App() {
 
         <Route path="*" element={"route does not exist"} />
       </Routes>
-      welcome{""}
       {user?.user?.name}
       <button onClick={logout}>logout</button>
     </>

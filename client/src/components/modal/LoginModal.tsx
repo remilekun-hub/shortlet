@@ -1,12 +1,15 @@
 import Modal from "./Modal";
 import useLoginModalState from "../../zustand/UseLoginModal";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { userSlice } from "../../zustand/user";
 import { useForm } from "@mantine/form";
-import { TextInput, PasswordInput } from "@mantine/core";
+import { TextInput, PasswordInput, LoadingOverlay } from "@mantine/core";
+import { useState } from "react";
 
 function LoginModal() {
   const loginModaLState = useLoginModalState();
+  const [status, setStatus] = useState({ message: "", color: "" });
+  const [isLoading, setIsLoading] = useState(false);
   const user = userSlice((state) => state);
 
   const form = useForm({
@@ -33,6 +36,7 @@ function LoginModal() {
     },
   });
   const Login = async (values: { email: string; password: string }) => {
+    setIsLoading(true);
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/auth/login",
@@ -40,8 +44,21 @@ function LoginModal() {
       );
       localStorage.setItem("user", JSON.stringify(data));
       user.setUser(data);
-    } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      setStatus({
+        message: "Login Successful!",
+        color: "text-green-500",
+      });
+    } catch (error: any) {
+      setIsLoading(false);
+      setStatus({
+        message: `${error.response.data.msg}!`,
+        color: "text-red-500",
+      });
+    } finally {
+      setTimeout(() => {
+        form.reset(), setStatus({ message: "", color: "" });
+      }, 5000);
     }
   };
 
@@ -64,6 +81,11 @@ function LoginModal() {
           {...form.getInputProps("password")}
         />
       </form>
+      {/* change to loading componment later */}
+      <div className="mt-3 flex flex-col items-center">
+        {isLoading && <p>...Loading</p>}
+        <p className={`${status.color}`}>{status.message}</p>
+      </div>
     </>
   );
 

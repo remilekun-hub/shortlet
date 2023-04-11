@@ -5,7 +5,7 @@ interface MenuItemProp {
 
 function MenuItem({ title, onClick }: MenuItemProp) {
   return (
-    <div onClick={onClick} className="p-3 hover:bg-black/30 cursor-pointer">
+    <div onClick={onClick} className="p-3 hover:bg-black/20 cursor-pointer">
       {title}
     </div>
   );

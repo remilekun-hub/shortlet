@@ -6,7 +6,11 @@ type Prop = {
 };
 const ProtectedRoute = ({ children, user }: Prop) => {
   if (user !== "remi") {
-    return <Navigate to={"/"} />;
+    return (
+      <>
+        <Navigate to={"/"} />
+      </>
+    );
   }
   return children;
 };

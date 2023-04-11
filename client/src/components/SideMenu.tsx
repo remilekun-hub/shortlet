@@ -2,6 +2,7 @@ import { userSlice } from "../zustand/user";
 import MenuItem from "./MenuItem";
 import useRegisterModalState from "../zustand/useRegisterModal";
 import useLoginModalState from "../zustand/UseLoginModal";
+import { Link } from "react-router-dom";
 
 interface SideMenuProps {
   setIsMenu: (value: boolean) => void;
@@ -23,10 +24,12 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
   };
 
   return (
-    <aside className="absolute top-[76px] z-[500] right-4 lg:right-[50px] w-full max-w-[220px] drop-shadow-xl">
+    <aside className="absolute top-[65px] z-[500] right-4 lg:right-[50px] w-full max-w-[220px] drop-shadow-xl">
       <div className="bg-white rounded-[9px] overflow-hidden">
         {user ? (
-          <div>hvshkf</div>
+          <>
+            <Link to="/users/me/listing">My Listings</Link>
+          </>
         ) : (
           <>
             <MenuItem title="SignUp" onClick={handleSignUpItemClick} />
