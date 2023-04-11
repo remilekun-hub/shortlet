@@ -22,7 +22,14 @@ function LoginModal() {
           : /^\S+@\S+$/.test(value)
           ? null
           : "Invalid email",
-      password: (value) => (value === "" ? "password is required" : null),
+      password: (value) =>
+        value === ""
+          ? "password is required"
+          : value.length < 6
+          ? "password characters cannot be less tahn six"
+          : value.length > 10
+          ? "password characters cannot be more than ten"
+          : null,
     },
   });
   const Login = async (values: { email: string; password: string }) => {

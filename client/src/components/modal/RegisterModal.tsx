@@ -1,52 +1,100 @@
 import Modal from "./Modal";
 import RegisterModalState from "../../zustand/useRegisterModal";
 import axios from "axios";
+import { useForm } from "@mantine/form";
+import { TextInput, PasswordInput } from "@mantine/core";
+import { useState } from "react";
 
 function RegisterModal(): JSX.Element {
+  const [first, setfirst] = useState("");
   const registerModal = RegisterModalState();
 
+  const form = useForm({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    validate: {
+      name: (value) =>
+        value === ""
+          ? "Your name is required"
+          : value.length <= 3
+          ? "Name is too short"
+          : null,
+      email: (value) =>
+        value === ""
+          ? "Email is required"
+          : /^\S+@\S+$/.test(value)
+          ? null
+          : "Invalid email",
+      password: (value) =>
+        value === ""
+          ? "Password is required"
+          : value.length < 6
+          ? "Password characters cannot be less tahn six"
+          : value.length > 10
+          ? "Password characters cannot be more than ten"
+          : null,
+    },
+  });
   const body = (
-    <div className="flex flex-col gap-5">
-      <input
-        type="text"
-        name=""
-        placeholder="Name"
-        className="border-[2px] outline-none rounded-[5px] p-3 focus:bg-none"
-      />
-      <input
-        type="text"
-        name=""
-        placeholder="Email"
-        className="border-[2px] outline-none rounded-[5px] p-3 focus:bg-none"
-      />
-      <input
-        type="password"
-        name=""
-        className="border-[2px] outline-none rounded-[5px] p-3 focus:bg-none bg-none"
-      />
-    </div>
+    <>
+      <form>
+        <TextInput
+          withAsterisk
+          label="Name"
+          placeholder="Enter your name here"
+          {...form.getInputProps("name")}
+          mb={10}
+          autoComplete="no"
+        />
+        <TextInput
+          withAsterisk
+          label="Email"
+          placeholder="your@email.com"
+          {...form.getInputProps("email")}
+          mb={10}
+          autoComplete="no"
+        />
+        <PasswordInput
+          withAsterisk
+          label="Password"
+          autoComplete="no"
+          placeholder="Enter your password here"
+          {...form.getInputProps("password")}
+        />
+      </form>
+      <p>{first}</p>
+    </>
   );
-  const handleSubmit = async () => {
+
+  const register = async (values: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/auth/register",
         {
-          name: "remi",
-          email: "atandaremilekun@gmail.com",
-          password: "remilekun",
+          name: values.name,
+          email: values.email,
+          password: values.email,
         }
       );
-      console.log({ data });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setfirst(error?.message);
+    } finally {
+      setTimeout(() => {
+        form.reset(), setfirst("");
+      }, 5000);
     }
-    // localStorage.setItem(
-    //   "user",
-    //   JSON.stringify({ name: "remi", isAdmin: "true" })
-    // );
-    // alert("details submitted");
-    // registerModal.onClose();
   };
+
+  const handleFormSubmit = form.onSubmit(async (values) => {
+    await register(values);
+  });
 
   return (
     <Modal
@@ -54,7 +102,8 @@ function RegisterModal(): JSX.Element {
       onClose={registerModal.onClose}
       title="Register"
       actionLabel="Submit"
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
+      body={body}
     />
   );
 }

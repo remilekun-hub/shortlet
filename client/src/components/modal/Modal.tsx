@@ -4,14 +4,14 @@ import Button from "../Button";
 interface ModalProp {
   isOpen?: boolean;
   onClose: () => void;
-  onSubmit?: () => void;
+  onSubmit: () => void;
   title?: string;
   body?: ReactElement;
   footer?: ReactElement;
   actionLabel: string;
   disabled?: boolean;
   secondaryAction?: () => void;
-  secondaryLabel?: () => void;
+  secondaryLabel?: string;
 }
 
 function Modal({
@@ -46,6 +46,7 @@ function Modal({
     if (disabled) {
       return;
     }
+    onSubmit();
   }, [disabled, onSubmit]);
 
   if (!isOpen) {
@@ -55,7 +56,7 @@ function Modal({
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black/40 flex justify-center items-center`}
+        className={`fixed inset-0 bg-black/50 flex justify-center items-center z-[50000]`}
       >
         <div className="relative w-full md:w-4/6 lg:3/6 xl:w-2/5 mx-auto h-full md:h-auto">
           {/* content */}
@@ -81,7 +82,7 @@ function Modal({
               <div className="flex-auto relative p-6 pb-2">{body}</div>
               <footer className="flex flex-col gap-2 p-6">
                 <div className=" flex flex-row items-center gap-4 w-full">
-                  <Button label={actionLabel} onSubmit={onSubmit} />
+                  <Button label={actionLabel} onSubmit={handleSubmit} />
                 </div>
               </footer>
             </div>
