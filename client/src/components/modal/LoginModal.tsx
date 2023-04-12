@@ -8,8 +8,11 @@ import { useState } from "react";
 
 function LoginModal() {
   const loginModaLState = useLoginModalState();
-  const [status, setStatus] = useState({ message: "", color: "" });
-  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState({
+    message: "",
+    color: "",
+    isLoading: false,
+  });
   const user = userSlice((state) => state);
 
   const form = useForm({
@@ -36,7 +39,7 @@ function LoginModal() {
     },
   });
   const Login = async (values: { email: string; password: string }) => {
-    setIsLoading(true);
+    setStatus({ ...status, isLoading: true });
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/auth/login",
@@ -44,20 +47,20 @@ function LoginModal() {
       );
       localStorage.setItem("user", JSON.stringify(data));
       user.setUser(data);
-      setIsLoading(false);
       setStatus({
         message: "Login Successful!",
         color: "text-green-500",
+        isLoading: false,
       });
     } catch (error: any) {
-      setIsLoading(false);
       setStatus({
         message: `${error.response.data.msg}!`,
         color: "text-red-500",
+        isLoading: false,
       });
     } finally {
       setTimeout(() => {
-        form.reset(), setStatus({ message: "", color: "" });
+        form.reset(), setStatus({ message: "", color: "", isLoading: false });
       }, 5000);
     }
   };
@@ -83,7 +86,7 @@ function LoginModal() {
       </form>
       {/* change to loading componment later */}
       <div className="mt-3 flex flex-col items-center">
-        {isLoading && <p>...Loading</p>}
+        {status.isLoading && <p>...Loading</p>}
         <p className={`${status.color}`}>{status.message}</p>
       </div>
     </>
