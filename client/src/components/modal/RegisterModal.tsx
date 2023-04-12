@@ -6,9 +6,11 @@ import { TextInput, PasswordInput } from "@mantine/core";
 import { useState } from "react";
 
 function RegisterModal(): JSX.Element {
-  const [first, setfirst] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [resMessage, setResMessage] = useState({ message: "", color: "" });
+  const [status, setStatus] = useState({
+    message: "",
+    color: "",
+    isLoading: false,
+  });
   const registerModal = RegisterModalState();
 
   const form = useForm({
@@ -67,8 +69,11 @@ function RegisterModal(): JSX.Element {
           {...form.getInputProps("password")}
         />
       </form>
-      {isLoading && "...Loading"}
-      <p className="text-center">{first}</p>
+      {/* change to loading componment later */}
+      <div className="mt-3 flex flex-col items-center">
+        {status.isLoading && <p>... Loading</p>}
+        <p className={`${status.color}`}>{status.message}</p>
+      </div>
     </>
   );
 
@@ -77,22 +82,27 @@ function RegisterModal(): JSX.Element {
     email: string;
     password: string;
   }) => {
-    setIsLoading(true);
+    setStatus({ ...status, isLoading: true });
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/auth/register",
-        {
-          name: values.name,
-          email: values.email,
-          password: values.email,
-        }
-      );
+      await axios.post("http://localhost:5000/api/v1/auth/register", {
+        name: values.name,
+        email: values.email,
+        password: values.email,
+      });
+      setStatus({
+        message: "Registration Successful!",
+        color: "text-green-500",
+        isLoading: false,
+      });
     } catch (error: any) {
-      setfirst(error?.message);
-      setIsLoading(false);
+      setStatus({
+        message: `${error.response.data.msg}!`,
+        color: "text-red-500",
+        isLoading: false,
+      });
     } finally {
       setTimeout(() => {
-        form.reset(), setfirst("");
+        form.reset(), setStatus({ message: "", color: "", isLoading: false });
       }, 5000);
     }
   };
