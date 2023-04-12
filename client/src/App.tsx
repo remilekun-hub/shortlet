@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      {!location.pathname.startsWith("/dashboard") && <NavBar />}
+      {/* {!location.pathname.startsWith("/dashboard") && <NavBar />} */}
       <RegisterModal />
       <LoginModal />
       <Routes>

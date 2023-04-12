@@ -36,6 +36,10 @@ const PropertySchema = new mongoose.Schema({
     type: Number,
     required: [true, "price per night must be provided"],
   },
+  title: {
+    type: String,
+    required: [true, "property title is required"],
+  },
   bed: {
     type: Number,
     required: [true, "number of beds in the property must be provided"],
