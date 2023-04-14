@@ -1,3 +1,7 @@
+body {
+  font-family: "Nunito", sans-serif;
+  font-size: 17px;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -4,7 +4,7 @@ import SideMenu from "./SideMenu";
 function NavBar() {
   const [isMenu, setIsMenu] = useState(false);
   return (
-    <nav className="flex items-center justify-between max-w-screen-xl mx-auto px-4 py-4 md:px-[48px] lg:px-[50px] xl:px-[80px] relative">
+    <nav className="flex items-center justify-between max-w-screen-xl mx-auto px-5 py-4 md:px-[48px] lg:px-[50px] xl:px-[80px] relative">
       <div>logohere</div>
       <button
         onClick={() => setIsMenu(!isMenu)}

@@ -66,7 +66,7 @@ function App() {
         <Route path="*" element={"route does not exist"} />
       </Routes>
       {user?.user?.name}
-      <button onClick={logout}>logout</button>
+      {/* <button onClick={logout}>logout</button> */}
     </>
   );
 }
