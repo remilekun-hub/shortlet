@@ -21,6 +21,9 @@ function Reserve({ price, review }: Prop) {
       LoginModal.onOpen();
       return;
     }
+    if (!value[0] || !value[1]) {
+      return;
+    }
   };
 
   const serviceFee = (): number | undefined => {
