@@ -56,7 +56,7 @@ function Modal({
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black/50 flex justify-center items-center z-[50000]`}
+        className={`fixed inset-0 bg-black/60 flex justify-center items-center z-[50000]`}
       >
         <div className="relative w-full md:w-4/6 lg:3/6 xl:w-2/5 mx-auto h-full md:h-auto">
           {/* content */}
