@@ -82,6 +82,9 @@ function Modal({
               <div className="flex-auto relative px-6 pt-6 pb-0">{body}</div>
               <footer className="flex flex-col gap-2 p-6">
                 <div className=" flex flex-row items-center gap-4 w-full">
+                  {secondaryLabel && secondaryAction && (
+                    <Button label={secondaryLabel} onSubmit={secondaryAction} />
+                  )}
                   <Button label={actionLabel} onSubmit={handleSubmit} />
                 </div>
               </footer>

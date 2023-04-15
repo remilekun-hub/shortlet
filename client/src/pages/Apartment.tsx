@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState, useMemo } from "react";
 import { calcDate } from "../util/calcDate";
 import { Property } from "../typings";
@@ -42,10 +41,6 @@ function Apartment() {
 
   return (
     <section>
-      <header className="border-b border-black/20">
-        <NavBar />
-      </header>
-
       <div className="mx-auto max-w-screen-xl px-5 sm:px-11 xl:px-[80px]">
         <div>
           {property ? (
@@ -55,7 +50,7 @@ function Apartment() {
                 <p className="font-normal underline">{`${property?.address}, ${property?.city}, ${property?.country}`}</p>
               </div>
 
-              <div className="h-[350px] rounded-[13px] overflow-hidden">
+              <div className="h-[370px] rounded-[13px] overflow-hidden">
                 <img
                   src={property?.photos[0]}
                   className="w-full object-cover h-full object-center"
@@ -118,7 +113,7 @@ function Apartment() {
               </div>
             </>
           ) : (
-            "no prop"
+            "no property"
           )}
         </div>
       </div>

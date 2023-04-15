@@ -15,3 +15,7 @@ export interface Property {
   reviews: string[] | [];
   __v?: number;
 }
+export interface Category {
+  label: string;
+  description: string;
+}
