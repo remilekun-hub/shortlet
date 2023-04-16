@@ -1,7 +1,7 @@
 import Modal from "./Modal";
 import useListingModalState from "../../zustand/listingModal";
 import { ReactElement, useMemo, useState } from "react";
-import { categories } from "../../categories";
+import { categories } from "../../data/categories";
 
 function CreateListingModal() {
   const [step, setStep] = useState(0);

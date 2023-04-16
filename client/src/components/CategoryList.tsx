@@ -1,4 +1,4 @@
-import { categories } from "../categories";
+import { categories } from "../data/categories";
 import SingleCategory from "./category/SingleCategory";
 import { useSearchParams } from "react-router-dom";
 

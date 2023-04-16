@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@fontsource/nunito": "^4.5.12",
-    "@heroicons/react": "^2.0.17",
     "@mantine/core": "^6.0.6",
     "@mantine/dates": "^6.0.6",
     "@mantine/form": "^6.0.6",
