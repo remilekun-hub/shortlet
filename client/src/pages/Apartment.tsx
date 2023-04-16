@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { calcDate } from "../util/calcDate";
 import { Property } from "../typings";
-import { Skeleton } from "@mantine/core";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 import Button from "../components/Button";

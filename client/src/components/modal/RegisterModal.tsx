@@ -1,17 +1,19 @@
 import Modal from "./Modal";
 import RegisterModalState from "../../zustand/useRegisterModal";
+import useLoginModalState from "../../zustand/UseLoginModal";
 import axios from "axios";
 import { useForm } from "@mantine/form";
 import { TextInput, PasswordInput } from "@mantine/core";
 import { useState } from "react";
 
 function RegisterModal(): JSX.Element {
+  const loginModal = useLoginModalState();
+  const registerModal = RegisterModalState();
   const [status, setStatus] = useState({
     message: "",
     color: "",
     isLoading: false,
   });
-  const registerModal = RegisterModalState();
 
   const form = useForm({
     initialValues: {
@@ -111,6 +113,19 @@ function RegisterModal(): JSX.Element {
     await register(values);
   });
 
+  const toggle = () => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  };
+  const footer = (
+    <div className="flex justify-center flex-wrap space-x-2 text-[14px]">
+      <p className="text-neutral-600">Already have an account?</p>
+      <p onClick={toggle} className="cursor-pointer">
+        Login{" "}
+      </p>
+    </div>
+  );
+
   return (
     <Modal
       isOpen={registerModal.isOpen}
@@ -119,6 +134,7 @@ function RegisterModal(): JSX.Element {
       actionLabel="Submit"
       onSubmit={handleFormSubmit}
       body={body}
+      footer={footer}
     />
   );
 }

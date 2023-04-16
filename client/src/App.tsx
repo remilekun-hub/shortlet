@@ -1,19 +1,15 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Home, Apartment, Dashboard, UserListings } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
 import Apartments from "./pages/Apartments";
-import { ReactElement, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { userSlice } from "./zustand/user";
-import useRegisterModalState from "./zustand/useRegisterModal";
 import RegisterModal from "./components/modal/RegisterModal";
-import NavBar from "./components/NavBar";
 import LoginModal from "./components/modal/LoginModal";
 import { useNavigate } from "react-router-dom";
 import CreateListingModal from "./components/modal/CreateListingModal";
-import CategoryList from "./components/CategoryList";
 
 function App() {
-  const location = useLocation();
   const user = userSlice((state) => state);
   const navigate = useNavigate();
 
@@ -38,7 +34,6 @@ function App() {
 
   return (
     <>
-      
       <RegisterModal />
       <LoginModal />
       <CreateListingModal />
