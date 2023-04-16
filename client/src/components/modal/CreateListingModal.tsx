@@ -1,12 +1,9 @@
 import Modal from "./Modal";
 import useListingModalState from "../../zustand/listingModal";
-import { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useCallback, useMemo, useState } from "react";
 import { categories } from "../../data/categories";
 
 function CreateListingModal() {
-  const [step, setStep] = useState(0);
-  const listingModal = useListingModalState();
-  const handleSubmit = () => {};
   enum STEPS {
     CATEGORY,
     LOCATION,
@@ -15,6 +12,27 @@ function CreateListingModal() {
     DESCRIPTION,
     PRICE,
   }
+  const [step, setStep] = useState(STEPS.CATEGORY);
+  const listingModal = useListingModalState();
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+  const formData = { category, location };
+  console.log({ step });
+
+  const handleSubmit = useCallback(() => {
+    if (!category) return;
+
+    if (step > STEPS.PRICE) {
+      setStep(0);
+    }
+    if (step === STEPS.PRICE) {
+      console.log("form submmitted");
+      listingModal.onClose();
+      return;
+    }
+    onNext();
+  }, [step, category]);
+
   const onBack = () => {
     setStep((step) => step - 1);
   };
@@ -39,42 +57,7 @@ function CreateListingModal() {
   const handleBodyContent = (): ReactElement => {
     let bodyContent: ReactElement;
     switch (step) {
-      case 1:
-        bodyContent = (
-          <>
-            <p>welcome to create a listing</p>
-          </>
-        );
-      case 2:
-        bodyContent = (
-          <>
-            <p>step 2</p>
-          </>
-        );
-        break;
-      case 3:
-        bodyContent = (
-          <>
-            <p>step 3</p>
-          </>
-        );
-        break;
-      case 4:
-        bodyContent = (
-          <>
-            <p>step 4</p>
-          </>
-        );
-        break;
-      case 5:
-        bodyContent = (
-          <>
-            <p>step 5</p>
-          </>
-        );
-        break;
-
-      default:
+      case 0:
         bodyContent = (
           <div className="flex flex-col gap-8">
             <h1>Which of these best describe your place</h1>
@@ -83,13 +66,37 @@ function CreateListingModal() {
               {categories.map((item) => (
                 <div
                   key={item.label}
-                  className="col-span-1 border-2 hover:border-black rounded-xl flex flex-col p-4 transition cursor-pointer"
+                  className={`col-span-1 border-2 hover:border-black rounded-xl flex flex-col p-4 transition cursor-pointer ${
+                    category === item.label && "border-black"
+                  }`}
+                  onClick={() => {
+                    if (category === item.label) {
+                      setCategory("");
+                      return;
+                    }
+                    setCategory(item.label);
+                  }}
                 >
                   {item.label}
                 </div>
               ))}
             </div>
           </div>
+        );
+        break;
+      case 1:
+        bodyContent = (
+          <>
+            <p>select your location</p>
+          </>
+        );
+        break;
+
+      default:
+        bodyContent = (
+          <>
+            <p>oops!</p>
+          </>
         );
     }
     return bodyContent;
