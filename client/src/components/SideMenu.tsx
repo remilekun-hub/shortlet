@@ -32,8 +32,8 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
           </>
         ) : (
           <>
-            <MenuItem title="SignUp" onClick={handleSignUpItemClick} />
-            <MenuItem title="Login" onClick={handleLoginItemClick} />
+            <MenuItem title="Sign Up" onClick={handleSignUpItemClick} />
+            <MenuItem title="Log in" onClick={handleLoginItemClick} />
           </>
         )}
       </div>
