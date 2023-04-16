@@ -5,7 +5,7 @@ import Property from "../components/Property";
 function Home() {
   return (
     <section>
-      <header className=" w-full bg-white sticky top-0 shadow mb-6">
+      <header className=" w-full bg-white sticky top-0 shadow mb-6 z-[50]">
         <div className="border-b-[1px] border-black/10">
           <NavBar />
         </div>
