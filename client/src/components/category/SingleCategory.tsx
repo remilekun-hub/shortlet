@@ -31,15 +31,15 @@ function SingleCategory({ label, selected }: Prop) {
 
   return (
     <div
-      className={`flex flex-col items-center
+      className={`flex flex-col items-center cursor-pointer p-2 text-[14px] group transition
       ${
         selected
           ? "border-b-[2px] border-black text-black"
-          : "border-transparent text-neutral-500"
+          : "text-neutral-500 border-b-[2px] border-transparent hover:border-black/10"
       }`}
       onClick={handleClick}
     >
-      <p>{label}</p>
+      <p className="group-hover:text-black">{label}</p>
       <p>icon here</p>
     </div>
   );

@@ -10,6 +10,7 @@ import NavBar from "./components/NavBar";
 import LoginModal from "./components/modal/LoginModal";
 import { useNavigate } from "react-router-dom";
 import CreateListingModal from "./components/modal/CreateListingModal";
+import CategoryList from "./components/CategoryList";
 
 function App() {
   const location = useLocation();
@@ -37,7 +38,7 @@ function App() {
 
   return (
     <>
-      {/* {!location.pathname.startsWith("/dashboard") && <NavBar />} */}
+      
       <RegisterModal />
       <LoginModal />
       <CreateListingModal />
@@ -67,8 +68,6 @@ function App() {
 
         <Route path="*" element={"route does not exist"} />
       </Routes>
-      {user?.user?.name}
-      {/* <button onClick={logout}>logout</button> */}
     </>
   );
 }

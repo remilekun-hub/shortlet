@@ -24,7 +24,7 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
   };
 
   return (
-    <aside className="absolute top-[67px] z-[500] right-5 md:right-[48px] lg:right-[50px] xl:right-[80px] w-full max-w-[220px] drop-shadow-xl">
+    <aside className="absolute top-[67px] z-[500] right-5 md:right-[48px] lg:right-[50px] xl:right-[60px] w-full max-w-[220px] drop-shadow-xl">
       <div className="bg-white rounded-[9px] overflow-hidden">
         {user ? (
           <>

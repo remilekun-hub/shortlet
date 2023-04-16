@@ -41,7 +41,7 @@ function Apartment() {
 
   return (
     <section>
-      <div className="mx-auto max-w-screen-xl px-5 sm:px-11 xl:px-[80px]">
+      <div className="mx-auto max-w-screen-xl px-5 sm:px-11 xl:px-[50px]">
         <div>
           {property ? (
             <>

@@ -27,32 +27,4 @@ export const categories: category[] = [
     label: "Pools",
     description: "This property has a pool",
   },
-  {
-    label: "Pools",
-    description: "This property has a pool",
-  },
-  {
-    label: "Pools",
-    description: "This property has a pool",
-  },
-  {
-    label: "Pools",
-    description: "This property has a pool",
-  },
-  {
-    label: "Pools",
-    description: "This property has a pool",
-  },
-  {
-    label: "Pools",
-    description: "This property has a pool",
-  },
-  {
-    label: "Pools",
-    description: "This property has a pool",
-  },
-  {
-    label: "Pools",
-    description: "This property has a pool",
-  },
 ];

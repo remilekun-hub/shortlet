@@ -69,7 +69,7 @@ function Modal({
           >
             <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white ">
               {/* header */}
-              <div className="flex justify-center relative p-4 rounded-t border-b-[1px]">
+              <div className="flex justify-center relative p-5 rounded-t border-b-[1px] border-black/10">
                 <button
                   className="absolute left-5 bottom-auto"
                   onClick={handleClose}
