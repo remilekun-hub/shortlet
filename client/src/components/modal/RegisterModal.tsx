@@ -120,8 +120,8 @@ function RegisterModal(): JSX.Element {
   const footer = (
     <div className="flex justify-center flex-wrap space-x-2 text-[14px]">
       <p className="text-neutral-600">Already have an account?</p>
-      <p onClick={toggle} className="cursor-pointer">
-        Login{" "}
+      <p onClick={toggle} className="cursor-pointer underline">
+        Log in{" "}
       </p>
     </div>
   );

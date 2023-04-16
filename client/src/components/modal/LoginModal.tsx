@@ -1,5 +1,6 @@
 import Modal from "./Modal";
 import useLoginModalState from "../../zustand/UseLoginModal";
+import useRegisterModalState from "../../zustand/useRegisterModal";
 import axios, { AxiosError } from "axios";
 import { userSlice } from "../../zustand/user";
 import { useForm } from "@mantine/form";
@@ -8,6 +9,7 @@ import { useState } from "react";
 
 function LoginModal() {
   const loginModaLState = useLoginModalState();
+  const registerModal = useRegisterModalState();
   const [status, setStatus] = useState({
     message: "",
     color: "",
@@ -95,6 +97,18 @@ function LoginModal() {
   const handleSubmit = form.onSubmit(async (values) => {
     await Login(values);
   });
+  const toggle = () => {
+    loginModaLState.onClose();
+    registerModal.onOpen();
+  };
+  const footer = (
+    <div className="flex justify-center flex-wrap space-x-2 text-[14px]">
+      <p className="text-neutral-600">Don't have an account yet?</p>
+      <p onClick={toggle} className="cursor-pointer underline">
+        Sign up{" "}
+      </p>
+    </div>
+  );
 
   return (
     <Modal
@@ -104,6 +118,7 @@ function LoginModal() {
       actionLabel="Submit"
       onSubmit={handleSubmit}
       body={body}
+      footer={footer}
     />
   );
 }
