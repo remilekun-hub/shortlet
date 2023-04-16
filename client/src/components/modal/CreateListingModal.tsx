@@ -22,12 +22,10 @@ function CreateListingModal() {
   const handleSubmit = useCallback(() => {
     if (!category) return;
 
-    if (step > STEPS.PRICE) {
-      setStep(0);
-    }
     if (step === STEPS.PRICE) {
       console.log("form submmitted");
       listingModal.onClose();
+      setStep(0);
       return;
     }
     onNext();
