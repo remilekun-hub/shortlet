@@ -3,6 +3,7 @@ import useListingModalState from "../../zustand/listingModal";
 import { ReactElement, useCallback, useMemo, useState } from "react";
 import { categories } from "../../data/categories";
 import Heading from "../Heading";
+import { Select } from "@mantine/core";
 
 function CreateListingModal() {
   enum STEPS {
@@ -18,7 +19,7 @@ function CreateListingModal() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const formData = { category, location };
-  console.log({ step });
+  console.log({ location });
 
   const handleSubmit = useCallback(() => {
     if (!category) return;
@@ -88,7 +89,25 @@ function CreateListingModal() {
       case 1:
         bodyContent = (
           <>
-            <p>select your location</p>
+            <p>Select your location</p>
+            <Select
+              label="Select apartment location "
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              searchValue={location}
+              onSearchChange={setLocation}
+              data={[
+                "Nigeria",
+                "USA",
+                "Germany",
+                "Ghana",
+                "Spain",
+                "Uk",
+                "Japan",
+                "Canada",
+              ]}
+            />
           </>
         );
         break;
