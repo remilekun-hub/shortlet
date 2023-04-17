@@ -2,6 +2,7 @@ import Modal from "./Modal";
 import useListingModalState from "../../zustand/listingModal";
 import { ReactElement, useCallback, useMemo, useState } from "react";
 import { categories } from "../../data/categories";
+import Heading from "../Heading";
 
 function CreateListingModal() {
   enum STEPS {
@@ -58,8 +59,10 @@ function CreateListingModal() {
       case 0:
         bodyContent = (
           <div className="flex flex-col gap-8">
-            <h1>Which of these best describe your place</h1>
-            <p>Pick a category</p>
+            <Heading
+              title="Which of these best describe your place"
+              subtitle="Pick a category"
+            />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
               {categories.map((item) => (
                 <div
