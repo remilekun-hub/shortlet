@@ -19,7 +19,7 @@ function CreateListingModal() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const formData = { category, location };
-  console.log({ location });
+  console.log({ formData });
 
   const handleSubmit = useCallback(() => {
     if (!category) return;
@@ -97,6 +97,11 @@ function CreateListingModal() {
               nothingFound="No options"
               searchValue={location}
               onSearchChange={setLocation}
+              transitionProps={{
+                transition: "pop",
+                duration: 80,
+                timingFunction: "ease",
+              }}
               data={[
                 "Nigeria",
                 "USA",
