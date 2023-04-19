@@ -4,6 +4,7 @@ import { ReactElement, useCallback, useMemo, useState } from "react";
 import { categories } from "../../data/categories";
 import Heading from "../Heading";
 import { Select } from "@mantine/core";
+import Counter from "../Counter";
 
 function CreateListingModal() {
   enum STEPS {
@@ -19,6 +20,13 @@ function CreateListingModal() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const formData = { category, location };
+  const [data, setData] = useState({
+    location: "",
+    guests: 1,
+    rooms: 1,
+    bathrooms: 1,
+  });
+  console.log({ data });
   console.log({ formData });
 
   const handleSubmit = useCallback(() => {
@@ -89,11 +97,16 @@ function CreateListingModal() {
       case 1:
         bodyContent = (
           <>
-            <p>Select your location</p>
+            <Heading
+              title="Where is your place located ?"
+              subtitle="Help guests find you"
+            />
             <Select
-              label="Select apartment location "
-              placeholder="Pick one"
+              placeholder="Anywhere"
               searchable
+              mt={20}
+              size="md"
+              defaultValue={location}
               nothingFound="No options"
               searchValue={location}
               onSearchChange={setLocation}
@@ -114,6 +127,48 @@ function CreateListingModal() {
               ]}
             />
           </>
+        );
+        break;
+      case 2:
+        bodyContent = (
+          <div className="flex flex-col gap-8">
+            <Heading
+              title="Share some basics about your place"
+              subtitle="what amenities do you have?"
+            />
+            <Counter
+              title="Guests"
+              subtitle="How many guests do you allow?"
+              value={data.guests}
+              onChange={(value: number) => setData({ ...data, guests: value })}
+            />
+            <hr />
+            <Counter
+              title="Rooms"
+              subtitle="How many rooms do you have?"
+              value={data.rooms}
+              onChange={(value: number) => setData({ ...data, rooms: value })}
+            />
+            <hr />
+            <Counter
+              title="Bathroom"
+              subtitle="How many bathrooms do you have?"
+              value={data.bathrooms}
+              onChange={(value: number) =>
+                setData({ ...data, bathrooms: value })
+              }
+            />
+          </div>
+        );
+        break;
+      case 3:
+        bodyContent = (
+          <div className="flex flex-col gap-8">
+            <Heading
+              title="Add a photo of your place"
+              subtitle="show guests what your place looks like"
+            />
+          </div>
         );
         break;
 
