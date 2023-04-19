@@ -79,7 +79,7 @@ function Modal({
                 <h2 className="font-semibold">{title}</h2>
               </div>
               {/* body*/}
-              <div className="flex-auto relative px-6 pt-6 pb-3">{body}</div>
+              <div className="flex-auto relative px-6 pt-7 pb-3">{body}</div>
               <footer className="flex flex-col gap-3 p-6">
                 <div className=" flex flex-row items-center gap-4 w-full">
                   {secondaryLabel && secondaryAction && (

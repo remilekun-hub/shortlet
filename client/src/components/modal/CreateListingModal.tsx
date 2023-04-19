@@ -1,6 +1,7 @@
 import Modal from "./Modal";
 import useListingModalState from "../../zustand/listingModal";
 import { ReactElement, useCallback, useMemo, useState } from "react";
+import { TextInput } from "@mantine/core";
 import { categories } from "../../data/categories";
 import Heading from "../Heading";
 import { Select } from "@mantine/core";
@@ -17,29 +18,32 @@ function CreateListingModal() {
   }
   const [step, setStep] = useState(STEPS.CATEGORY);
   const listingModal = useListingModalState();
-  const [category, setCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState("");
-  const formData = { category, location };
+
   const [data, setData] = useState({
+    category: "",
     location: "",
     guests: 1,
     rooms: 1,
     bathrooms: 1,
   });
-  console.log({ data });
-  console.log({ formData });
 
   const handleSubmit = useCallback(() => {
-    if (!category) return;
+    if (!data.category) return;
 
-    if (step === STEPS.PRICE) {
-      console.log("form submmitted");
-      listingModal.onClose();
-      setStep(0);
-      return;
+    // if (step === STEPS.PRICE) {
+    //   console.log("form submmitted");
+    //   listingModal.onClose();
+    //   setStep(0);
+    //   return;
+    // }
+    if (step !== STEPS.PRICE) {
+      return onNext();
     }
-    onNext();
-  }, [step, category]);
+    setIsLoading(true);
+    // call axios
+  }, [step]);
 
   const onBack = () => {
     setStep((step) => step - 1);
@@ -53,7 +57,7 @@ function CreateListingModal() {
       return "Create";
     }
     return "Next";
-  }, [step]);
+  }, [step, data.category]);
 
   const SecondaryActionLabel = useMemo(() => {
     if (step === STEPS.CATEGORY) {
@@ -77,14 +81,14 @@ function CreateListingModal() {
                 <div
                   key={item.label}
                   className={`col-span-1 border-2 hover:border-black rounded-xl flex flex-col p-4 transition cursor-pointer ${
-                    category === item.label && "border-black"
+                    data.category === item.label && "border-black"
                   }`}
                   onClick={() => {
-                    if (category === item.label) {
-                      setCategory("");
+                    if (data.category === item.label) {
+                      setData({ ...data, category: "" });
                       return;
                     }
-                    setCategory(item.label);
+                    setData({ ...data, category: item.label });
                   }}
                 >
                   {item.label}
@@ -167,6 +171,46 @@ function CreateListingModal() {
             <Heading
               title="Add a photo of your place"
               subtitle="show guests what your place looks like"
+            />
+            <input
+              type="file"
+              name="upload"
+              id=""
+              multiple
+              formEncType="multipart/form-data"
+              typeof="image"
+              onChange={(e) => console.log(e.target.files)}
+            />
+          </div>
+        );
+        break;
+
+      case 4:
+        bodyContent = (
+          <div className="flex flex-col gap-8">
+            <Heading
+              title="how would you describe your place?"
+              subtitle="short and sweet works best"
+            />
+            <TextInput
+              placeholder="Title"
+              // {...form.getInputProps("email")}
+              mb={10}
+              autoComplete="no"
+              size="md"
+            />
+            <hr />
+            <input type="text" name="" id="" placeholder="description" />
+          </div>
+        );
+        break;
+
+      case 5:
+        bodyContent = (
+          <div className="flex flex-col gap-8">
+            <Heading
+              title="Now, set your price"
+              subtitle="How much do you charge per night?"
             />
           </div>
         );
