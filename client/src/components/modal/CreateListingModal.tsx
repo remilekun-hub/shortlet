@@ -23,15 +23,13 @@ function CreateListingModal() {
 
   const [data, setData] = useState({
     category: "",
-    location: "",
+    location,
     guests: 1,
     rooms: 1,
     bathrooms: 1,
   });
 
   const handleSubmit = useCallback(() => {
-    if (!data.category) return;
-
     // if (step === STEPS.PRICE) {
     //   console.log("form submmitted");
     //   listingModal.onClose();
