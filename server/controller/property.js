@@ -3,23 +3,11 @@ const Review = require("../models/Review");
 const NotFound = require("../errors/notFoundError");
 
 const createProperty = async (req, res) => {
+  req.body.createdBy = req.user.userId;
+  req.body.username = req.user.name;
   const newProperty = req.body;
   const property = await Property.create({ ...newProperty });
   res.status(201).json({ property });
-};
-
-const getProperties = async (req, res) => {
-  const { country, bathroom } = req.query;
-  const propertyQuery = {};
-
-  if (country) {
-    propertyQuery.country = country;
-  }
-  if (bathroom) {
-    propertyQuery.bath = bathroom;
-  }
-  const properties = await Property.find(propertyQuery);
-  res.status(200).json({ properties, nbHits: properties.length });
 };
 
 const getProperty = async (req, res) => {
@@ -36,7 +24,7 @@ const updateProperty = async (req, res) => {
   const { id: propertyID } = req.params;
 
   const property = await Property.findByIdAndUpdate(
-    propertyID,
+    { _id: propertyID, createdBy: req.user.userId },
     { ...newProperty },
     { new: true, runValidators: true }
   );
@@ -48,7 +36,10 @@ const updateProperty = async (req, res) => {
 
 const deleteProperty = async (req, res) => {
   const { id: propertyID } = req.params;
-  const property = await Property.findByIdAndDelete(propertyID);
+  const property = await Property.findByIdAndDelete({
+    _id: propertyID,
+    createdBy: req.user.userId,
+  });
   if (!property) {
     throw new NotFound(`No property with id ${propertyID}`);
   }
@@ -98,7 +89,6 @@ const deletePropertyReview = async (req, res) => {
 
 module.exports = {
   createProperty,
-  getProperties,
   getProperty,
   updateProperty,
   deleteProperty,

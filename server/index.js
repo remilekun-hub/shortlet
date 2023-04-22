@@ -10,6 +10,7 @@ const connectDB = require("./db/connect");
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const propertyRouter = require("./routes/propertyRouter");
+const publicPropertyRouter = require("./routes/publicPropertyRouter");
 const port = process.env.PORT || 5000;
 
 app.use(cors());
@@ -21,7 +22,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth/", authRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/properties", propertyRouter);
+app.use("/api/v1/public/properties", publicPropertyRouter);
+app.use("/api/v1/properties", authentication, propertyRouter);
 app.use(notFound);
 app.use(errorHandler);
 

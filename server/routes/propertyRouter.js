@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const {
   createProperty,
-  getProperties,
   getProperty,
   deleteProperty,
   updateProperty,
@@ -10,7 +9,7 @@ const {
   deletePropertyReview,
 } = require("../controller/property");
 
-router.route("/").get(getProperties).post(createProperty);
+router.route("/").post(createProperty);
 
 router
   .route("/:id")

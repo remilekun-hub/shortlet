@@ -20,9 +20,9 @@ const PropertySchema = new mongoose.Schema({
     type: String,
     required: [true, "country is required"],
   },
-  name: {
+  username: {
     type: String,
-    required: [true, "property name must be provided"],
+    required: [true, "creator name must be provided"],
   },
   city: {
     type: String,
