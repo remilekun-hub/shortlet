@@ -20,10 +20,6 @@ const PropertySchema = new mongoose.Schema({
     type: String,
     required: [true, "country is required"],
   },
-  address: {
-    type: String,
-    required: [true, "property address must be provided"],
-  },
   name: {
     type: String,
     required: [true, "property name must be provided"],
@@ -44,16 +40,23 @@ const PropertySchema = new mongoose.Schema({
     type: Number,
     required: [true, "number of beds in the property must be provided"],
   },
-  bath: {
+  bathrooms: {
     type: Number,
     required: [true, "number of bathroom in the property must be provided"],
   },
-  bedroom: {
+  bedrooms: {
     type: Number,
     required: [true, "number of bedrooms in the property must be provided"],
   },
-  photos: {
+  images: {
     type: [String],
+  },
+  guests: {
+    type: Number,
+    required: [
+      true,
+      "number of guests allowed in the property must be provided",
+    ],
   },
   description: {
     type: String,

@@ -67,7 +67,7 @@ function Modal({
                 : "translate-y-full opacity-0"
             }`}
           >
-            <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white ">
+            <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white">
               {/* header */}
               <div className="flex justify-center relative p-5 rounded-t border-b-[1px] border-black/10">
                 <button
