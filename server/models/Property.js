@@ -28,6 +28,10 @@ const PropertySchema = new mongoose.Schema({
     type: String,
     required: [true, "please provide the city where the property is located"],
   },
+  createdBy: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
   price: {
     type: Number,
     required: [true, "price per night must be provided"],
