@@ -2,12 +2,23 @@ const Property = require("../models/Property");
 const Review = require("../models/Review");
 const NotFound = require("../errors/notFoundError");
 
+// const createProperty = async (req, res) => {
+//   req.body.createdBy = req.user.userId;
+//   req.body.username = req.user.name;
+//   const newProperty = req.body;
+//   const property = await Property.create({ ...newProperty });
+//   res.status(201).json({ property });
+// };
+
 const createProperty = async (req, res) => {
-  req.body.createdBy = req.user.userId;
-  req.body.username = req.user.name;
   const newProperty = req.body;
   const property = await Property.create({ ...newProperty });
+  property.createdBy.id = req.user.userId;
+  property.createdBy.name = req.user.name;
+  property.createdBy.img = req.user_img || "";
+  property.save();
   res.status(201).json({ property });
+  console.log(newProperty);
 };
 
 const getProperty = async (req, res) => {
@@ -38,7 +49,7 @@ const deleteProperty = async (req, res) => {
   const { id: propertyID } = req.params;
   const property = await Property.findByIdAndDelete({
     _id: propertyID,
-    createdBy: req.user.userId,
+    createdBy: { id: req.user.userId },
   });
   if (!property) {
     throw new NotFound(`No property with id ${propertyID}`);

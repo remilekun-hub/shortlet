@@ -15,22 +15,39 @@ const reviewSchema = new mongoose.Schema({
   },
 });
 
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  id: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
+  img: {
+    type: String,
+  },
+});
+
 const PropertySchema = new mongoose.Schema({
   country: {
     type: String,
     required: [true, "country is required"],
-  },
-  username: {
-    type: String,
-    required: [true, "creator name must be provided"],
   },
   city: {
     type: String,
     required: [true, "please provide the city where the property is located"],
   },
   createdBy: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
+    name: {
+      type: String,
+    },
+    id: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+    },
+    img: {
+      type: String,
+    },
   },
   price: {
     type: Number,
