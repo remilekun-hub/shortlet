@@ -11,7 +11,6 @@ import CreateListingModal from "./components/modal/CreateListingModal";
 import axios from "axios";
 
 function App() {
-  const images: string[] = [];
   const user = userSlice((state) => state);
   const navigate = useNavigate();
 

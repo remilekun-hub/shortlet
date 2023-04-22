@@ -21,6 +21,7 @@ function CreateListingModal() {
   const listingModal = useListingModalState();
   const [isLoading, setIsLoading] = useState(true);
   const [files, setFiles] = useState<FileList | null>(null);
+  const [error, setError] = useState(false);
   const [data, setData] = useState({
     category: "",
     title: "",
@@ -31,14 +32,32 @@ function CreateListingModal() {
     bathrooms: 1,
     beds: 1,
     city: "",
+    price: 1,
   });
 
   const handleSubmit = async () => {
     if (step !== STEPS.PRICE) {
       return onNext();
     }
-    console.log("submitted");
+
+    if (
+      !data.bathrooms ||
+      !data.bedrooms ||
+      !data.beds ||
+      !data.category ||
+      !data.city ||
+      !data.description ||
+      !data.guests ||
+      !data.location ||
+      !data.title ||
+      !data.price
+    ) {
+      setError(true);
+      setTimeout(() => setError(false), 5000);
+      return;
+    }
     setIsLoading(true);
+    console.log("submitted");
 
     try {
       const cloudImages = await imageUpload(files);
@@ -248,17 +267,24 @@ function CreateListingModal() {
           <div className="flex flex-col gap-8">
             <Heading
               title="Now, set your price"
-              subtitle="How much do you charge per night?"
+              subtitle="How much do you charge per night in USD?"
             />
             <input
               type="number"
               name="price"
-              placeholder="$ Price Per Night"
-              className="outline-none border-[2px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
-              onChange={(e) =>
-                setData({ ...data, [e.target.name]: e.target.value })
-              }
+              placeholder="$ Price Per Night "
+              value={data.price}
+              className="outline-none border-[1.5px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
+              onChange={(e) => {
+                setData({ ...data, [e.target.name]: e.target.value });
+              }}
             />
+
+            {error && (
+              <p className="text-red-700 text-center">
+                All fields must be filled!
+              </p>
+            )}
           </div>
         );
         break;

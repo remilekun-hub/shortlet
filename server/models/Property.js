@@ -33,6 +33,10 @@ const PropertySchema = new mongoose.Schema({
     type: String,
     required: [true, "country is required"],
   },
+  category: {
+    type: String,
+    required: [true, "property category is required"],
+  },
   city: {
     type: String,
     required: [true, "please provide the city where the property is located"],

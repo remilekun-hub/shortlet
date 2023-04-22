@@ -2,14 +2,6 @@ const Property = require("../models/Property");
 const Review = require("../models/Review");
 const NotFound = require("../errors/notFoundError");
 
-// const createProperty = async (req, res) => {
-//   req.body.createdBy = req.user.userId;
-//   req.body.username = req.user.name;
-//   const newProperty = req.body;
-//   const property = await Property.create({ ...newProperty });
-//   res.status(201).json({ property });
-// };
-
 const createProperty = async (req, res) => {
   const newProperty = req.body;
   const property = await Property.create({ ...newProperty });
@@ -35,7 +27,7 @@ const updateProperty = async (req, res) => {
   const { id: propertyID } = req.params;
 
   const property = await Property.findByIdAndUpdate(
-    { _id: propertyID, createdBy: req.user.userId },
+    { _id: propertyID, createdBy: { id: req.user.userId } },
     { ...newProperty },
     { new: true, runValidators: true }
   );
