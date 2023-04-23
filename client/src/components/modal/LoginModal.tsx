@@ -54,6 +54,7 @@ function LoginModal() {
         color: "text-green-500",
         isLoading: false,
       });
+      loginModaLState.onClose();
     } catch (error: any) {
       setStatus({
         message: `${error.response.data.msg}!`,
@@ -63,7 +64,7 @@ function LoginModal() {
     } finally {
       setTimeout(() => {
         form.reset(), setStatus({ message: "", color: "", isLoading: false });
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -75,12 +76,14 @@ function LoginModal() {
           label="Email"
           placeholder="your@email.com"
           {...form.getInputProps("email")}
+          size="md"
           mb={10}
           autoComplete="no"
         />
         <PasswordInput
           withAsterisk
           label="Password"
+          size="md"
           autoComplete="no"
           placeholder="Password"
           {...form.getInputProps("password")}

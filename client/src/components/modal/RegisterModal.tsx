@@ -51,6 +51,7 @@ function RegisterModal(): JSX.Element {
           withAsterisk
           label="Name"
           placeholder="Michael"
+          size="md"
           {...form.getInputProps("name")}
           mb={10}
           autoComplete="no"
@@ -58,6 +59,7 @@ function RegisterModal(): JSX.Element {
         <TextInput
           withAsterisk
           label="Email"
+          size="md"
           placeholder="your@email.com"
           {...form.getInputProps("email")}
           mb={10}
@@ -67,6 +69,7 @@ function RegisterModal(): JSX.Element {
           withAsterisk
           label="Password"
           autoComplete="no"
+          size="md"
           placeholder="Password"
           {...form.getInputProps("password")}
         />

@@ -2,25 +2,18 @@ import { Routes, Route } from "react-router-dom";
 import { Home, Apartment, Dashboard, UserListings } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
 import Apartments from "./pages/Apartments";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { userSlice } from "./zustand/user";
 import RegisterModal from "./components/modal/RegisterModal";
 import LoginModal from "./components/modal/LoginModal";
-import { useNavigate } from "react-router-dom";
 import CreateListingModal from "./components/modal/CreateListingModal";
-import axios from "axios";
 
 function App() {
   const user = userSlice((state) => state);
-  const navigate = useNavigate();
 
-  const logout = async () => {
-    localStorage.removeItem("user");
-    user.removeUser();
-    navigate(0);
-  };
   useEffect(() => {
     let storageUser = localStorage.getItem("user");
+
     if (storageUser != null) {
       const parsedUser: {
         name: string;

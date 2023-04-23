@@ -26,7 +26,7 @@ function CreateListingModal() {
     category: "",
     title: "",
     description: "",
-    location: "",
+    country: "",
     guests: 1,
     bedrooms: 1,
     bathrooms: 1,
@@ -48,7 +48,7 @@ function CreateListingModal() {
       !data.city ||
       !data.description ||
       !data.guests ||
-      !data.location ||
+      !data.country ||
       !data.title ||
       !data.price
     ) {
@@ -61,7 +61,10 @@ function CreateListingModal() {
 
     try {
       const cloudImages = await imageUpload(files);
-      // const res = await axios.post('url', {data, images:cloudImages})
+      const res = await axios.post("http://localhost:5000/api/v1/properties", {
+        data,
+        images: cloudImages,
+      });
       console.log({ data, images: cloudImages });
     } catch (error) {
       console.log(error);
@@ -138,9 +141,9 @@ function CreateListingModal() {
               searchable
               mt={20}
               size="md"
-              defaultValue={data.location}
+              defaultValue={data.country}
               nothingFound="No options"
-              onSearchChange={(value) => setData({ ...data, location: value })}
+              onSearchChange={(value) => setData({ ...data, country: value })}
               transitionProps={{
                 transition: "pop",
                 duration: 80,
@@ -161,7 +164,7 @@ function CreateListingModal() {
             <input
               type="text"
               name="city"
-              placeholder="City"
+              placeholder="City e.g Victoria Island, Lagos"
               value={data.city}
               className="mt-5 w-full outline-none border-[1.5px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
               onChange={(e) =>

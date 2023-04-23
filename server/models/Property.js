@@ -15,19 +15,6 @@ const reviewSchema = new mongoose.Schema({
   },
 });
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-  id: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
-  },
-  img: {
-    type: String,
-  },
-});
-
 const PropertySchema = new mongoose.Schema({
   country: {
     type: String,

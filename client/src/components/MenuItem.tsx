@@ -5,7 +5,10 @@ interface MenuItemProp {
 
 function MenuItem({ title, onClick }: MenuItemProp) {
   return (
-    <div onClick={onClick} className="p-3 hover:bg-black/5 cursor-pointer">
+    <div
+      onClick={onClick}
+      className="px-3 py-2 hover:bg-black/5 cursor-pointer"
+    >
       {title}
     </div>
   );
