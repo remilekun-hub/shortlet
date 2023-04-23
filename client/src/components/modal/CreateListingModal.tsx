@@ -20,9 +20,13 @@ function CreateListingModal() {
   }
   const [step, setStep] = useState(STEPS.CATEGORY);
   const listingModal = useListingModalState();
-  const [isLoading, setIsLoading] = useState(true);
   const [files, setFiles] = useState<FileList | null>(null);
   const [error, setError] = useState(false);
+  const [status, setStatus] = useState({
+    message: "",
+    color: "",
+    isLoading: false,
+  });
   const user = userSlice((state) => state.user);
   const [data, setData] = useState({
     category: "",
@@ -36,8 +40,6 @@ function CreateListingModal() {
     city: "",
     price: 1,
   });
-
-  console.log({ data });
 
   const handleSubmit = async () => {
     if (step !== STEPS.PRICE) {
@@ -60,8 +62,7 @@ function CreateListingModal() {
       setTimeout(() => setError(false), 5000);
       return;
     }
-    setIsLoading(true);
-    console.log("submitted");
+    setStatus({ ...status, isLoading: true });
 
     try {
       const cloudImages = await imageUpload(files);
@@ -77,11 +78,10 @@ function CreateListingModal() {
           },
         }
       );
-      console.log(res);
+      console.log("listing successfylly created");
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false);
       setData({
         category: "",
         title: "",
@@ -95,6 +95,7 @@ function CreateListingModal() {
         price: 1,
       });
       setFiles(null);
+      setStatus({ ...status, isLoading: false });
     }
     // call
   };
