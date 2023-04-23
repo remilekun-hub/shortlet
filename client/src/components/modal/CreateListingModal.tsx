@@ -6,6 +6,7 @@ import Heading from "../Heading";
 import { Select } from "@mantine/core";
 import Counter from "../Counter";
 import { imageUpload } from "../../util/imageUpload";
+import { userSlice } from "../../zustand/user";
 import axios from "axios";
 
 function CreateListingModal() {
@@ -22,6 +23,7 @@ function CreateListingModal() {
   const [isLoading, setIsLoading] = useState(true);
   const [files, setFiles] = useState<FileList | null>(null);
   const [error, setError] = useState(false);
+  const user = userSlice((state) => state.user);
   const [data, setData] = useState({
     category: "",
     title: "",
@@ -30,10 +32,12 @@ function CreateListingModal() {
     guests: 1,
     bedrooms: 1,
     bathrooms: 1,
-    beds: 1,
+    bed: 1,
     city: "",
     price: 1,
   });
+
+  console.log({ data });
 
   const handleSubmit = async () => {
     if (step !== STEPS.PRICE) {
@@ -43,7 +47,7 @@ function CreateListingModal() {
     if (
       !data.bathrooms ||
       !data.bedrooms ||
-      !data.beds ||
+      !data.bed ||
       !data.category ||
       !data.city ||
       !data.description ||
@@ -61,16 +65,35 @@ function CreateListingModal() {
 
     try {
       const cloudImages = await imageUpload(files);
-      const res = await axios.post("http://localhost:5000/api/v1/properties", {
-        data,
-        images: cloudImages,
-      });
-      console.log({ data, images: cloudImages });
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/properties",
+        {
+          ...data,
+          images: cloudImages,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
+      );
+      console.log(res);
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
-      console.log("we are done");
+      setData({
+        category: "",
+        title: "",
+        description: "",
+        country: "",
+        guests: 1,
+        bedrooms: 1,
+        bathrooms: 1,
+        bed: 1,
+        city: "",
+        price: 1,
+      });
       setFiles(null);
     }
     // call
@@ -191,8 +214,8 @@ function CreateListingModal() {
             <Counter
               title="Beds"
               subtitle="How many beds do you have?"
-              value={data.beds}
-              onChange={(value: number) => setData({ ...data, beds: value })}
+              value={data.bed}
+              onChange={(value: number) => setData({ ...data, bed: value })}
             />
             <hr />
             <Counter

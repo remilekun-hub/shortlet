@@ -10,7 +10,7 @@ const getProperties = async (req, res) => {
   if (bathroom) {
     propertyQuery.bath = bathroom;
   }
-  const properties = await Property.find(propertyQuery);
+  const properties = await Property.find(propertyQuery).select("-createdBy");
   res.status(200).json({ properties, nbHits: properties.length });
 };
 

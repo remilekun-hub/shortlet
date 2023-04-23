@@ -10,7 +10,6 @@ const createProperty = async (req, res) => {
   property.createdBy.img = req.user_img || "";
   property.save();
   res.status(201).json({ property });
-  console.log(newProperty);
 };
 
 const getProperty = async (req, res) => {
