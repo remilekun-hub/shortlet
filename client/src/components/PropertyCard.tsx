@@ -1,25 +1,7 @@
 import { Link } from "react-router-dom";
-import { nuProperty } from "../typings";
+import { Property } from "../typings";
 
-interface data {
-  _id: string;
-  country: string;
-  category: string;
-  city: string;
-  price: number;
-  title: string;
-  bed: number;
-  bathrooms: number;
-  bedrooms: number;
-  images: string[];
-  guests: number;
-  description: string;
-  ameneties: string[] | [];
-  reviews: any[];
-  __v?: number;
-}
-
-function Property({ _id, city, country, images, price }: nuProperty) {
+function PropertyCard({ _id, city, country, images, price }: Property) {
   return (
     <div className="relative ">
       <div className="w-10 h-10 rounded-full top-5 right-5 bg-green-500 absolute cursor-pointer" />
@@ -42,4 +24,4 @@ function Property({ _id, city, country, images, price }: nuProperty) {
   );
 }
 
-export default Property;
+export default PropertyCard;

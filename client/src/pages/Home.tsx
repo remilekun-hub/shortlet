@@ -1,12 +1,12 @@
 import axios from "axios";
 import CategoryList from "../components/CategoryList";
 import NavBar from "../components/NavBar";
-import Property from "../components/Property";
+import PropertyCard from "../components/PropertyCard";
 import { useEffect, useState } from "react";
-import { nuProperty } from "../typings";
+import { Property } from "../typings";
 
 function Home() {
-  const [properties, setProperties] = useState<nuProperty[] | null>(null);
+  const [properties, setProperties] = useState<Property[] | null>(null);
   useEffect(() => {
     const getProperties = async () => {
       await axios
@@ -24,9 +24,9 @@ function Home() {
         </div>
         <CategoryList />
       </header>
-      <div className="px-4 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[55px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="px-4 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[55px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {properties?.map((item) => (
-          <Property key={item._id} {...item} />
+          <PropertyCard key={item._id} {...item} />
         ))}
       </div>
     </section>

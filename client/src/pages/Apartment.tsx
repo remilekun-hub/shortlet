@@ -1,70 +1,60 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useMemo } from "react";
-import { calcDate } from "../util/calcDate";
+import { useEffect, useState } from "react";
 import { Property } from "../typings";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 import Button from "../components/Button";
 import BedroomBedandBath from "../components/BedroomBedandBath";
 import { userSlice } from "../zustand/user";
-import useLoginModalState from "../zustand/UseLoginModal";
 import Reserve from "../components/Reserve";
 
 function Apartment() {
   const [property, setProperty] = useState<Property | null>(null);
   const { id } = useParams();
-  const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
-  const numberofNights = useMemo(() => calcDate(value), [value]);
   const user = userSlice((state) => state.user);
-  const LoginModal = useLoginModalState();
-  const handleChange = (val: [Date | null, Date | null]) => {
-    if (val[0] !== null && val[1] !== null) {
-      setValue(val);
-    }
-  };
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/v1/properties/${id}`)
+      .get(`http://localhost:5000/api/v1/public/properties/${id}`)
       .then((res) => setProperty(res?.data?.property));
     console.log(property);
   }, []);
 
   const handlereviewSubmit = () => console.log("review submited");
-  const handleReserve = () => {
-    if (!user) {
-      LoginModal.onOpen();
-      return;
-    }
-  };
 
   return (
     <section>
-      <div className="mx-auto max-w-screen-xl px-5 sm:px-11 xl:px-[50px]">
+      <header className=" w-full bg-white sticky top-0 shadow mb-6 z-[50]">
+        <NavBar />
+      </header>
+      <div className="max-w-[1400px] px-5 py-4 md:px-[48px] lg:px-[50px] xl:px-[65px]">
         <div>
           {property ? (
             <>
               <div className="py-4 md:py-5">
                 <h2 className="font-semibold text-2xl">{property?.title}</h2>
-                <p className="font-normal underline">{`${property?.address}, ${property?.city}, ${property?.country}`}</p>
+                <p className="font-normal underline">{`${property?.city}, ${property?.country}`}</p>
               </div>
 
               <div className="h-[370px] rounded-[13px] overflow-hidden">
                 <img
-                  src={property?.photos[0]}
+                  src={property?.images[0]}
                   className="w-full object-cover h-full object-center"
                 />
               </div>
               <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
                 <div className="md:basis-[55%] lg:basis-[58%]">
                   <div className="py-6 border-b-[1px] border-black/20">
-                    <h3 className="text-xl font-bold md:text-2xl mb-2">{`${property?.name} hosted by`}</h3>
+                    <h3 className="text-xl font-bold md:text-2xl mb-2">{`hosted by`}</h3>
                     <div className="flex space-x-2">
                       <BedroomBedandBath
-                        amount={property?.bedroom}
+                        amount={property?.bedrooms}
                         type="bedroom"
                       />
-                      <BedroomBedandBath amount={property?.bath} type="bath" />
+                      <BedroomBedandBath
+                        amount={property?.bathrooms}
+                        type="bath"
+                      />
                       <BedroomBedandBath amount={property?.bed} type="bed" />
                     </div>
                   </div>

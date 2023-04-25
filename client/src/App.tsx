@@ -7,6 +7,8 @@ import { userSlice } from "./zustand/user";
 import RegisterModal from "./components/modal/RegisterModal";
 import LoginModal from "./components/modal/LoginModal";
 import CreateListingModal from "./components/modal/CreateListingModal";
+import NavBar from "./components/NavBar";
+import CategoryList from "./components/CategoryList";
 
 function App() {
   const user = userSlice((state) => state);
