@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { Property } from "../typings";
 import axios from "axios";
 import NavBar from "../components/NavBar";
@@ -20,6 +20,123 @@ function Apartment() {
     console.log(property);
   }, []);
 
+  const handleImageLayout = (images: string[]) => {
+    const imagesNo = images.length;
+    let imageGrid: ReactElement;
+    switch (imagesNo) {
+      case 5 || 6 || 7 || 8 || 9 || 10 || 11:
+        imageGrid = (
+          <div className="h-full grid grid-cols-4 grid-rows-2 gap-[6px]">
+            <img
+              src={property?.images[0]}
+              className="w-full object-cover h-full object-center row-span-full col-span-2 col-start-1 col-end-3 cursor-pointer"
+            />
+
+            <img
+              src={property?.images[1]}
+              className="w-full object-cover h-full object-center  col-start-3 col-end-4 row-start-1 row-end-2 cursor-pointer"
+            />
+            <img
+              src={property?.images[2]}
+              className="w-full object-cover h-full object-center  col-start-4 col-end-5 row-start-1 row-end-2 cursor-pointer"
+            />
+
+            <img
+              src={property?.images[3]}
+              className="w-full object-cover h-full object-center  col-start-3 col-end-4 row-start-2 row-end-3 cursor-pointer"
+            />
+            <img
+              src={property?.images[4]}
+              className="w-full object-cover h-full object-center  col-start-4 col-end-4 row-start-2 row-end-3 cursor-pointer"
+            />
+          </div>
+        );
+        break;
+      case 4:
+        imageGrid = (
+          <div className="h-full grid grid-cols-5 grid-rows-2 gap-[6px]">
+            <img
+              src={property?.images[0]}
+              className="w-full object-cover h-full object-center row-span-full col-span-2 col-start-1 col-end-3 cursor-pointer"
+            />
+
+            <img
+              src={property?.images[1]}
+              className="w-full object-cover h-full object-center row-start-1 row-end-2 col-start-3 col-end-4 cursor-pointer"
+            />
+            <img
+              src={property?.images[2]}
+              className="w-full object-cover h-full object-center row-start-2 row-end-3 col-start-3 col-end-4 cursor-pointer"
+            />
+            <img
+              src={property?.images[3]}
+              className="w-full object-cover h-full object-center row-span-full col-span-2 col-start-4 col-end-6 cursor-pointer"
+            />
+
+            {/* <img
+              src={property?.images[2]}
+              className="w-full object-cover h-full object-center  col-start-4 col-end-5 row-start-1 row-end-2 cursor-pointer"
+            />
+
+            <img
+              src={property?.images[3]}
+              className="w-full object-cover h-full object-center  col-start-3 col-end-4 row-start-2 row-end-3 cursor-pointer"
+            /> */}
+          </div>
+        );
+        break;
+      case 3:
+        imageGrid = (
+          <div className="h-full grid grid-cols-3 gap-[6px]">
+            <img
+              src={property?.images[0]}
+              className="w-full object-cover h-full object-center cursor-pointer"
+            />
+
+            <img
+              src={property?.images[1]}
+              className="w-full object-cover h-full object-center cursor-pointer"
+            />
+            <img
+              src={property?.images[2]}
+              className="w-full object-cover h-full object-center cursor-pointer"
+            />
+          </div>
+        );
+        break;
+
+      case 2:
+        imageGrid = (
+          <div className="h-full grid grid-cols-2 gap-[6px]">
+            <img
+              src={property?.images[0]}
+              className="w-full object-cover h-full object-center cursor-pointer"
+            />
+
+            <img
+              src={property?.images[1]}
+              className="w-full object-cover h-full object-center cursor-pointer"
+            />
+          </div>
+        );
+        break;
+      case 1:
+        imageGrid = (
+          <div className="h-full grid grid-cols-1 gap-[6px]">
+            <img
+              src={property?.images[0]}
+              className="w-full object-cover h-full object-center cursor-pointer"
+            />
+          </div>
+        );
+        break;
+
+      default:
+        return null;
+        break;
+    }
+    return imageGrid;
+  };
   const handlereviewSubmit = () => console.log("review submited");
 
   return (
@@ -36,17 +153,29 @@ function Apartment() {
                 <p className="font-normal underline">{`${property?.city}, ${property?.country}`}</p>
               </div>
 
-              <div className="h-[370px] rounded-[13px] overflow-hidden">
-                <img
-                  src={property?.images[0]}
-                  className="w-full object-cover h-full object-center"
-                />
-              </div>
+              {property.images.length > 1 ? (
+                <div className="hidden md:block h-[380px] rounded-[13px] overflow-hidden">
+                  {handleImageLayout(property.images)}
+                </div>
+              ) : (
+                <div className="hidden md:block h-full rounded-[13px] overflow-hidden">
+                  <img
+                    src={property.images[0]}
+                    className=" w-full object-cover object-center"
+                  />
+                </div>
+              )}
+
               <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
                 <div className="md:basis-[55%] lg:basis-[58%]">
                   <div className="py-6 border-b-[1px] border-black/20">
                     <h3 className="text-xl font-bold md:text-2xl mb-2">{`hosted by`}</h3>
                     <div className="flex space-x-2">
+                      <BedroomBedandBath
+                        amount={property?.guests}
+                        type="guests"
+                      />
+
                       <BedroomBedandBath
                         amount={property?.bedrooms}
                         type="bedroom"
