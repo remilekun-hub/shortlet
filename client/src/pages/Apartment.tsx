@@ -9,6 +9,7 @@ import { userSlice } from "../zustand/user";
 import Reserve from "../components/Reserve";
 import { Carousel } from "@mantine/carousel";
 import { imageLayout } from "../util/ImageLayout";
+import ImageBlock from "../components/ImageBlock";
 
 function Apartment() {
   const [property, setProperty] = useState<Property | null>(null);
@@ -29,7 +30,6 @@ function Apartment() {
   ));
 
   const handlereviewSubmit = () => console.log("review submited");
-
   return (
     <section>
       <header className=" w-full bg-white sticky top-0 shadow mb-6 z-[50]">
@@ -44,35 +44,7 @@ function Apartment() {
                 <p className="font-normal underline">{`${property?.city}, ${property?.country}`}</p>
               </div>
 
-              {property.images.length! >= 1 ? (
-                <div className="hidden md:block h-[380px] rounded-[13px] overflow-hidden">
-                  {imageLayout(property.images)}
-                </div>
-              ) : (
-                <div className="hidden md:block h-full rounded-[13px] overflow-hidden">
-                  <img
-                    src={property.images[0]}
-                    className=" w-full object-cover object-center"
-                  />
-                </div>
-              )}
-
-              <div className="md:hidden rounded-xl overflow-hidden">
-                <Carousel
-                  maw={"100%"}
-                  mx="auto"
-                  styles={{
-                    control: {
-                      "&[data-inactive]": {
-                        opacity: 0,
-                        cursor: "default",
-                      },
-                    },
-                  }}
-                >
-                  {slides}
-                </Carousel>
-              </div>
+              <ImageBlock images={property.images} />
 
               <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
                 <div className="md:basis-[55%] lg:basis-[58%]">
