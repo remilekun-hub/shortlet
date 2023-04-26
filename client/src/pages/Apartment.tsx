@@ -7,6 +7,8 @@ import Button from "../components/Button";
 import BedroomBedandBath from "../components/BedroomBedandBath";
 import { userSlice } from "../zustand/user";
 import Reserve from "../components/Reserve";
+import { Carousel } from "@mantine/carousel";
+import { imageLayout } from "../util/ImageLayout";
 
 function Apartment() {
   const [property, setProperty] = useState<Property | null>(null);
@@ -20,123 +22,12 @@ function Apartment() {
     console.log(property);
   }, []);
 
-  const handleImageLayout = (images: string[]) => {
-    const imagesNo = images.length;
-    let imageGrid: ReactElement;
-    switch (imagesNo) {
-      case 5 || 6 || 7 || 8 || 9 || 10 || 11:
-        imageGrid = (
-          <div className="h-full grid grid-cols-4 grid-rows-2 gap-[6px]">
-            <img
-              src={property?.images[0]}
-              className="w-full object-cover h-full object-center row-span-full col-span-2 col-start-1 col-end-3 cursor-pointer"
-            />
+  const slides = property?.images.map((url) => (
+    <Carousel.Slide key={url}>
+      <img src={url} className="object-cover w-full h-full" />
+    </Carousel.Slide>
+  ));
 
-            <img
-              src={property?.images[1]}
-              className="w-full object-cover h-full object-center  col-start-3 col-end-4 row-start-1 row-end-2 cursor-pointer"
-            />
-            <img
-              src={property?.images[2]}
-              className="w-full object-cover h-full object-center  col-start-4 col-end-5 row-start-1 row-end-2 cursor-pointer"
-            />
-
-            <img
-              src={property?.images[3]}
-              className="w-full object-cover h-full object-center  col-start-3 col-end-4 row-start-2 row-end-3 cursor-pointer"
-            />
-            <img
-              src={property?.images[4]}
-              className="w-full object-cover h-full object-center  col-start-4 col-end-4 row-start-2 row-end-3 cursor-pointer"
-            />
-          </div>
-        );
-        break;
-      case 4:
-        imageGrid = (
-          <div className="h-full grid grid-cols-5 grid-rows-2 gap-[6px]">
-            <img
-              src={property?.images[0]}
-              className="w-full object-cover h-full object-center row-span-full col-span-2 col-start-1 col-end-3 cursor-pointer"
-            />
-
-            <img
-              src={property?.images[1]}
-              className="w-full object-cover h-full object-center row-start-1 row-end-2 col-start-3 col-end-4 cursor-pointer"
-            />
-            <img
-              src={property?.images[2]}
-              className="w-full object-cover h-full object-center row-start-2 row-end-3 col-start-3 col-end-4 cursor-pointer"
-            />
-            <img
-              src={property?.images[3]}
-              className="w-full object-cover h-full object-center row-span-full col-span-2 col-start-4 col-end-6 cursor-pointer"
-            />
-
-            {/* <img
-              src={property?.images[2]}
-              className="w-full object-cover h-full object-center  col-start-4 col-end-5 row-start-1 row-end-2 cursor-pointer"
-            />
-
-            <img
-              src={property?.images[3]}
-              className="w-full object-cover h-full object-center  col-start-3 col-end-4 row-start-2 row-end-3 cursor-pointer"
-            /> */}
-          </div>
-        );
-        break;
-      case 3:
-        imageGrid = (
-          <div className="h-full grid grid-cols-3 gap-[6px]">
-            <img
-              src={property?.images[0]}
-              className="w-full object-cover h-full object-center cursor-pointer"
-            />
-
-            <img
-              src={property?.images[1]}
-              className="w-full object-cover h-full object-center cursor-pointer"
-            />
-            <img
-              src={property?.images[2]}
-              className="w-full object-cover h-full object-center cursor-pointer"
-            />
-          </div>
-        );
-        break;
-
-      case 2:
-        imageGrid = (
-          <div className="h-full grid grid-cols-2 gap-[6px]">
-            <img
-              src={property?.images[0]}
-              className="w-full object-cover h-full object-center cursor-pointer"
-            />
-
-            <img
-              src={property?.images[1]}
-              className="w-full object-cover h-full object-center cursor-pointer"
-            />
-          </div>
-        );
-        break;
-      case 1:
-        imageGrid = (
-          <div className="h-full grid grid-cols-1 gap-[6px]">
-            <img
-              src={property?.images[0]}
-              className="w-full object-cover h-full object-center cursor-pointer"
-            />
-          </div>
-        );
-        break;
-
-      default:
-        return null;
-        break;
-    }
-    return imageGrid;
-  };
   const handlereviewSubmit = () => console.log("review submited");
 
   return (
@@ -144,7 +35,7 @@ function Apartment() {
       <header className=" w-full bg-white sticky top-0 shadow mb-6 z-[50]">
         <NavBar />
       </header>
-      <div className="max-w-[1400px] px-5 py-4 md:px-[48px] lg:px-[50px] xl:px-[65px]">
+      <div className="max-w-[1400px] px-5 py-1 md:px-[48px] lg:px-[50px] xl:px-[65px]">
         <div>
           {property ? (
             <>
@@ -153,9 +44,9 @@ function Apartment() {
                 <p className="font-normal underline">{`${property?.city}, ${property?.country}`}</p>
               </div>
 
-              {property.images.length > 1 ? (
+              {property.images.length! >= 1 ? (
                 <div className="hidden md:block h-[380px] rounded-[13px] overflow-hidden">
-                  {handleImageLayout(property.images)}
+                  {imageLayout(property.images)}
                 </div>
               ) : (
                 <div className="hidden md:block h-full rounded-[13px] overflow-hidden">
@@ -166,10 +57,27 @@ function Apartment() {
                 </div>
               )}
 
+              <div className="md:hidden rounded-xl overflow-hidden">
+                <Carousel
+                  maw={"100%"}
+                  mx="auto"
+                  styles={{
+                    control: {
+                      "&[data-inactive]": {
+                        opacity: 0,
+                        cursor: "default",
+                      },
+                    },
+                  }}
+                >
+                  {slides}
+                </Carousel>
+              </div>
+
               <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
                 <div className="md:basis-[55%] lg:basis-[58%]">
                   <div className="py-6 border-b-[1px] border-black/20">
-                    <h3 className="text-xl font-bold md:text-2xl mb-2">{`hosted by`}</h3>
+                    <h3 className="text-xl font-bold md:text-2xl mb-2">{`hosted by `}</h3>
                     <div className="flex space-x-2">
                       <BedroomBedandBath
                         amount={property?.guests}
