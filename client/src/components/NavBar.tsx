@@ -11,7 +11,7 @@ function NavBar() {
       <div>logohere</div>
       <button
         onClick={() => setIsMenu(!isMenu)}
-        className="flex items-center justify-center p-1 rounded-[20px] gap-1 shadow-xl"
+        className="flex items-center justify-center p-1 rounded-[20px] gap-1 shadow-lg"
       >
         <div>hello</div>
         <Avatar radius="xl" src={user?.image} />
