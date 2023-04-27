@@ -67,19 +67,14 @@ function LoginModal() {
     <>
       <form>
         <TextInput
-          withAsterisk
-          label="Email"
           placeholder="your@email.com"
           {...form.getInputProps("email")}
           size="md"
-          mb={10}
+          mb={20}
           autoComplete="no"
         />
         <PasswordInput
-          withAsterisk
-          label="Password"
           size="md"
-          autoComplete="no"
           placeholder="Password"
           {...form.getInputProps("password")}
         />

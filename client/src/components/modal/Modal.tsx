@@ -80,7 +80,7 @@ function Modal({
               </div>
               {/* body*/}
               <div className="flex-auto relative px-6 pt-7 pb-2">{body}</div>
-              <footer className="flex flex-col gap-3 p-6">
+              <footer className="flex flex-col gap-3 pt-2 p-6">
                 <div className=" flex flex-row items-center gap-4 w-full">
                   {secondaryLabel && secondaryAction && (
                     <Button label={secondaryLabel} onSubmit={secondaryAction} />
