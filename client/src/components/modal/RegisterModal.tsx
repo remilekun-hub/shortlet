@@ -54,28 +54,29 @@ function RegisterModal(): JSX.Element {
           placeholder="Michael"
           size="md"
           {...form.getInputProps("name")}
-          mb={10}
+          mb={20}
           autoComplete="no"
         />
-        {/* <FileInput
-          placeholder="select your image"
-          my={10}
+        <FileInput
+          placeholder="Upload image"
+          my={20}
           value={file}
+          size="md"
           accept="image/png,image/jpeg"
-          onChange={console.log(file)}
-        /> */}
-        <input
+          onChange={setFile}
+        />
+        {/* <input
           type="file"
           name=""
           id=""
           accept="image/png,image/jpeg"
           onChange={(e) => setFile(e.target.files?.item(0))}
-        />
+        /> */}
         <TextInput
           size="md"
           placeholder="your@email.com"
           {...form.getInputProps("email")}
-          mb={10}
+          mb={20}
           autoComplete="no"
         />
         <PasswordInput
@@ -85,7 +86,6 @@ function RegisterModal(): JSX.Element {
           {...form.getInputProps("password")}
         />
       </form>
-      {/* change to loading componment later */}
       <div className="mt-3 flex flex-col items-center">
         {status.isLoading && <Loader size={"sm"} color="#F43F5E" />}
         <p className={`${status.color}`}>{status.message}</p>
