@@ -4,7 +4,7 @@ export const singleImageUpload = async (file: File | null | undefined) => {
   if (file != null && file != undefined) {
     const form_data = new FormData();
     form_data.append("file", file);
-    form_data.append("upload_preset", "shortlet");
+    form_data.append("upload_preset", "shortletusers");
 
     try {
       const {

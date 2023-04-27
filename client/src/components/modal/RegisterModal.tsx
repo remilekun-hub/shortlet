@@ -41,9 +41,7 @@ function RegisterModal(): JSX.Element {
         value === ""
           ? "Password is required"
           : value.length < 6
-          ? "Password characters cannot be less tahn six"
-          : value.length > 10
-          ? "Password characters cannot be more than ten"
+          ? "Password is too short"
           : null,
     },
   });
@@ -65,13 +63,7 @@ function RegisterModal(): JSX.Element {
           accept="image/png,image/jpeg"
           onChange={setFile}
         />
-        {/* <input
-          type="file"
-          name=""
-          id=""
-          accept="image/png,image/jpeg"
-          onChange={(e) => setFile(e.target.files?.item(0))}
-        /> */}
+
         <TextInput
           size="md"
           placeholder="your@email.com"
@@ -104,7 +96,7 @@ function RegisterModal(): JSX.Element {
       await axios.post("http://localhost:5000/api/v1/auth/register", {
         name: values.name,
         email: values.email,
-        password: values.email,
+        password: values.password,
         image: url,
       });
       setStatus({
@@ -112,7 +104,6 @@ function RegisterModal(): JSX.Element {
         color: "text-green-500",
         isLoading: false,
       });
-      setTimeout(() => registerModal.onClose(), 3000);
     } catch (error: any) {
       setStatus({
         message: `${error.response.data.msg}!`,
@@ -122,6 +113,7 @@ function RegisterModal(): JSX.Element {
     } finally {
       setTimeout(() => {
         form.reset(), setStatus({ message: "", color: "", isLoading: false });
+        setFile(null);
       }, 3000);
     }
   };

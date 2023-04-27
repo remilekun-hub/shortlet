@@ -11,10 +11,10 @@ function NavBar() {
       <div>logohere</div>
       <button
         onClick={() => setIsMenu(!isMenu)}
-        className="flex items-center justify-center p-1 rounded-[20px] gap-1 shadow-lg"
+        className="flex items-center justify-center py-[7px] px-2 rounded-[25px] gap-1 shadow-lg"
       >
         <div>hello</div>
-        <Avatar radius="xl" src={user?.image} />
+        <Avatar radius="xl" src={user?.image} size={"md"} />
       </button>
 
       {isMenu && <SideMenu setIsMenu={setIsMenu} />}

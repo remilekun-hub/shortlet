@@ -16,7 +16,6 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "password is required"],
-    min: [6, "password is too short"],
   },
   image: {
     type: String,
@@ -34,7 +33,7 @@ UserSchema.pre("save", async function () {
 });
 
 UserSchema.methods.comparePassword = async function (candidatepassword) {
-  const isMatch = bcrypt.compare(candidatepassword, this.password);
+  const isMatch = await bcrypt.compare(candidatepassword, this.password);
   return isMatch;
 };
 

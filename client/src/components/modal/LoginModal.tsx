@@ -34,14 +34,13 @@ function LoginModal() {
         value === ""
           ? "password is required"
           : value.length < 6
-          ? "password characters cannot be less tahn six"
-          : value.length > 10
-          ? "password characters cannot be more than ten"
+          ? "password should be more than six"
           : null,
     },
   });
   const Login = async (values: { email: string; password: string }) => {
     setStatus({ ...status, isLoading: true });
+    console.log({ values });
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/auth/login",
