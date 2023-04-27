@@ -5,6 +5,7 @@ type UserType = {
   isAdmin: boolean;
   id: string;
   token: string;
+  image: string;
 };
 
 interface UserInterface {
@@ -13,6 +14,7 @@ interface UserInterface {
     isAdmin: boolean;
     id: string;
     token: string;
+    image: string;
   } | null;
   setUser: (user: UserType) => void;
   removeUser: () => void;
