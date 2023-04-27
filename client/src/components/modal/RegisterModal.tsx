@@ -3,7 +3,7 @@ import RegisterModalState from "../../zustand/useRegisterModal";
 import useLoginModalState from "../../zustand/UseLoginModal";
 import axios from "axios";
 import { useForm } from "@mantine/form";
-import { TextInput, PasswordInput, FileInput } from "@mantine/core";
+import { TextInput, PasswordInput, FileInput, Loader } from "@mantine/core";
 import { useState } from "react";
 import { singleImageUpload } from "../../util/singleImageUpload";
 
@@ -87,7 +87,7 @@ function RegisterModal(): JSX.Element {
       </form>
       {/* change to loading componment later */}
       <div className="mt-3 flex flex-col items-center">
-        {status.isLoading && <p>... Loading</p>}
+        {status.isLoading && <Loader size={"sm"} color="#F43F5E" />}
         <p className={`${status.color}`}>{status.message}</p>
       </div>
     </>

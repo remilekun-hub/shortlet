@@ -4,7 +4,7 @@ import useRegisterModalState from "../../zustand/useRegisterModal";
 import axios, { AxiosError } from "axios";
 import { userSlice } from "../../zustand/user";
 import { useForm } from "@mantine/form";
-import { TextInput, PasswordInput, LoadingOverlay } from "@mantine/core";
+import { TextInput, PasswordInput, Loader } from "@mantine/core";
 import { useState } from "react";
 
 function LoginModal() {
@@ -49,11 +49,6 @@ function LoginModal() {
       );
       localStorage.setItem("user", JSON.stringify(data));
       user.setUser(data);
-      setStatus({
-        message: "Login Successful!",
-        color: "text-green-500",
-        isLoading: false,
-      });
       loginModaLState.onClose();
     } catch (error: any) {
       setStatus({
@@ -91,7 +86,7 @@ function LoginModal() {
       </form>
       {/* change to loading componment later */}
       <div className="mt-3 flex flex-col items-center">
-        {status.isLoading && <p>...Loading</p>}
+        {status.isLoading && <Loader size={"sm"} color="#F43F5E" />}
         <p className={`${status.color}`}>{status.message}</p>
       </div>
     </>
