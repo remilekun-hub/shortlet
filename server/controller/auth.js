@@ -4,11 +4,17 @@ const BadRequestError = require("../errors/badrequest-error");
 const UnAuthenticatedError = require("../errors/unAuthError");
 
 const registerUser = async (req, res) => {
-  const newUser = req.body;
+  const { name, email, password, image } = req.body;
 
-  const user = await User.create({ ...newUser });
+  const isEmailExist = await User.findOne({ email });
 
-  res.status(StatusCodes.CREATED).json(user);
+  if (isEmailExist) {
+    throw new BadRequestError("email is already taken");
+  }
+
+  await User.create({ name, email, password, image });
+
+  res.status(StatusCodes.CREATED).json({ msg: "user successfully created" });
 };
 
 const loginUser = async (req, res) => {
@@ -35,6 +41,7 @@ const loginUser = async (req, res) => {
     name: user.name,
     isAdmin: user.isAdmin,
     id: user._id,
+    image: user.image,
     token,
   });
 };

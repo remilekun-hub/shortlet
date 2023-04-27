@@ -7,8 +7,6 @@ import Button from "../components/Button";
 import BedroomBedandBath from "../components/BedroomBedandBath";
 import { userSlice } from "../zustand/user";
 import Reserve from "../components/Reserve";
-import { Carousel } from "@mantine/carousel";
-import { imageLayout } from "../util/ImageLayout";
 import ImageBlock from "../components/ImageBlock";
 
 function Apartment() {
@@ -22,12 +20,6 @@ function Apartment() {
       .then((res) => setProperty(res?.data?.property));
     console.log(property);
   }, []);
-
-  const slides = property?.images.map((url) => (
-    <Carousel.Slide key={url}>
-      <img src={url} className="object-cover w-full h-full" />
-    </Carousel.Slide>
-  ));
 
   const handlereviewSubmit = () => console.log("review submited");
   return (

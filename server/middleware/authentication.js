@@ -5,7 +5,11 @@ const ForbiddenError = require("../errors/forbiddenError");
 const authentication = async (req, res, next) => {
   const auth = req.headers.authorization;
 
-  if (!auth || !auth.startsWith("Bearer")) {
+  if (!auth) {
+    throw new UnAuthenticatedError("token required");
+  }
+
+  if (!auth.startsWith("Bearer")) {
     throw new UnAuthenticatedError("Authentication Invalid");
   }
   const token = auth.split(" ")[1];

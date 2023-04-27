@@ -25,7 +25,7 @@ function ImageBlock({ images }: Prop) {
         </div>
       )}
 
-      <div className="md:hidden rounded-xl overflow-hidden">
+      <div className="md:hidden rounded-xl overflow-hidden max-h-[450px]">
         <Carousel
           maw={"100%"}
           mx="auto"

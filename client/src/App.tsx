@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Apartment, Dashboard, UserListings } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
-import Apartments from "./pages/Apartments";
 import { useEffect } from "react";
 import { userSlice } from "./zustand/user";
 import RegisterModal from "./components/modal/RegisterModal";
@@ -35,7 +34,6 @@ function App() {
       <CreateListingModal />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/apartments" element={<Apartments />} />
         <Route path="/apartment/:id" element={<Apartment />} />
         {user.user && (
           <Route path="/user/me/listings" element={<UserListings />} />

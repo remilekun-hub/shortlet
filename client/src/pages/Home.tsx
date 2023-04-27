@@ -4,7 +4,6 @@ import NavBar from "../components/NavBar";
 import PropertyCard from "../components/PropertyCard";
 import { useEffect, useState } from "react";
 import { Property } from "../typings";
-import { Carousel } from "@mantine/carousel";
 
 function Home() {
   const [properties, setProperties] = useState<Property[] | null>(null);

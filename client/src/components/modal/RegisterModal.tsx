@@ -3,12 +3,14 @@ import RegisterModalState from "../../zustand/useRegisterModal";
 import useLoginModalState from "../../zustand/UseLoginModal";
 import axios from "axios";
 import { useForm } from "@mantine/form";
-import { TextInput, PasswordInput } from "@mantine/core";
+import { TextInput, PasswordInput, FileInput } from "@mantine/core";
 import { useState } from "react";
+import { singleImageUpload } from "../../util/singleImageUpload";
 
 function RegisterModal(): JSX.Element {
   const loginModal = useLoginModalState();
   const registerModal = RegisterModalState();
+  const [file, setFile] = useState<File | null | undefined>(null);
   const [status, setStatus] = useState({
     message: "",
     color: "",
@@ -21,6 +23,7 @@ function RegisterModal(): JSX.Element {
       email: "",
       password: "",
     },
+    validateInputOnChange: true,
     validate: {
       name: (value) =>
         value === ""
@@ -48,17 +51,27 @@ function RegisterModal(): JSX.Element {
     <>
       <form>
         <TextInput
-          withAsterisk
-          label="Name"
           placeholder="Michael"
           size="md"
           {...form.getInputProps("name")}
           mb={10}
           autoComplete="no"
         />
+        {/* <FileInput
+          placeholder="select your image"
+          my={10}
+          value={file}
+          accept="image/png,image/jpeg"
+          onChange={console.log(file)}
+        /> */}
+        <input
+          type="file"
+          name=""
+          id=""
+          accept="image/png,image/jpeg"
+          onChange={(e) => setFile(e.target.files?.item(0))}
+        />
         <TextInput
-          withAsterisk
-          label="Email"
           size="md"
           placeholder="your@email.com"
           {...form.getInputProps("email")}
@@ -66,8 +79,6 @@ function RegisterModal(): JSX.Element {
           autoComplete="no"
         />
         <PasswordInput
-          withAsterisk
-          label="Password"
           autoComplete="no"
           size="md"
           placeholder="Password"
@@ -89,16 +100,19 @@ function RegisterModal(): JSX.Element {
   }) => {
     setStatus({ ...status, isLoading: true });
     try {
+      const url = await singleImageUpload(file);
       await axios.post("http://localhost:5000/api/v1/auth/register", {
         name: values.name,
         email: values.email,
         password: values.email,
+        image: url,
       });
       setStatus({
         message: "Registration Successful!",
         color: "text-green-500",
         isLoading: false,
       });
+      setTimeout(() => registerModal.onClose(), 3000);
     } catch (error: any) {
       setStatus({
         message: `${error.response.data.msg}!`,
@@ -108,11 +122,12 @@ function RegisterModal(): JSX.Element {
     } finally {
       setTimeout(() => {
         form.reset(), setStatus({ message: "", color: "", isLoading: false });
-      }, 5000);
+      }, 3000);
     }
   };
 
   const handleFormSubmit = form.onSubmit(async (values) => {
+    console.log(values);
     await register(values);
   });
 
