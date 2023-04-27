@@ -40,7 +40,12 @@ UserSchema.methods.comparePassword = async function (candidatepassword) {
 
 UserSchema.methods.createJWT = function () {
   return jwt.sign(
-    { userId: this._id, name: this.name, isAdmin: this.isAdmin },
+    {
+      userId: this._id,
+      name: this.name,
+      isAdmin: this.isAdmin,
+      image: this.image,
+    },
     "remi",
     {
       expiresIn: process.env.JWT_LIFETIME,
