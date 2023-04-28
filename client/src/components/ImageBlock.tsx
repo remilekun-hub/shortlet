@@ -1,6 +1,6 @@
-import React from "react";
-import { imageLayout } from "../util/ImageLayout";
+import React, { lazy } from "react";
 import { Carousel } from "@mantine/carousel";
+const imageLayout = lazy(() => import("../util/ImageLayout"));
 
 interface Prop {
   images: string[];

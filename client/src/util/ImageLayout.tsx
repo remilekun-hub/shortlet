@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export const imageLayout = (images: string[]) => {
+const imageLayout = (images: string[]) => {
   const imagesNo = images.length;
   let imageGrid: ReactElement;
   switch (imagesNo) {
@@ -107,3 +107,5 @@ export const imageLayout = (images: string[]) => {
   }
   return imageGrid;
 };
+
+export default imageLayout;
