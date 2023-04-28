@@ -1,9 +1,13 @@
 const Property = require("../models/Property");
 
 const getProperties = async (req, res) => {
-  const { country, bath, category, minPrice, maxPrice, guests } = req.query;
+  const { country, bath, category, minPrice, maxPrice, guests, bedroom } =
+    req.query;
   const propertyQuery = {};
 
+  if (bedroom) {
+    propertyQuery.bedroom = { $gte: bedroom };
+  }
   if (country) {
     propertyQuery.country = { $regex: country, $options: "i" };
   }
