@@ -1,17 +1,35 @@
 const Property = require("../models/Property");
 
 const getProperties = async (req, res) => {
-  const { country, bathroom } = req.query;
+  const { country, bath, category, minPrice, maxPrice, guests } = req.query;
   const propertyQuery = {};
 
   if (country) {
-    propertyQuery.country = country;
+    propertyQuery.country = { $regex: country, $options: "i" };
   }
-  if (bathroom) {
-    propertyQuery.bath = bathroom;
+  if (category) {
+    propertyQuery.category = { $regex: category, $options: "i" };
   }
-  const properties = await Property.find(propertyQuery).select("-createdBy");
-  res.status(200).json({ properties, nbHits: properties.length });
+  if (bath) {
+    propertyQuery.bathrooms = { $gte: bath };
+  }
+  if (guests) {
+    propertyQuery.guests = { $gte: guests };
+  }
+  if (minPrice) {
+    propertyQuery.price = { $gte: minPrice };
+  }
+  if (maxPrice) {
+    propertyQuery.price = { $lte: maxPrice };
+  }
+  if (minPrice && maxPrice) {
+    propertyQuery.price = { $gte: minPrice, $lte: maxPrice };
+  }
+
+  console.log({ propertyQuery });
+  let result = Property.find(propertyQuery);
+  const properties = await result;
+  res.status(200).json(properties);
 };
 
 const getProperty = async (req, res) => {
