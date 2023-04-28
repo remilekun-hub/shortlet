@@ -1,12 +1,9 @@
-import CategoryList from "../components/CategoryList";
-import NavBar from "../components/NavBar";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../typings";
 import useFetch from "../util/useFetch";
 import { Loader } from "@mantine/core";
 
 function Home() {
-  // const [properties, setProperties] = useState<Property[] | null>(null);
   const { data, error } = useFetch<Property[]>(
     "http://localhost:5000/api/v1/public/properties"
   );
