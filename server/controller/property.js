@@ -12,6 +12,16 @@ const createProperty = async (req, res) => {
   res.status(201).json({ property });
 };
 
+const getProperties = async (req, res) => {
+  const properties = await Property.find({
+    "createdBy.id": req.user.userId,
+  });
+  // if (!property) {
+  //   throw new NotFound(`No property with id ${propertyID}`);
+  // }
+  res.status(200).json(properties);
+};
+
 const getProperty = async (req, res) => {
   const { id: propertyID } = req.params;
   const property = await Property.findById(propertyID);
@@ -92,6 +102,7 @@ const deletePropertyReview = async (req, res) => {
 module.exports = {
   createProperty,
   getProperty,
+  getProperties,
   updateProperty,
   deleteProperty,
   createPropertyReview,

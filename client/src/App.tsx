@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Dashboard, UserListings } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
 import { useEffect } from "react";
@@ -7,11 +7,15 @@ import RegisterModal from "./components/modal/RegisterModal";
 import LoginModal from "./components/modal/LoginModal";
 import CreateListingModal from "./components/modal/CreateListingModal";
 import { lazy, Suspense } from "react";
+import CategoryList from "./components/CategoryList";
+import NavBar from "./components/NavBar";
 const LazyHome = lazy(() => import("./pages/Home"));
 const LazyApartment = lazy(() => import("./pages/Apartment"));
 
 function App() {
   const user = userSlice((state) => state);
+  const location = useLocation();
+  const homepage = "/";
 
   useEffect(() => {
     let storageUser = localStorage.getItem("user");
@@ -31,6 +35,16 @@ function App() {
 
   return (
     <>
+      <header
+        className={`w-full bg-white sticky top-0 mb-6 z-[50] ${
+          location.pathname === homepage && "shadow"
+        }`}
+      >
+        <div className="border-b-[1px] border-black/10">
+          <NavBar />
+        </div>
+        <CategoryList />
+      </header>
       <RegisterModal />
       <LoginModal />
       <CreateListingModal />

@@ -24,9 +24,6 @@ function Apartment() {
   const handlereviewSubmit = () => console.log("review submited");
   return (
     <section>
-      <header className=" w-full bg-white sticky top-0 shadow mb-6 z-[50]">
-        <NavBar />
-      </header>
       <div className="max-w-[1400px] px-5 py-1 md:px-[48px] lg:px-[50px] xl:px-[65px]">
         <div>
           {property ? (

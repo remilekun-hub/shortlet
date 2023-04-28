@@ -3,13 +3,14 @@ const router = express.Router();
 const {
   createProperty,
   getProperty,
+  getProperties,
   deleteProperty,
   updateProperty,
   createPropertyReview,
   deletePropertyReview,
 } = require("../controller/property");
 
-router.route("/").post(createProperty);
+router.route("/").get(getProperties).post(createProperty);
 
 router
   .route("/:id")

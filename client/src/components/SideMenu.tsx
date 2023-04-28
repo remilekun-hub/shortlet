@@ -44,7 +44,7 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
       <div className="bg-white rounded-[9px] overflow-hidden">
         {user.user ? (
           <>
-            <UserLink url="/users/me/listing" title="My Listing" />
+            <UserLink url="/user/me/listings" title="My Listing" />
             <UserLink url="/users/me/listing" title="My Favourites" />
             <UserLink url="/users/me/listing" title="My Reservations" />
             <MenuItem title="Shortlet my home" onClick={handleShortletClick} />
