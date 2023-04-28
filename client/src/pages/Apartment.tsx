@@ -2,12 +2,11 @@ import { useParams } from "react-router-dom";
 import { ReactElement, lazy, useEffect, useState } from "react";
 import { Property } from "../typings";
 import axios from "axios";
-import NavBar from "../components/NavBar";
 import Button from "../components/Button";
 import { userSlice } from "../zustand/user";
 const Reserve = lazy(() => import("../components/Reserve"));
-const BedroomBedandBath = lazy(() => import("../components/BedroomBedandBath"));
-const ImageBlock = lazy(() => import("../components/ImageBlock"));
+import BedroomBedandBath from "../components/BedroomBedandBath";
+import ImageBlock from "../components/ImageBlock";
 
 function Apartment() {
   const [property, setProperty] = useState<Property | null>(null);

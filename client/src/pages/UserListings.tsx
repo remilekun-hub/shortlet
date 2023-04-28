@@ -13,6 +13,7 @@ function UserListings() {
       },
     }
   );
+  console.log(data);
   if (error) {
     return <p>An error has occured</p>;
   }
