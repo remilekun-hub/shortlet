@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Apartment, Dashboard, UserListings } from "./pages";
+import { Dashboard, UserListings } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
 import { useEffect } from "react";
 import { userSlice } from "./zustand/user";
 import RegisterModal from "./components/modal/RegisterModal";
 import LoginModal from "./components/modal/LoginModal";
 import CreateListingModal from "./components/modal/CreateListingModal";
-import NavBar from "./components/NavBar";
-import CategoryList from "./components/CategoryList";
+import { lazy, Suspense } from "react";
+const LazyHome = lazy(() => import("./pages/Home"));
+const LazyApartment = lazy(() => import("./pages/Apartment"));
 
 function App() {
   const user = userSlice((state) => state);
@@ -21,6 +22,7 @@ function App() {
         isAdmin: boolean;
         id: string;
         token: string;
+        image: string;
       } = JSON.parse(storageUser);
       user.setUser({ ...parsedUser });
       return;
@@ -33,8 +35,22 @@ function App() {
       <LoginModal />
       <CreateListingModal />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/apartment/:id" element={<Apartment />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback="Loading...">
+              <LazyHome />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/apartment/:id"
+          element={
+            <Suspense fallback="Loading...">
+              <LazyApartment />
+            </Suspense>
+          }
+        />
         {user.user && (
           <Route path="/user/me/listings" element={<UserListings />} />
         )}

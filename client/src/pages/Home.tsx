@@ -12,7 +12,6 @@ function Home() {
   const { data, error } = useFetch<Property[]>(
     "http://localhost:5000/api/v1/public/properties"
   );
-  console.log({ data });
 
   return (
     <section>

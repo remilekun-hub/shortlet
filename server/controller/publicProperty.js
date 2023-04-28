@@ -30,7 +30,6 @@ const getProperties = async (req, res) => {
     propertyQuery.price = { $gte: minPrice, $lte: maxPrice };
   }
 
-  console.log({ propertyQuery });
   let result = Property.find(propertyQuery);
   const properties = await result;
   res.status(200).json(properties);
