@@ -7,7 +7,7 @@ const createProperty = async (req, res) => {
   const property = await Property.create({ ...newProperty });
   property.createdBy.id = req.user.userId;
   property.createdBy.name = req.user.name;
-  property.createdBy.img = req.user_img || "";
+  property.createdBy.img = req.user.image || "";
   property.save();
   res.status(201).json({ property });
 };
