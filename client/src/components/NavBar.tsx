@@ -7,7 +7,7 @@ function NavBar() {
   const [isMenu, setIsMenu] = useState(false);
   const user = userSlice((state) => state.user);
   return (
-    <nav className="flex items-center justify-between mx-auto max-w-[1400px] px-5 py-4 md:px-[48px] lg:px-[50px] xl:px-[65px] relative">
+    <nav className="flex items-center justify-between mx-auto max-w-[1400px] px-3 py-4 md:px-[48px] lg:px-[50px] xl:px-[65px] relative">
       <div>logohere</div>
       <button
         onClick={() => setIsMenu(!isMenu)}
