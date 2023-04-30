@@ -9,6 +9,7 @@ import {
   createSearchParams,
 } from "react-router-dom";
 import ApartmentFilter from "./ApartmentFilter";
+import { RangeSlider } from "@mantine/core";
 
 function NavBar() {
   const [isMenu, setIsMenu] = useState(false);
@@ -20,6 +21,7 @@ function NavBar() {
   const currentSearch = location.search;
   const params = useSearchParams();
   const country = params?.[0].get("country");
+  const category = params?.[0].get("category");
 
   const [userFilter, setUserFilter] = useState({
     beds: 1,
@@ -27,34 +29,52 @@ function NavBar() {
     baths: 1,
     bedrooms: 1,
     minPrice: 0,
-    maxPrice: 5000,
+    maxPrice: 1000,
   });
-  let query: any = {};
-  const handleSearch = () => {
-    if (!search) return;
-    if (country) {
-      navigate(`/?country=${search}`);
-      setSearch("");
-      return;
-    }
-    if (currentSearch) {
-      navigate(`/${currentSearch}&country=${search}`);
-      setSearch("");
-    } else {
-      navigate(`/?country=${search}`);
-      setSearch("");
-    }
-  };
+  const [rangeValue, setRangeValue] = useState<[number, number]>([
+    userFilter.minPrice,
+    userFilter.maxPrice,
+  ]);
 
-  const handleFilter = () => {
+  const handleSearch = () => {
+    let query: any = { ...userFilter };
+    if (search) {
+      query = { country: search, ...query };
+    }
+    if (category) {
+      query = { category, ...query };
+    }
+    navigate({
+      pathname: "/",
+      search: `${createSearchParams(query)}`,
+    });
+    setShowFilter(false);
+  };
+  const reset = () => {
     setUserFilter({
       beds: 1,
       guests: 1,
       baths: 1,
       bedrooms: 1,
       minPrice: 0,
-      maxPrice: 5000,
+      maxPrice: 1000,
     });
+    setSearch("");
+    setRangeValue([userFilter.minPrice, userFilter.maxPrice]);
+    setShowFilter(false);
+    navigate("/");
+  };
+  const handleFilter = () => {
+    if (search) {
+      navigate(
+        `/?country=${search}&beds=${userFilter.beds}&bedrooms=${userFilter.bedrooms}&baths=${userFilter.baths}&guests=${userFilter.guests}&minPrice=${rangeValue[0]}&maxPrice=${rangeValue[1]}`
+      );
+      setSearch("");
+    } else {
+      navigate(
+        `/?beds=${userFilter.beds}&bedrooms=${userFilter.bedrooms}&baths=${userFilter.baths}&guests=${userFilter.guests}&minPrice=${rangeValue[0]}&maxPrice=${rangeValue[1]}`
+      );
+    }
     setShowFilter(!showFilter);
   };
 
@@ -88,7 +108,7 @@ function NavBar() {
         </div>
 
         {showFilter && (
-          <div className="absolute min-h-full bg-white shadow-xl p-2 border-[1px] w-full top-[55px] left-0 z-[300] rounded-lg">
+          <div className="absolute min-h-full bg-white shadow-xl p-2 border-[1px] w-full top-[63px] left-0 z-[300] rounded-lg">
             <ApartmentFilter
               value={userFilter.beds}
               title="beds"
@@ -104,21 +124,34 @@ function NavBar() {
               }}
             />
             <ApartmentFilter
+              value={userFilter.bedrooms}
+              title="bedrooms"
+              onChange={(value: number) => {
+                setUserFilter({ ...userFilter, bedrooms: value });
+              }}
+            />
+            <ApartmentFilter
               value={userFilter.guests}
               title="guests"
               onChange={(value: number) => {
                 setUserFilter({ ...userFilter, guests: value });
               }}
             />
+
+            <div className="flex items-center justify-between">
+              <span className="mr-3">Price</span>
+              <div className="w-full">
+                <RangeSlider
+                  value={rangeValue}
+                  onChange={setRangeValue}
+                  min={0}
+                  max={1000}
+                />
+              </div>
+            </div>
+
             <div className="flex justify-between">
-              <button
-                onClick={() => {
-                  setShowFilter(false);
-                  navigate("/");
-                }}
-              >
-                Clear
-              </button>
+              <button onClick={reset}>Clear</button>
 
               <button
                 onClick={handleFilter}
