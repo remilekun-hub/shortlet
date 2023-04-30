@@ -31,6 +31,12 @@ const getProperties = async (req, res) => {
   if (guests) {
     propertyQuery.guests = { $gte: guests };
   }
+  if (minPrice) {
+    propertyQuery.price = { $gte: minPrice };
+  }
+  if (maxPrice) {
+    propertyQuery.price = { $lte: minPrice };
+  }
   if (minPrice && maxPrice) {
     propertyQuery.price = { $gte: minPrice, $lte: maxPrice };
   }
