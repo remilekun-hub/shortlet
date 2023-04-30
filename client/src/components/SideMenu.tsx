@@ -41,7 +41,7 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
 
   return (
     <aside className="absolute top-[78px] z-[500] right-3 md:right-[48px] lg:right-[50px] xl:right-[65px] w-full max-w-[190px] drop-shadow-xl">
-      <div className="bg-white rounded-[9px] overflow-hidden">
+      <div className="bg-white rounded-[9px] overflow-hidden border-[1px]">
         {user.user ? (
           <>
             <UserLink url="/user/me/listings" title="My Listing" />

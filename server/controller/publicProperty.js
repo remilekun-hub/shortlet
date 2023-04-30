@@ -1,12 +1,23 @@
 const Property = require("../models/Property");
 
 const getProperties = async (req, res) => {
-  const { country, bath, category, minPrice, maxPrice, guests, bedroom } =
-    req.query;
+  const {
+    country,
+    baths,
+    beds,
+    category,
+    minPrice,
+    maxPrice,
+    guests,
+    bedrooms,
+  } = req.query;
   const propertyQuery = {};
 
-  if (bedroom) {
-    propertyQuery.bedroom = { $gte: bedroom };
+  if (beds) {
+    propertyQuery.bed = { $gte: beds };
+  }
+  if (bedrooms) {
+    propertyQuery.bedrooms = { $gte: bedrooms };
   }
   if (country) {
     propertyQuery.country = { $regex: country, $options: "i" };
@@ -14,17 +25,11 @@ const getProperties = async (req, res) => {
   if (category) {
     propertyQuery.category = { $regex: category, $options: "i" };
   }
-  if (bath) {
-    propertyQuery.bathrooms = { $gte: bath };
+  if (baths) {
+    propertyQuery.bathrooms = { $gte: baths };
   }
   if (guests) {
     propertyQuery.guests = { $gte: guests };
-  }
-  if (minPrice) {
-    propertyQuery.price = { $gte: minPrice };
-  }
-  if (maxPrice) {
-    propertyQuery.price = { $lte: maxPrice };
   }
   if (minPrice && maxPrice) {
     propertyQuery.price = { $gte: minPrice, $lte: maxPrice };

@@ -14,9 +14,16 @@ function SingleCategory({ label, selected }: Prop) {
   const navigate = useNavigate();
 
   const handleClick = useCallback(() => {
-    let updatedQuery: any = {};
+    let updatedQuery: any = {
+      baths: 1,
+      guests: 1,
+      beds: 1,
+      bedrooms: 1,
+      minPrice: 0,
+      maxPrice: 5000,
+    };
     if (label) {
-      updatedQuery = { ...updatedQuery, category: label };
+      updatedQuery = { category: label, ...updatedQuery };
     }
 
     if (params?.[0].get("category") === label) {

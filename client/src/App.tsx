@@ -36,7 +36,7 @@ function App() {
   return (
     <>
       <header
-        className={`w-full bg-white sticky top-0 mb-6 z-[50] ${
+        className={`w-full bg-white sticky top-0 mb-4 z-[50] ${
           location.pathname === homepage && "shadow"
         }`}
       >

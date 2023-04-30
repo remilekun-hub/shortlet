@@ -1,5 +1,4 @@
-import { Subtitle } from "@tremor/react";
-import React, { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 interface Props {
   title: string;
@@ -9,16 +8,6 @@ interface Props {
 }
 
 function Counter({ title, subtitle, value, onChange }: Props) {
-  // const reduce = useCallback(() => {
-  //   if (CounterV == 1) {
-  //     return;
-  //   }
-  //   setCouterV((value) => value - 1);
-  // }, [CounterV]);
-
-  // const Add = useCallback(() => {
-  //   setCouterV((value) => value + 1);
-  // }, [CounterV]);
   const reduce = useCallback(() => {
     if (value == 1) {
       return;
