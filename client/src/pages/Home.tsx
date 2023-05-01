@@ -13,10 +13,13 @@ function Home() {
   const guests = params?.[0].get("guests");
   const country = params?.[0].get("country");
   console.log({ category, baths, beds, bedrooms, guests, country });
+
   const { data, error } = useFetch<Property[]>(
-    `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&${
+    `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
+      baths || 1
+    }&guests=${guests || 1}&bedrooms=${
       bedrooms || 1
-    }&${guests || 1}&${baths || 1}&${country || "spain"}`
+    }&country=${country}&category=${category}`
   );
 
   if (error) {
