@@ -12,13 +12,15 @@ function Home() {
   const bedrooms = params?.[0].get("bedrooms");
   const guests = params?.[0].get("guests");
   const country = params?.[0].get("country");
+  const minPrice = params?.[0].get("minPrice");
+  const maxPrice = params?.[0].get("maxPrice");
 
   const { data, error } = useFetch<Property[]>(
     `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
       baths || 1
-    }&guests=${guests || 1}&bedrooms=${
-      bedrooms || 1
-    }&country=${country}&category=${category}`
+    }&guests=${guests || 1}&bedrooms=${bedrooms || 1}&minPrice=${
+      minPrice || 0
+    }&maxPrice=${maxPrice || 1000}&country=${country}&category=${category}`
   );
 
   if (error) {

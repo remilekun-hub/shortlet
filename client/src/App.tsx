@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Dashboard, UserListings } from "./pages";
+import { Dashboard } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
 import { useEffect } from "react";
 import { userSlice } from "./zustand/user";
@@ -11,6 +11,7 @@ import CategoryList from "./components/CategoryList";
 import NavBar from "./components/NavBar";
 const LazyHome = lazy(() => import("./pages/Home"));
 const LazyApartment = lazy(() => import("./pages/Apartment"));
+const LazyUserListings = lazy(() => import("./pages/UserListings"));
 
 function App() {
   const user = userSlice((state) => state);
@@ -65,9 +66,16 @@ function App() {
             </Suspense>
           }
         />
-        {user.user && (
-          <Route path="/user/me/listings" element={<UserListings />} />
-        )}
+
+        <Route
+          path="/user/me/listings"
+          element={
+            <Suspense fallback="Loading...">
+              <LazyUserListings />
+            </Suspense>
+          }
+        />
+
         <Route
           path="/dashboard"
           element={

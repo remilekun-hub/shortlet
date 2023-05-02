@@ -12,7 +12,6 @@ const getProperties = async (req, res) => {
     bedrooms,
   } = req.query;
   const propertyQuery = {};
-  console.log({ country }, typeof country);
 
   if (beds) {
     propertyQuery.bed = { $gte: beds };

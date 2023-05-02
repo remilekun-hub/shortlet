@@ -17,10 +17,7 @@ function NavBar() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [showFilter, setShowFilter] = useState(false);
-  const location = useLocation();
-  const currentSearch = location.search;
   const params = useSearchParams();
-  const country = params?.[0].get("country");
   const category = params?.[0].get("category");
 
   const [userFilter, setUserFilter] = useState({
@@ -94,16 +91,16 @@ function NavBar() {
             className="outline-none"
           />
           <span
-            onClick={() => setShowFilter(!showFilter)}
-            className="cursor-pointer mx-1 w-8 h-8 rounded-full flex justify-center items-center bg-rose-400"
-          >
-            f
-          </span>
-          <span
             onClick={handleSearch}
             className="cursor-pointer w-8 h-8 rounded-full flex justify-center items-center bg-rose-400"
           >
             G
+          </span>
+          <span
+            onClick={() => setShowFilter(!showFilter)}
+            className="cursor-pointer mx-1 w-8 h-8 rounded-full flex justify-center items-center bg-rose-400"
+          >
+            f
           </span>
         </div>
 

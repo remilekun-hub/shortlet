@@ -20,7 +20,7 @@ function SingleCategory({ label, selected }: Prop) {
       beds: 1,
       bedrooms: 1,
       minPrice: 0,
-      maxPrice: 5000,
+      maxPrice: 1000,
     };
     if (label) {
       updatedQuery = { category: label, ...updatedQuery };

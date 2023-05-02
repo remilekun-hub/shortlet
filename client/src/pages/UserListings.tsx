@@ -4,18 +4,23 @@ import { Loader } from "@mantine/core";
 import { Property } from "../typings";
 
 function UserListings() {
-  const user = userSlice((state) => state.user);
+  const user = userSlice((state) => state);
   const { data, error } = useFetch<Property[]>(
     "http://localhost:5000/api/v1/properties",
     {
       headers: {
-        Authorization: `Bearer ${user?.token}`,
+        Authorization: `Bearer ${user.user?.token}`,
       },
     }
   );
-  console.log(data);
+  if (!user.user) {
+    return (
+      <p className="text-center">You must be logged in to access this route</p>
+    );
+  }
+
   if (error) {
-    return <p>An error has occured</p>;
+    return <p className="text-center">An error has occured</p>;
   }
   if (!data) {
     return (
