@@ -12,6 +12,7 @@ const getProperties = async (req, res) => {
     bedrooms,
   } = req.query;
   const propertyQuery = {};
+  console.log({ country }, typeof country);
 
   if (beds) {
     propertyQuery.bed = { $gte: beds };
@@ -19,10 +20,10 @@ const getProperties = async (req, res) => {
   if (bedrooms) {
     propertyQuery.bedrooms = { $gte: bedrooms };
   }
-  if (country != "" && country != "null") {
+  if (country != "null") {
     propertyQuery.country = { $regex: country, $options: "i" };
   }
-  if (category != "" && country != "null") {
+  if (category != "null") {
     propertyQuery.category = { $regex: category, $options: "i" };
   }
   if (baths) {

@@ -79,7 +79,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="flex items-center justify-between mx-auto max-w-[1400px] px-3 py-4 md:px-[48px] lg:px-[50px] xl:px-[65px] relative">
+    <nav className="flex items-center justify-between mx-auto max-w-[1400px] px-3 py-4 md:px-[48px] lg:px-[50px] relative">
       <span className="hidden md:block">logo here</span>
 
       <div className="relative">

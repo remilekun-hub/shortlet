@@ -12,7 +12,6 @@ function Home() {
   const bedrooms = params?.[0].get("bedrooms");
   const guests = params?.[0].get("guests");
   const country = params?.[0].get("country");
-  console.log({ category, baths, beds, bedrooms, guests, country });
 
   const { data, error } = useFetch<Property[]>(
     `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
@@ -34,7 +33,7 @@ function Home() {
   }
   return (
     <section>
-      <div className="px-4 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[55px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="px-3 sm:px-10 md:px-[48px] lg:px-[50px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {data.map((item) => (
           <PropertyCard key={item._id} {...item} />
         ))}
