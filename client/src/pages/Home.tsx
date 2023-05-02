@@ -3,12 +3,8 @@ import PropertyCard from "../components/PropertyCard";
 import { Property } from "../typings";
 import useFetch from "../util/useFetch";
 import { Loader } from "@mantine/core";
-import { favouritesSlice } from "../zustand/userFavourites";
 
 function Home() {
-  const fav = favouritesSlice((state) => state.favourites);
-  const removeAllFav = favouritesSlice((state) => state.removeAll);
-  console.log({ fav });
   const params = useSearchParams();
   const category = params?.[0].get("category");
   const baths = params?.[0].get("baths");
@@ -44,7 +40,6 @@ function Home() {
           <PropertyCard key={item._id} {...item} />
         ))}
         <p>{data.length}</p>
-        <button onClick={removeAllFav}>remove all fav</button>
       </div>
     </section>
   );
