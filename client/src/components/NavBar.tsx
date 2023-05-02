@@ -176,7 +176,7 @@ function NavBar() {
 
       <button
         onClick={() => setIsMenu(!isMenu)}
-        className="border-[1px] flex items-center justify-center transition py-[3px] px-2 rounded-[25px] gap-2 hover:shadow-md"
+        className="border-[1px] flex items-center justify-center transition py-[4px] px-[5px] rounded-[25px] gap-2 hover:shadow-md"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

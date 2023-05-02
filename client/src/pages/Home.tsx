@@ -14,7 +14,6 @@ function Home() {
   const country = params?.[0].get("country");
   const minPrice = params?.[0].get("minPrice");
   const maxPrice = params?.[0].get("maxPrice");
-
   const { data, error } = useFetch<Property[]>(
     `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
       baths || 1
