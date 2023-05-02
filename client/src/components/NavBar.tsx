@@ -94,7 +94,20 @@ function NavBar() {
             onClick={handleSearch}
             className="cursor-pointer w-8 h-8 rounded-full flex justify-center items-center bg-rose-400"
           >
-            G
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="white"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
           </span>
           <span
             onClick={() => setShowFilter(!showFilter)}
@@ -105,7 +118,7 @@ function NavBar() {
         </div>
 
         {showFilter && (
-          <div className="absolute min-h-full bg-white shadow-xl p-2 border-[1px] w-full top-[63px] left-0 z-[300] rounded-lg">
+          <div className="absolute min-h-full bg-white shadow-xl p-2 border-[1px] w-full top-[59px] left-0 z-[300] rounded-lg">
             <ApartmentFilter
               value={userFilter.beds}
               title="beds"
@@ -163,10 +176,24 @@ function NavBar() {
 
       <button
         onClick={() => setIsMenu(!isMenu)}
-        className="flex items-center justify-center py-[7px] px-2 rounded-[25px] gap-1 shadow-md"
+        className="border-[1px] flex items-center justify-center transition py-[3px] px-2 rounded-[25px] gap-2 hover:shadow-md"
       >
-        <div>heu</div>
-        <Avatar radius="xl" src={user?.image} size={"md"} />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-5 h-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+
+        <Avatar radius="xl" src={user?.image} size={"35px"} />
       </button>
 
       {isMenu && <SideMenu setIsMenu={setIsMenu} />}

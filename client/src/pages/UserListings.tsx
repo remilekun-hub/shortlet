@@ -15,7 +15,7 @@ function UserListings() {
   );
   if (!user.user) {
     return (
-      <p className="text-center">You must be logged in to access this route</p>
+      <p className="text-center">You must be logged in to access this page</p>
     );
   }
 

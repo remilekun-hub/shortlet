@@ -40,12 +40,12 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
   };
 
   return (
-    <aside className="absolute top-[81px] z-[500] right-3 md:right-[48px] lg:right-[50px] w-full max-w-[190px] drop-shadow-xl">
+    <aside className="absolute top-[75px] z-[500] right-3 md:right-[48px] lg:right-[50px] w-full max-w-[190px] drop-shadow-xl">
       <div className="bg-white rounded-[9px] overflow-hidden border-[1px]">
         {user.user ? (
           <>
-            <UserLink url="/user/me/listings" title="My Listing" />
-            <UserLink url="/users/me/listing" title="My Favourites" />
+            <UserLink url="/user/me/listing" title="My Listing" />
+            <UserLink url="/user/me/favourites" title="My Favourites" />
             <UserLink url="/users/me/listing" title="My Reservations" />
             <MenuItem title="Shortlet my home" onClick={handleShortletClick} />
             <MenuItem title="Log out" onClick={handleLogOut} />

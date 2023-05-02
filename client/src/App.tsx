@@ -12,6 +12,7 @@ import NavBar from "./components/NavBar";
 const LazyHome = lazy(() => import("./pages/Home"));
 const LazyApartment = lazy(() => import("./pages/Apartment"));
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
+const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
 
 function App() {
   const user = userSlice((state) => state);
@@ -68,10 +69,18 @@ function App() {
         />
 
         <Route
-          path="/user/me/listings"
+          path="/user/me/listing"
           element={
             <Suspense fallback="Loading...">
               <LazyUserListings />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/user/me/favourites"
+          element={
+            <Suspense fallback="Loading...">
+              <LazyUserFavourites />
             </Suspense>
           }
         />
