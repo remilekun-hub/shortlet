@@ -50,7 +50,7 @@ const deleteProperty = async (req, res) => {
   const { id: propertyID } = req.params;
   const property = await Property.findByIdAndDelete({
     _id: propertyID,
-    createdBy: { id: req.user.userId },
+    "createdBy.id": req.user.userId,
   });
   if (!property) {
     throw new NotFound(`No property with id ${propertyID}`);
