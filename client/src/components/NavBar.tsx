@@ -4,16 +4,20 @@ import { Avatar } from "@mantine/core";
 import { userSlice } from "../zustand/user";
 import {
   useNavigate,
-  useLocation,
   useSearchParams,
   createSearchParams,
+  Link,
 } from "react-router-dom";
 import ApartmentFilter from "./ApartmentFilter";
 import { RangeSlider } from "@mantine/core";
+import useLoginModalState from "../zustand/UseLoginModal";
+import useListingModalState from "../zustand/listingModal";
 
 function NavBar() {
   const [isMenu, setIsMenu] = useState(false);
   const user = userSlice((state) => state.user);
+  const loginModal = useLoginModalState();
+  const listingModal = useListingModalState();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [showFilter, setShowFilter] = useState(false);
@@ -75,12 +79,27 @@ function NavBar() {
     setShowFilter(!showFilter);
   };
 
+  const handleCreate = () => {
+    if (!user) {
+      return loginModal.onOpen();
+    }
+    listingModal.onOpen();
+  };
+
   return (
-    <nav className="flex items-center justify-between mx-auto max-w-[1400px] px-3 py-4 md:px-[48px] lg:px-[50px] relative">
-      <span className="hidden md:block">logo here</span>
+    <nav className="flex items-center justify-between mx-auto max-w-[1400px] px-4 py-4 md:px-[50px] relative ">
+      <div
+        className="absolute right-[160px] hidden lg:block cursor-pointer"
+        onClick={handleCreate}
+      >
+        Shortlet your home
+      </div>
+      <Link to={"/"} className="hidden md:block">
+        logo here
+      </Link>
 
       <div className="relative">
-        <div className="flex border-[1px] rounded-full items-center h-[48px] px-[8px] py-4 shadow-md">
+        <div className="flex border-[1px] rounded-full items-center h-[48px] pl-[8px] pr-[2px] py-4 shadow-md">
           <input
             type="search"
             name=""
@@ -88,19 +107,20 @@ function NavBar() {
             value={search}
             placeholder="search by country"
             onChange={(e) => setSearch(e.target.value)}
-            className="outline-none"
+            className="outline-none pl-1"
           />
+
           <span
             onClick={handleSearch}
-            className="cursor-pointer w-8 h-8 rounded-full flex justify-center items-center bg-rose-400"
+            className="cursor-pointer w-8 h-8 rounded-full flex justify-center items-center bg-[#412db3]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={2}
+              strokeWidth={3.5}
               stroke="white"
-              className="w-4 h-4"
+              className="w-[14px] h-[14px]"
             >
               <path
                 strokeLinecap="round"
@@ -111,7 +131,7 @@ function NavBar() {
           </span>
           <span
             onClick={() => setShowFilter(!showFilter)}
-            className="cursor-pointer mx-1 w-8 h-8 rounded-full flex justify-center items-center bg-rose-400"
+            className="cursor-pointer mx-1 w-8 h-8 rounded-full flex justify-center items-center bg-[#412db3] text-white"
           >
             f
           </span>
@@ -165,7 +185,7 @@ function NavBar() {
 
               <button
                 onClick={handleFilter}
-                className="text-white bg-black px-3 py-1 rounded-sm"
+                className="text-white bg-black py-1 rounded-sm"
               >
                 Filter
               </button>
@@ -174,27 +194,29 @@ function NavBar() {
         )}
       </div>
 
-      <button
-        onClick={() => setIsMenu(!isMenu)}
-        className="border-[1px] flex items-center justify-center transition py-[4px] px-[5px] rounded-[25px] gap-2 hover:shadow-md"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-5 h-5"
+      <div>
+        <button
+          onClick={() => setIsMenu(!isMenu)}
+          className="border-[1px] flex items-center justify-center transition py-[4px] px-[5px] rounded-[25px] gap-2 hover:shadow-md"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-5 h-5 ml-[5px]"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
 
-        <Avatar radius="xl" src={user?.image} size={"35px"} />
-      </button>
+          <Avatar radius="xl" src={user?.image} size={"35px"} />
+        </button>
+      </div>
 
       {isMenu && <SideMenu setIsMenu={setIsMenu} />}
     </nav>

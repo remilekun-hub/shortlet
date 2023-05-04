@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../typings";
 import useFetch from "../util/useFetch";
-import { Loader } from "@mantine/core";
+import { Loader, Skeleton } from "@mantine/core";
 
 function Home() {
   const params = useSearchParams();
@@ -14,6 +14,7 @@ function Home() {
   const country = params?.[0].get("country");
   const minPrice = params?.[0].get("minPrice");
   const maxPrice = params?.[0].get("maxPrice");
+
   const { data, error } = useFetch<Property[]>(
     `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
       baths || 1
@@ -28,17 +29,29 @@ function Home() {
   if (!data) {
     return (
       <div className="h-full w-full flex justify-center items-center">
-        <Loader size={"md"} color="#F43F5E" />
+        <Loader size={"md"} color="#412db3" />
       </div>
     );
   }
   return (
     <section>
-      <div className="px-3 sm:px-10 md:px-[48px] lg:px-[50px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {data.map((item) => (
           <PropertyCard key={item._id} {...item} />
         ))}
-        <p>{data.length}</p>
+        {/* {Array.from({ length: 10 }).map((_, i) => (
+          <div key={i}>
+            <div className="rounded-xl overflow-hidden">
+              <Skeleton height={300} />
+            </div>
+            <div className="mt-3">
+              <Skeleton height={20} />
+            </div>
+            <div className="mt-3 w-[100px]">
+              <Skeleton height={20} />
+            </div>
+          </div>
+        ))} */}
       </div>
     </section>
   );

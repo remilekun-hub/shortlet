@@ -29,7 +29,14 @@ function UserListings() {
       </div>
     );
   }
-  return <div>you have {data?.length} listing</div>;
+  return (
+    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="bg-red-700 h-[300px]">rem</div>
+      <div className="bg-red-700 h-[300px]">rem</div>
+      <div className="bg-red-700 h-[300px]">rem</div>
+      <div className="bg-red-700 h-[300px]">rem</div>
+    </section>
+  );
 }
 
 export default UserListings;

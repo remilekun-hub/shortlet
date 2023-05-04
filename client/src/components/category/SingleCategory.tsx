@@ -12,6 +12,7 @@ interface Prop {
 function SingleCategory({ label, selected }: Prop) {
   const params = useSearchParams();
   const navigate = useNavigate();
+  const country = params?.[0].get("country");
 
   const handleClick = useCallback(() => {
     let updatedQuery: any = {
@@ -24,6 +25,9 @@ function SingleCategory({ label, selected }: Prop) {
     };
     if (label) {
       updatedQuery = { category: label, ...updatedQuery };
+    }
+    if (country) {
+      updatedQuery = { country: country, ...updatedQuery };
     }
 
     if (params?.[0].get("category") === label) {
