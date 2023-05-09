@@ -16,10 +16,11 @@ function UserFavourites() {
   return (
     <section>
       <h1>My Favourites</h1>
-      <div className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
         {/* {favourites.map((item) => (
           <PropertyCard key={item._id} {...item} />
         ))} */}
+        <div className="bg-red-700 h-[300px]">rem</div>
         <div className="bg-red-700 h-[300px]">rem</div>
         <div className="bg-red-700 h-[300px]">rem</div>
         <div className="bg-red-700 h-[300px]">rem</div>

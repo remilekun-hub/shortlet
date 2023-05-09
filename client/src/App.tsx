@@ -1,7 +1,7 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Dashboard } from "./pages";
 import ProtectedRoute from "./util/ProtectedRoute";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { userSlice } from "./zustand/user";
 import RegisterModal from "./components/modal/RegisterModal";
 import LoginModal from "./components/modal/LoginModal";
@@ -9,15 +9,27 @@ import CreateListingModal from "./components/modal/CreateListingModal";
 import { lazy, Suspense } from "react";
 import CategoryList from "./components/CategoryList";
 import NavBar from "./components/NavBar";
+import { Avatar } from "@mantine/core";
+import SideMenu from "./components/SideMenu";
+import MenuItem from "./components/MenuItem";
+import UserLink from "./components/UserLink";
+import useListingModalState from "./zustand/listingModal";
+import useRegisterModalState from "./zustand/useRegisterModal";
+import useLoginModalState from "./zustand/UseLoginModal";
 const LazyHome = lazy(() => import("./pages/Home"));
 const LazyApartment = lazy(() => import("./pages/Apartment"));
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
 const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
 
 function App() {
+  const [isMenu, setIsMenu] = useState(false);
   const user = userSlice((state) => state);
+  const listingModal = useListingModalState();
+  const registerModal = useRegisterModalState();
+  const loginModal = useLoginModalState();
   const location = useLocation();
   const homepage = "/";
+  const navigate = useNavigate();
 
   useEffect(() => {
     let storageUser = localStorage.getItem("user");
@@ -34,7 +46,26 @@ function App() {
       return;
     }
   }, []);
+  const handleSignUpItemClick = () => {
+    setIsMenu(false);
+    registerModal.onOpen();
+  };
 
+  const handleLoginItemClick = () => {
+    setIsMenu(false);
+    loginModal.onOpen();
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    user.removeUser();
+    navigate(0);
+  };
+
+  const handleShortletClick = () => {
+    setIsMenu(false);
+    listingModal.onOpen();
+  };
   return (
     <>
       <header
@@ -47,6 +78,7 @@ function App() {
         </div>
         <CategoryList />
       </header>
+
       <RegisterModal />
       <LoginModal />
       <CreateListingModal />
@@ -102,6 +134,38 @@ function App() {
         </Route>
         <Route path="*" element={"route does not exist"} />
       </Routes>
+      <footer className="fixed bottom-0 w-full sm:hidden border-t-[1px] border-black/20 bg-white">
+        {isMenu && (
+          <div className="bg-white rounded-[9px] overflow-hidden border-[1px] w-[180px] absolute right-0 bottom-[56px]">
+            {user.user ? (
+              <>
+                <UserLink url="/user/me/listing" title="My Listing" />
+                <UserLink url="/user/me/favourites" title="My Favourites" />
+                <UserLink url="/users/me/listing" title="My Reservations" />
+                <MenuItem
+                  title="Shortlet my home"
+                  onClick={handleShortletClick}
+                />
+                <MenuItem title="Log out" onClick={handleLogOut} />
+              </>
+            ) : (
+              <>
+                <MenuItem title="Sign Up" onClick={handleSignUpItemClick} />
+                <MenuItem title="Log in" onClick={handleLoginItemClick} />
+              </>
+            )}
+          </div>
+        )}
+        <div className="px-4 flex justify-evenly items-center h-[55px]">
+          <div>1</div>
+          <div>2</div>
+          <div className="">
+            <button onClick={() => setIsMenu(!isMenu)}>
+              <Avatar radius="xl" src={user.user?.image} size={"35px"} />
+            </button>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }

@@ -87,7 +87,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="flex items-center justify-between mx-auto max-w-[1400px] px-4 py-4 md:px-[50px] relative ">
+    <nav className="flex items-center justify-center sm:justify-between mx-auto max-w-[1400px] px-4 py-4 md:px-[50px] relative ">
       <div
         className="absolute right-[160px] hidden lg:block cursor-pointer"
         onClick={handleCreate}
@@ -130,7 +130,10 @@ function NavBar() {
             </svg>
           </span>
           <span
-            onClick={() => setShowFilter(!showFilter)}
+            onClick={() => {
+              setShowFilter(!showFilter);
+              setIsMenu(false);
+            }}
             className="cursor-pointer mx-1 w-8 h-8 rounded-full flex justify-center items-center bg-[#412db3] text-white"
           >
             f
@@ -194,9 +197,12 @@ function NavBar() {
         )}
       </div>
 
-      <div>
+      <div className="hidden sm:block">
         <button
-          onClick={() => setIsMenu(!isMenu)}
+          onClick={() => {
+            setIsMenu(!isMenu);
+            setShowFilter(false);
+          }}
           className="border-[1px] flex items-center justify-center transition py-[4px] px-[5px] rounded-[25px] gap-2 hover:shadow-md"
         >
           <svg

@@ -5,6 +5,12 @@ import { Property } from "../typings";
 
 function UserListings() {
   const user = userSlice((state) => state);
+
+  if (!user.user) {
+    return (
+      <p className="text-center">You must be logged in to access this page</p>
+    );
+  }
   const { data, error } = useFetch<Property[]>(
     "http://localhost:5000/api/v1/properties",
     {
@@ -13,12 +19,6 @@ function UserListings() {
       },
     }
   );
-  if (!user.user) {
-    return (
-      <p className="text-center">You must be logged in to access this page</p>
-    );
-  }
-
   if (error) {
     return <p className="text-center">An error has occured</p>;
   }
