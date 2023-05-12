@@ -10,14 +10,15 @@ import ImageBlock from "../components/ImageBlock";
 import useFetch from "../util/useFetch";
 
 function Apartment() {
-  const [property, setProperty] = useState<Property | null>(null);
   const { id } = useParams();
+  const [property, setProperty] = useState<Property | null>(null);
   const user = userSlice((state) => state.user);
   const handlereviewSubmit = () => console.log("review submited");
 
   const { data, error } = useFetch(
     `http://localhost:5000/api/v1/public/properties/${id}`
   );
+  console.log({ data });
   // useEffect(() => {
   //   axios
   //     .get(`http://localhost:5000/api/v1/public/properties/${id}`)
@@ -43,7 +44,7 @@ function Apartment() {
                   <div className="py-6 border-b-[1px] border-black/20">
                     <h3 className="text-xl font-bold md:text-2xl mb-2">{`hosted by `}</h3>
                     <div className="flex space-x-2">
-                      <BedroomBedandBath
+                      {/* <BedroomBedandBath
                         amount={property?.guests}
                         type="guests"
                       />
@@ -56,7 +57,7 @@ function Apartment() {
                         amount={property?.bathrooms}
                         type="bath"
                       />
-                      <BedroomBedandBath amount={property?.bed} type="bed" />
+                      <BedroomBedandBath amount={property?.bed} type="bed" /> */}
                     </div>
                   </div>
 

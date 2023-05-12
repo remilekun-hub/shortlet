@@ -126,7 +126,7 @@ function App() {
               <>
                 <UserLink url="/user/me/listing" title="My Listing" />
                 <UserLink url="/user/me/favourites" title="My Favourites" />
-                <UserLink url="/users/me/listing" title="My Reservations" />
+                <UserLink url="/user/me/listing" title="My Reservations" />
                 <MenuItem
                   title="Shortlet my home"
                   onClick={handleShortletClick}
