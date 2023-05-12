@@ -1,6 +1,6 @@
 import useFetch from "../util/useFetch";
 import { userSlice } from "../zustand/user";
-import { Loader, Skeleton } from "@mantine/core";
+import { Skeleton } from "@mantine/core";
 import { Property } from "../typings";
 import Heading from "../components/Heading";
 

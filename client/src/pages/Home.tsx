@@ -3,6 +3,7 @@ import PropertyCard from "../components/PropertyCard";
 import { Property } from "../typings";
 import useFetch from "../util/useFetch";
 import { Loader, Skeleton } from "@mantine/core";
+import Heading from "../components/Heading";
 
 function Home() {
   const params = useSearchParams();
@@ -24,12 +25,27 @@ function Home() {
   );
 
   if (error) {
-    return <p className="text-center">An error has occured</p>;
+    return (
+      <div className="flex justify-center items-center pt-[100px] text-center">
+        <Heading title="Oops!" subtitle="Something went wrong, try again." />
+      </div>
+    );
   }
   if (!data) {
     return (
       <div className="h-full w-full flex justify-center items-center">
         <Loader size={"md"} color="#412db3" />
+      </div>
+    );
+  }
+  if (data.length == 0) {
+    return (
+      <div className="flex justify-center items-center pt-[100px] text-center">
+        <Heading
+          title="No Exact Matches"
+          subtitle="Try changing or improving your filters"
+        />
+        <button>Remove all filters</button>
       </div>
     );
   }
