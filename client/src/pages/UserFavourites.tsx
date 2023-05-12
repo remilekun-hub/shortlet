@@ -8,28 +8,28 @@ function UserFavourites() {
   const favourites = favouritesSlice((state) => state.favourites);
   const user = userSlice((state) => state);
 
-  // if (!user?.user) {
-  //   return (
-  //     <div className="flex justify-center items-center pt-[100px] text-center">
-  //       <Heading
-  //         title="Please Log in"
-  //         subtitle="you must be logged in to access this route"
-  //       />
-  //     </div>
-  //   );
-  // }
+  if (!user?.user) {
+    return (
+      <div className="flex justify-center items-center pt-[100px] text-center">
+        <Heading
+          title="Please Log in"
+          subtitle="you must be logged in to access this route"
+        />
+      </div>
+    );
+  }
 
-  // if (favourites.length == 0) {
-  //   return (
-  //     <div className="flex justify-center items-center pt-[100px] text-center">
-  //       <Heading
-  //         title="No Favourites Found"
-  //         subtitle="Looks like you have no favourite listings"
-  //       />
-  //       ;
-  //     </div>
-  //   );
-  // }
+  if (favourites.length == 0) {
+    return (
+      <div className="flex justify-center items-center pt-[100px] text-center">
+        <Heading
+          title="No Favourites Found"
+          subtitle="Looks like you have no favourite listings"
+        />
+        ;
+      </div>
+    );
+  }
 
   return (
     <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] ">
