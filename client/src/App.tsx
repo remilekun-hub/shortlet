@@ -10,7 +10,6 @@ import { lazy, Suspense } from "react";
 import CategoryList from "./components/CategoryList";
 import NavBar from "./components/NavBar";
 import { Avatar } from "@mantine/core";
-import SideMenu from "./components/SideMenu";
 import MenuItem from "./components/MenuItem";
 import UserLink from "./components/UserLink";
 import useListingModalState from "./zustand/listingModal";
@@ -121,7 +120,7 @@ function App() {
       </Routes>
       <footer className="fixed bottom-0 w-full sm:hidden border-t-[1px] border-black/20 bg-white">
         {isMenu && (
-          <div className="bg-white rounded-[9px] overflow-hidden border-[1px] w-[180px] absolute right-0 bottom-[56px]">
+          <div className="bg-white rounded-[9px] overflow-hidden border-[1px] w-[180px] absolute right-4 bottom-[60px]">
             {user.user ? (
               <>
                 <UserLink url="/user/me/listing" title="My Listing" />
