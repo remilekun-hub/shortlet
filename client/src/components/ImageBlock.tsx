@@ -1,11 +1,11 @@
 import { Carousel } from "@mantine/carousel";
 import imageLayout from "../util/ImageLayout";
 
-interface Prop {
+interface ImageBlockProp {
   images: string[];
 }
 
-function ImageBlock({ images }: Prop) {
+function ImageBlock({ images }: ImageBlockProp) {
   const slides = images.map((url) => (
     <Carousel.Slide key={url}>
       <img src={url} className="object-cover w-full h-full" />

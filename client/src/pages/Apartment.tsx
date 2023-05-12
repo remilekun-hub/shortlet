@@ -7,20 +7,24 @@ import { userSlice } from "../zustand/user";
 const Reserve = lazy(() => import("../components/Reserve"));
 import BedroomBedandBath from "../components/BedroomBedandBath";
 import ImageBlock from "../components/ImageBlock";
+import useFetch from "../util/useFetch";
 
 function Apartment() {
   const [property, setProperty] = useState<Property | null>(null);
   const { id } = useParams();
   const user = userSlice((state) => state.user);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/v1/public/properties/${id}`)
-      .then((res) => setProperty(res?.data?.property));
-    console.log(property);
-  }, []);
-
   const handlereviewSubmit = () => console.log("review submited");
+
+  const { data, error } = useFetch(
+    `http://localhost:5000/api/v1/public/properties/${id}`
+  );
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:5000/api/v1/public/properties/${id}`)
+  //     .then((res) => setProperty(res?.data?.property));
+  //   console.log(property);
+  // }, []);
+
   return (
     <section>
       <div className="max-w-[1400px] px-5 py-1 md:px-[48px] lg:px-[50px] xl:px-[65px]">

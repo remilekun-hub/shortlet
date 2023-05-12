@@ -117,21 +117,6 @@ function App() {
           }
         />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute user={"wale"}>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={"home"} />
-          <Route path="users" element={"list of user"} />
-          <Route path="bookings" element={"bookings"} />
-          <Route path="user/create" element={"create new user"} />
-          <Route path="user/:userID" element={"single user"} />
-          <Route path="user/:userID/edit" element={"edit user"} />
-        </Route>
         <Route path="*" element={"route does not exist"} />
       </Routes>
       <footer className="fixed bottom-0 w-full sm:hidden border-t-[1px] border-black/20 bg-white">
