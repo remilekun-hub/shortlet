@@ -19,12 +19,6 @@ function Apartment() {
     `http://localhost:5000/api/v1/public/properties/${id}`
   );
   console.log({ data });
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:5000/api/v1/public/properties/${id}`)
-  //     .then((res) => setProperty(res?.data?.property));
-  //   console.log(property);
-  // }, []);
 
   return (
     <section>
