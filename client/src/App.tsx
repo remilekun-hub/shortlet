@@ -1,6 +1,4 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import { Dashboard } from "./pages";
-import ProtectedRoute from "./util/ProtectedRoute";
 import { useEffect, useState } from "react";
 import { userSlice } from "./zustand/user";
 import RegisterModal from "./components/modal/RegisterModal";
@@ -19,6 +17,7 @@ const LazyHome = lazy(() => import("./pages/Home"));
 const LazyApartment = lazy(() => import("./pages/Apartment"));
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
 const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
+const LazyReservation = lazy(() => import("./pages/Reservations"));
 
 function App() {
   const [isMenu, setIsMenu] = useState(false);
@@ -100,7 +99,7 @@ function App() {
         />
 
         <Route
-          path="/user/me/listing"
+          path="/listing"
           element={
             <Suspense fallback="Loading...">
               <LazyUserListings />
@@ -108,24 +107,32 @@ function App() {
           }
         />
         <Route
-          path="/user/me/favourites"
+          path="/favourites"
           element={
             <Suspense fallback="Loading...">
               <LazyUserFavourites />
             </Suspense>
           }
         />
+        <Route
+          path="/reservation"
+          element={
+            <Suspense fallback="Loading...">
+              <LazyReservation />
+            </Suspense>
+          }
+        />
 
         <Route path="*" element={"route does not exist"} />
       </Routes>
-      <footer className="fixed bottom-0 w-full sm:hidden border-t-[1px] border-black/20 bg-white">
+      {/* <footer className="fixed bottom-0 w-full sm:hidden border-t-[1px] border-black/20 bg-white">
         {isMenu && (
           <div className="bg-white rounded-[9px] overflow-hidden border-[1px] w-[180px] absolute right-4 bottom-[60px]">
             {user.user ? (
               <>
                 <UserLink url="/user/me/listing" title="My Listing" />
                 <UserLink url="/user/me/favourites" title="My Favourites" />
-                <UserLink url="/user/me/listing" title="My Reservations" />
+                <UserLink url="/reservation" title="My Reservations" />
                 <MenuItem
                   title="Shortlet my home"
                   onClick={handleShortletClick}
@@ -149,7 +156,7 @@ function App() {
             </button>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </>
   );
 }

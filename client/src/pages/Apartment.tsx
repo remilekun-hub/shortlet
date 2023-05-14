@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { ReactElement, lazy, useEffect, useState } from "react";
-import { Property } from "../typings";
+import { SingleProperty } from "../typings";
 import axios from "axios";
 import Button from "../components/Button";
 import { userSlice } from "../zustand/user";
@@ -11,7 +11,7 @@ import useFetch from "../util/useFetch";
 
 function Apartment() {
   const { id } = useParams();
-  const [property, setProperty] = useState<Property | null>(null);
+  const [property, setProperty] = useState<SingleProperty | null>(null);
   const user = userSlice((state) => state.user);
   const handlereviewSubmit = () => console.log("review submited");
 
@@ -100,6 +100,9 @@ function Apartment() {
                 <Reserve
                   price={property?.price}
                   review={property?.reviews.length}
+                  id={property?._id}
+                  createdBy={property?.createdBy.id}
+                  image={property?.images[0]}
                 />
               </div>
             </>

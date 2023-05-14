@@ -4,26 +4,41 @@ import { useMemo, useState } from "react";
 import { calcDate } from "../util/calcDate";
 import { userSlice } from "../zustand/user";
 import useLoginModalState from "../zustand/UseLoginModal";
+import axios from "axios";
 
 interface Prop {
   price: number;
   review: number;
+  id: string;
+  createdBy: string;
+  image: string;
 }
 
-function Reserve({ price, review }: Prop) {
+function Reserve({ price, review, id, createdBy, image }: Prop) {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
   const numberofNights = useMemo(() => calcDate(value), [value]);
 
   const user = userSlice((state) => state.user);
   const LoginModal = useLoginModalState();
-  const handleReserve = () => {
+
+  const handleReserve = async () => {
     if (!user) {
-      LoginModal.onOpen();
-      return;
+      return LoginModal.onOpen();
     }
     if (!value[0] || !value[1]) {
       return;
     }
+    if (!numberofNights) return;
+
+    await axios.post("j", {
+      startDate: value[0],
+      endDate: value[1],
+      image: image,
+      price: numberofNights * price,
+      reservedBy: user.id,
+      propertyId: id,
+      propertyOwner: createdBy,
+    });
   };
 
   const serviceFee = (): number | undefined => {
