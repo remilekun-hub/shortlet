@@ -14,7 +14,7 @@ import useListingModalState from "./zustand/listingModal";
 import useRegisterModalState from "./zustand/useRegisterModal";
 import useLoginModalState from "./zustand/UseLoginModal";
 const LazyHome = lazy(() => import("./pages/Home"));
-const LazyApartment = lazy(() => import("./pages/Apartment"));
+import { Apartment } from "./pages";
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
 const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
 const LazyReservation = lazy(() => import("./pages/Reservations"));
@@ -89,14 +89,7 @@ function App() {
             </Suspense>
           }
         />
-        <Route
-          path="/apartment/:id"
-          element={
-            <Suspense fallback="Loading...">
-              <LazyApartment />
-            </Suspense>
-          }
-        />
+        <Route path="/apartment/:id" element={<Apartment />} />
 
         <Route
           path="/listing"

@@ -28,7 +28,7 @@ const getProperty = async (req, res) => {
   if (!property) {
     throw new NotFound(`No property with id ${propertyID}`);
   }
-  res.status(200).json({ property });
+  res.status(200).json(property);
 };
 
 const updateProperty = async (req, res) => {

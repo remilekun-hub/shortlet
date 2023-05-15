@@ -24,7 +24,7 @@ export interface SingleProperty {
   createdBy: {
     name: string;
     id: string;
-    image: string;
+    img: string;
   };
   price: number;
   title: string;
@@ -35,7 +35,7 @@ export interface SingleProperty {
   guests: number;
   description: string;
   ameneties: string[] | [];
-  reviews: any[];
+  reviews: string[] | [];
   __v?: number;
 }
 
