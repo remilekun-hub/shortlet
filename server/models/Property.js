@@ -75,9 +75,6 @@ const PropertySchema = new mongoose.Schema({
     required: [true, "property description must be provided"],
   },
   reviews: [reviewSchema],
-  ameneties: {
-    type: [String],
-  },
 });
 
 module.exports = mongoose.model("Property", PropertySchema);
