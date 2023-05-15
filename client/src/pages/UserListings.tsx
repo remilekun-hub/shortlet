@@ -25,41 +25,11 @@ function UserListings() {
       },
     }
   );
-  if (error) {
-    return (
-      <div className="flex justify-center items-center pt-[100px] text-center">
-        <Heading title="Oops!" subtitle="Something went wrong, try again." />
-      </div>
-    );
-  }
-  if (!data) {
-    return (
-      <div className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] h-full w-full pb-8">
-        <div className="mb-4 w-[150px]">
-          <Skeleton height={20} />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i}>
-              <div className="rounded-xl overflow-hidden">
-                <Skeleton height={300} />
-              </div>
-              <div className="mt-3">
-                <Skeleton height={20} />
-              </div>
-              <div className="mt-3 w-[100px]">
-                <Skeleton height={20} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+
   return (
-    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] pb-8 ">
+    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] pb-8 ">
       <h1 className="text-[20px] font-bold mb-4">My Listings</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         <div className="bg-red-700 h-[300px]">rem</div>
         <div className="bg-red-700 h-[300px]">rem</div>
         <div className="bg-red-700 h-[300px]">rem</div>

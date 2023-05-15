@@ -4,7 +4,7 @@ const imageLayout = (images: string[]) => {
   const imagesNo = images.length;
   let imageGrid: ReactElement;
   switch (imagesNo) {
-    case 5 || 6 || 7 || 8 || 9 || 10 || 11:
+    case 5 || 6 || 7 || 8 || 9 || 10 || 11 || 12 || 13 || 14 || 15:
       imageGrid = (
         <div className="h-full grid grid-cols-4 grid-rows-2 gap-[6px]">
           <img
@@ -103,7 +103,6 @@ const imageLayout = (images: string[]) => {
 
     default:
       return null;
-      break;
   }
   return imageGrid;
 };

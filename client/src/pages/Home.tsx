@@ -51,7 +51,7 @@ function Home() {
   }
   return (
     <section>
-      <div className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {data.map((item) => (
           <PropertyCard key={item._id} {...item} />
         ))}

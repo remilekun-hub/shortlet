@@ -44,7 +44,7 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
     navigate(url);
   };
   return (
-    <aside className="absolute top-[75px] z-[500] right-3 md:right-[48px] lg:right-[50px] w-full max-w-[190px] drop-shadow-xl">
+    <aside className="absolute top-[75px] z-[500] right-4 sm:right-10 md:right-[48px] lg:right-[50px] w-full max-w-[190px] drop-shadow-xl">
       <div className="bg-white rounded-[9px] overflow-hidden border-[1px]">
         {user.user ? (
           <>

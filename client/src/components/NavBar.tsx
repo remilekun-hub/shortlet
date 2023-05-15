@@ -87,7 +87,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="flex items-center justify-center sm:justify-between mx-auto max-w-[1400px] px-4 py-4 md:px-[50px] relative ">
+    <nav className="flex items-center justify-center sm:justify-between mx-auto max-w-[1800px] px-4 py-4 sm:px-10 md:px-[50px] relative ">
       <div
         className="absolute right-[160px] hidden lg:block cursor-pointer"
         onClick={handleCreate}

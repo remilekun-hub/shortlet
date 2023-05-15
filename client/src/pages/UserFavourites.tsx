@@ -32,9 +32,9 @@ function UserFavourites() {
   }
 
   return (
-    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1400px] ">
+    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] ">
       <h1 className="text-[20px] font-bold mb-4">My Favourites</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {/* {favourites.map((item) => (
           <PropertyCard key={item._id} {...item} />
         ))} */}
