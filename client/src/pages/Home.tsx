@@ -4,6 +4,7 @@ import { Property } from "../typings";
 import useFetch from "../util/useFetch";
 import { Loader, Skeleton } from "@mantine/core";
 import Heading from "../components/Heading";
+import Button from "../components/Button";
 
 function Home() {
   const params = useSearchParams();
@@ -41,11 +42,13 @@ function Home() {
   if (data.length == 0) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
-        <Heading
-          title="No Exact Matches"
-          subtitle="Try changing or improving your filters"
-        />
-        <button>Remove all filters</button>
+        <div className="flex flex-col gap-3">
+          <Heading
+            title="No Exact Matches"
+            subtitle="Try changing your filters"
+          />
+          <Button label="Remove All Filters" />
+        </div>
       </div>
     );
   }

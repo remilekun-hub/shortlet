@@ -25,8 +25,6 @@ const getMyTrips = async (req, res) => {
   res.status(200).json(trips);
 };
 
-module.exports = { getTrips };
-
 const deleteMyTrip = async (req, res) => {
   const { id: reservationID } = req.params;
   const userID = req.user.userId;

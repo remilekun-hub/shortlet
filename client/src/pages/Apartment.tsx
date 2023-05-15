@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { ReactElement, lazy, useEffect, useState } from "react";
+import { lazy, useState } from "react";
 import { SingleProperty } from "../typings";
 import axios from "axios";
 import Button from "../components/Button";

@@ -26,7 +26,6 @@ function UserFavourites() {
           title="No Favourites Found"
           subtitle="Looks like you have no favourite listings"
         />
-        ;
       </div>
     );
   }
