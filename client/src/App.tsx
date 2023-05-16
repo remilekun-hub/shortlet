@@ -117,7 +117,7 @@ function App() {
           }
         />
         <Route
-          path="/reservation"
+          path="/reservations"
           element={
             <Suspense fallback="Loading...">
               <LazyReservation />

@@ -37,7 +37,7 @@ function Reserve({ price, review, id, createdBy, image }: Prop) {
         startDate: value[0],
         endDate: value[1],
         image: image,
-        price: price,
+        price: numberofNights * price,
         reservedBy: user.id,
         propertyId: id,
         propertyOwner: createdBy,

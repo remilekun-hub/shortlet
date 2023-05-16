@@ -62,7 +62,7 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
             />
             <MenuItem
               title="My Reservations"
-              onClick={() => handleMenuItemNavigate("/reservation")}
+              onClick={() => handleMenuItemNavigate("/reservations")}
             />
 
             <MenuItem title="Shortlet my home" onClick={handleShortletClick} />

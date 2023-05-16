@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../typings";
 import useFetch from "../util/useFetch";
-import { Loader, Skeleton } from "@mantine/core";
+import { Skeleton } from "@mantine/core";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
 
@@ -35,9 +35,23 @@ function Home() {
 
   if (!data) {
     return (
-      <div className="h-full w-full flex justify-center items-center">
-        <Loader size={"md"} color="#412db3" />
-      </div>
+      <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px]">
+        <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i}>
+              <div className="rounded-xl overflow-hidden">
+                <Skeleton height={300} />
+              </div>
+              <div className="mt-3">
+                <Skeleton height={20} />
+              </div>
+              <div className="mt-3 w-[100px]">
+                <Skeleton height={20} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     );
   }
 
@@ -60,19 +74,6 @@ function Home() {
         {data.map((item) => (
           <PropertyCard key={item._id} {...item} />
         ))}
-        {/* {Array.from({ length: 10 }).map((_, i) => (
-          <div key={i}>
-            <div className="rounded-xl overflow-hidden">
-              <Skeleton height={300} />
-            </div>
-            <div className="mt-3">
-              <Skeleton height={20} />
-            </div>
-            <div className="mt-3 w-[100px]">
-              <Skeleton height={20} />
-            </div>
-          </div>
-        ))} */}
       </div>
     </section>
   );
