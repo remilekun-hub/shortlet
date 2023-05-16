@@ -49,6 +49,10 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
         {user.user ? (
           <>
             <MenuItem
+              title="My Trips"
+              onClick={() => handleMenuItemNavigate("/trips")}
+            />
+            <MenuItem
               title="My Listing"
               onClick={() => handleMenuItemNavigate("/listing")}
             />

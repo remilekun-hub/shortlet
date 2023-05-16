@@ -27,7 +27,7 @@ function PropertyCard({ _id, city, country, images, price }: Property) {
       <Link to={`/apartment/${_id}`} className="flex flex-col gap-3">
         <div className="h-[300px]">
           <img
-            src={images[4]}
+            src={images[0]}
             className="object-cover h-full w-full rounded-xl"
           />
         </div>

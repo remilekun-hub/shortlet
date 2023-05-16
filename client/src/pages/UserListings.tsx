@@ -5,9 +5,9 @@ import { Property } from "../typings";
 import Heading from "../components/Heading";
 
 function UserListings() {
-  const user = userSlice((state) => state);
+  const user = userSlice((state) => state.user);
 
-  if (!user?.user) {
+  if (!user) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
         <Heading
@@ -21,11 +21,17 @@ function UserListings() {
     "http://localhost:5000/api/v1/properties",
     {
       headers: {
-        Authorization: `Bearer ${user.user?.token}`,
+        Authorization: `Bearer ${user.token}`,
       },
     }
   );
-
+  if (error) {
+    return (
+      <div className="flex justify-center items-center pt-[100px] text-center">
+        <Heading title="Oops!" subtitle="Something went wrong, try again." />
+      </div>
+    );
+  }
   return (
     <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] pb-8 ">
       <h1 className="text-[20px] font-bold mb-4">My Listings</h1>

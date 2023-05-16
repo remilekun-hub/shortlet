@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Reservation = new mongoose.Schema({
+const ReservationSchema = new mongoose.Schema({
   propertyId: {
     type: mongoose.Types.ObjectId,
     ref: "Property",
@@ -31,4 +31,4 @@ const Reservation = new mongoose.Schema({
   },
 });
 
-module.exports = Reservation;
+module.exports = mongoose.model("Reservation", ReservationSchema);

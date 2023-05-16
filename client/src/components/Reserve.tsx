@@ -16,6 +16,7 @@ interface Prop {
 
 function Reserve({ price, review, id, createdBy, image }: Prop) {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
+
   const numberofNights = useMemo(() => calcDate(value), [value]);
 
   const user = userSlice((state) => state.user);
@@ -30,15 +31,25 @@ function Reserve({ price, review, id, createdBy, image }: Prop) {
     }
     if (!numberofNights) return;
 
-    await axios.post("j", {
-      startDate: value[0],
-      endDate: value[1],
-      image: image,
-      price: price,
-      reservedBy: user.id,
-      propertyId: id,
-      propertyOwner: createdBy,
-    });
+    const { data } = await axios.post(
+      "http://localhost:5000/api/v1/reservations",
+      {
+        startDate: value[0],
+        endDate: value[1],
+        image: image,
+        price: price,
+        reservedBy: user.id,
+        propertyId: id,
+        propertyOwner: createdBy,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    console.log("reserved");
+    console.log({ data });
   };
 
   const serviceFee = (): number | undefined => {
@@ -67,6 +78,7 @@ function Reserve({ price, review, id, createdBy, image }: Prop) {
         onChange={setValue}
         mb={16}
         mx="auto"
+        valueFormat="YYYY MMM DD"
         minDate={new Date()}
       />
       <Button label="Reserve" onSubmit={handleReserve} />

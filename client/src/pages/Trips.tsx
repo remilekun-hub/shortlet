@@ -1,9 +1,9 @@
 import React from "react";
-import useFetch from "../util/useFetch";
 import { userSlice } from "../zustand/user";
+import useFetch from "../util/useFetch";
 import Heading from "../components/Heading";
 
-function Reservations() {
+function Trips() {
   const user = userSlice((state) => state.user);
 
   if (!user) {
@@ -16,8 +16,9 @@ function Reservations() {
       </div>
     );
   }
+
   const { data, error } = useFetch(
-    "http://localhost:5000/api/v1/reservations",
+    `http://localhost:5000/api/v1/reservations/trips/${user?.id}`,
     {
       headers: {
         Authorization: `Bearer ${user?.token}`,
@@ -32,18 +33,7 @@ function Reservations() {
       </div>
     );
   }
-  return (
-    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] pb-8 ">
-      <h1 className="text-[20px] font-bold mb-4">My Reservations</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
-      </div>
-    </section>
-  );
+  return <div>Trips</div>;
 }
 
-export default Reservations;
+export default Trips;

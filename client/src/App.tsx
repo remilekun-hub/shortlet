@@ -16,6 +16,7 @@ import useLoginModalState from "./zustand/UseLoginModal";
 const LazyHome = lazy(() => import("./pages/Home"));
 import { Apartment } from "./pages";
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
+const LazyTrip = lazy(()=> import("./pages/Trips"))
 const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
 const LazyReservation = lazy(() => import("./pages/Reservations"));
 
@@ -90,6 +91,14 @@ function App() {
           }
         />
         <Route path="/apartment/:id" element={<Apartment />} />
+        <Route
+          path="/trips"
+          element={
+            <Suspense fallback="Loading...">
+              <LazyTrip />
+            </Suspense>
+          }
+        />
 
         <Route
           path="/listing"

@@ -32,7 +32,6 @@ function Apartment() {
     };
     getProperty().then((data) => setProperty(data));
   }, []);
-  console.log({ property });
 
   if (!property) {
     return <Heading title="wait..." subtitle="property Loading...." />;

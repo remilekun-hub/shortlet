@@ -2,9 +2,10 @@ const Reservation = require("../models/Reservation");
 const NotFound = require("../errors/notFoundError");
 
 const createReservation = async (req, res) => {
-  const reservation = await Reservation.create(req.body);
+  const newReservation = req.body;
+  const reservation = await Reservation.create({ ...newReservation });
 
-  res.status(201).json({ reservation });
+  res.status(201).json(reservation);
 };
 
 const getMyReservations = async (req, res) => {

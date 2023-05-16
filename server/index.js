@@ -11,7 +11,7 @@ const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const propertyRouter = require("./routes/propertyRouter");
 const publicPropertyRouter = require("./routes/publicPropertyRouter");
-const reservationRouter = require("./routes/reservationRoute");
+const reservationRouter = require("./routes/reservationRouter");
 const port = process.env.PORT || 5000;
 
 app.use(cors());
