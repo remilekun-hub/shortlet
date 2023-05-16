@@ -15,10 +15,7 @@ const createProperty = async (req, res) => {
 const getProperties = async (req, res) => {
   const properties = await Property.find({
     "createdBy.id": req.user.userId,
-  });
-  // if (!property) {
-  //   throw new NotFound(`No property with id ${propertyID}`);
-  // }
+  }).select("_id price images city country");
   res.status(200).json(properties);
 };
 
