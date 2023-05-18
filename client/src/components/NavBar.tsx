@@ -51,20 +51,7 @@ function NavBar() {
     });
     setShowFilter(false);
   };
-  const reset = () => {
-    setUserFilter({
-      beds: 1,
-      guests: 1,
-      baths: 1,
-      bedrooms: 1,
-      minPrice: 0,
-      maxPrice: 1000,
-    });
-    setSearch("");
-    setRangeValue([userFilter.minPrice, userFilter.maxPrice]);
-    setShowFilter(false);
-    navigate("/");
-  };
+
   const handleFilter = () => {
     if (search) {
       navigate(
@@ -126,59 +113,11 @@ function NavBar() {
             />
           </svg>
         </div>
-        {/* <div
-            onClick={() => {
-              setShowFilter(!showFilter);
-              setIsMenu(false);
-            }}
-            className="cursor-pointer mx-1 w-8 h-8 rounded-full flex justify-center items-center bg-[#412db3] text-white"
-          >
-            f
-          </div> */}
       </div>
 
       {/* {showFilter && (
           <div className="absolute min-h-full bg-white shadow-xl p-2 border-[1px] w-full top-[59px] left-0 z-[300] rounded-lg">
-            <ApartmentFilter
-              value={userFilter.beds}
-              title="beds"
-              onChange={(value: number) => {
-                setUserFilter({ ...userFilter, beds: value });
-              }}
-            />
-            <ApartmentFilter
-              value={userFilter.baths}
-              title="baths"
-              onChange={(value: number) => {
-                setUserFilter({ ...userFilter, baths: value });
-              }}
-            />
-            <ApartmentFilter
-              value={userFilter.bedrooms}
-              title="bedrooms"
-              onChange={(value: number) => {
-                setUserFilter({ ...userFilter, bedrooms: value });
-              }}
-            />
-            <ApartmentFilter
-              value={userFilter.guests}
-              title="guests"
-              onChange={(value: number) => {
-                setUserFilter({ ...userFilter, guests: value });
-              }}
-            />
-
-            <div className="flex items-center justify-between">
-              <span className="mr-3">Price</span>
-              <div className="w-full">
-                <RangeSlider
-                  value={rangeValue}
-                  onChange={setRangeValue}
-                  min={0}
-                  max={1000}
-                />
-              </div>
-            </div>
+            
 
             <div className="flex justify-between">
               <button onClick={reset}>Clear</button>

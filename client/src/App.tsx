@@ -15,6 +15,7 @@ import useRegisterModalState from "./zustand/useRegisterModal";
 import useLoginModalState from "./zustand/UseLoginModal";
 const LazyHome = lazy(() => import("./pages/Home"));
 import { Apartment } from "./pages";
+import FilterModal from "./components/modal/FilterModal";
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
 const LazyTrip = lazy(() => import("./pages/Trips"));
 const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
@@ -81,6 +82,7 @@ function App() {
       <RegisterModal />
       <LoginModal />
       <CreateListingModal />
+      <FilterModal />
       <Routes>
         <Route
           path="/"
