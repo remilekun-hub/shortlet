@@ -1,10 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../typings";
-import useFetch from "../util/useFetch";
 import { Skeleton } from "@mantine/core";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
+import useSWR from "swr";
+import { fetcher } from "../util/fetcher";
 
 function Home() {
   const params = useSearchParams();
@@ -17,14 +18,14 @@ function Home() {
   const minPrice = params?.[0].get("minPrice");
   const maxPrice = params?.[0].get("maxPrice");
 
-  const { data, error } = useFetch<Property[]>(
+  const { data, error } = useSWR(
     `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
       baths || 1
     }&guests=${guests || 1}&bedrooms=${bedrooms || 1}&minPrice=${
       minPrice || 0
-    }&maxPrice=${maxPrice || 1000}&country=${country}&category=${category}`
+    }&maxPrice=${maxPrice || 1000}&country=${country}&category=${category}`,
+    fetcher
   );
-
   if (error) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
@@ -71,7 +72,7 @@ function Home() {
   return (
     <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px]">
       <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-        {data.map((item) => (
+        {data.map((item: Property) => (
           <PropertyCard key={item._id} {...item} />
         ))}
       </div>

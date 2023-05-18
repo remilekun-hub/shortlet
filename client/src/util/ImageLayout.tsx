@@ -6,7 +6,7 @@ const imageLayout = (images: string[]) => {
   switch (imagesNo) {
     case 5 || 6 || 7 || 8 || 9 || 10 || 11 || 12 || 13 || 14 || 15:
       imageGrid = (
-        <div className="h-full grid grid-cols-4 grid-rows-2 gap-[6px]">
+        <div className="h-full grid grid-cols-4 grid-rows-2 gap-[8px]">
           <img
             src={images[0]}
             className="w-full object-cover h-full object-center row-span-full col-span-2 col-start-1 col-end-3 cursor-pointer"

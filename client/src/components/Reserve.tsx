@@ -52,32 +52,27 @@ function Reserve({ price, review, id, createdBy, image, reservations }: Prop) {
     }
     if (!numberofNights) return;
 
-    const { data } = await axios.post(
-      "http://localhost:5000/api/v1/reservations",
-      {
-        startDate: value[0],
-        endDate: value[1],
-        image: image,
-        price: numberofNights * price,
-        reservedBy: user.id,
-        propertyId: id,
-        propertyOwner: createdBy,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
+    if (price !== undefined) {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/v1/reservations",
+        {
+          startDate: value[0],
+          endDate: value[1],
+          image: image,
+          price: numberofNights * price,
+          reservedBy: user.id,
+          propertyId: id,
+          propertyOwner: createdBy,
         },
-      }
-    );
-    console.log("reserved");
-    console.log({ data });
-  };
-
-  const serviceFee = (): number | undefined => {
-    if (numberofNights != null) {
-      return numberofNights * price * 0.13;
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      console.log("reserved");
+      console.log({ data });
     }
-    return undefined;
   };
 
   return (
@@ -105,16 +100,11 @@ function Reserve({ price, review, id, createdBy, image, reservations }: Prop) {
       <Button label="Reserve" onSubmit={handleReserve} />
       <p className="text-center mt-4 text-[15px]">You won't be charged yet</p>
 
-      {numberofNights != null && (
+      {numberofNights != null && price !== undefined && (
         <div className="mt-4 pb-6 border-b-[1px] border-black/20">
           <div className="flex justify-between">
             <p className="underline">{`$${price} x ${numberofNights} nights`}</p>
             <p>{`$${numberofNights * price}`}</p>
-          </div>
-
-          <div className="flex justify-between mt-3">
-            <p className="underline">Shortlet service fee</p>
-            <p>{`$${serviceFee()}`}</p>
           </div>
         </div>
       )}

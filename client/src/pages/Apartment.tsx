@@ -7,7 +7,6 @@ import { userSlice } from "../zustand/user";
 const Reserve = lazy(() => import("../components/Reserve"));
 import BedroomBedandBath from "../components/BedroomBedandBath";
 import ImageBlock from "../components/ImageBlock";
-import useFetch from "../util/useFetch";
 import Heading from "../components/Heading";
 import { Avatar } from "@mantine/core";
 
@@ -54,13 +53,13 @@ function Apartment() {
   if (property) {
     return (
       <section>
-        <div className="max-w-[1300px] mx-auto px-3 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px]">
+        <div className="max-w-[1250px] mx-auto px-3 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px]">
           <div>
-            <div className="py-2 sm:py-5">
+            <div className="py-2 mb-4">
               <h2 className="font-semibold text-[17px] sm:text-2xl">
-                {property?.title}
+                {property.title}
               </h2>
-              <p className="font-normal underline">{`${property?.city}, ${property?.country}`}</p>
+              <p className="font-normal underline">{`${property.city}, ${property.country}`}</p>
             </div>
 
             <ImageBlock images={property.images} />
@@ -72,7 +71,7 @@ function Apartment() {
 
                   <Avatar
                     radius="xl"
-                    src={property?.createdBy.img}
+                    src={property.createdBy.img}
                     size={"60px"}
                   />
 
@@ -106,11 +105,11 @@ function Apartment() {
                 </div>
 
                 <p className="py-5 sm:py-7 border-b-[1px] border-black/20">
-                  {property?.description}
+                  {property.description}
                 </p>
 
                 <div className="py-8 border-b-[1px] border-black/20">
-                  <h3>{`${property?.reviews.length} reviews`}</h3>
+                  <h3>{`${property.reviews.length} reviews`}</h3>
                 </div>
                 <form className="flex flex-col gap-3">
                   <textarea
@@ -126,11 +125,11 @@ function Apartment() {
               </div>
 
               <Reserve
-                price={property?.price}
-                review={property?.reviews?.length}
-                id={property?._id}
-                createdBy={property?.createdBy.id}
-                image={property?.images[0]}
+                price={property.price}
+                review={property.reviews.length}
+                id={property._id}
+                createdBy={property.createdBy.id}
+                image={property.images[0]}
                 reservations={[]}
               />
             </div>
