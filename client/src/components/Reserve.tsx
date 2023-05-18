@@ -5,6 +5,7 @@ import { calcDate } from "../util/calcDate";
 import { userSlice } from "../zustand/user";
 import useLoginModalState from "../zustand/UseLoginModal";
 import axios from "axios";
+import eachDayOfInterval from "date-fns";
 
 interface Prop {
   price: number;
@@ -12,11 +13,31 @@ interface Prop {
   id: string;
   createdBy: string;
   image: string;
+  reservations: [];
 }
 
-function Reserve({ price, review, id, createdBy, image }: Prop) {
+function Reserve({ price, review, id, createdBy, image, reservations }: Prop) {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
 
+  // const initialDateRange = {
+  //   startDate: new Date(),
+  //   endDate: new Date(),
+  //   key: "selection",
+  // };
+
+  // const disabledDates = useMemo(() => {
+  //   // map reservations to find reserved dates
+  //   let dates: Date[] = [];
+  //   reservations.forEach((r) => {
+  //     const range = eachDayOfInterval({
+  //       start: new Date(r.startDate),
+  //       end: new Date(r.endDate),
+  //     });
+
+  //     dates = [...dates, ...range];
+  //   });
+  //   return dates;
+  // }, []);
   const numberofNights = useMemo(() => calcDate(value), [value]);
 
   const user = userSlice((state) => state.user);
@@ -97,6 +118,13 @@ function Reserve({ price, review, id, createdBy, image }: Prop) {
           </div>
         </div>
       )}
+
+      <div className="border-[1px] rounded-xl">
+        <div className="flex items-center gap-1 p-4">
+          <div className="text-xl font-semibold">${price}</div>
+          <div className="text-neutral-500 font-light">night</div>
+        </div>
+      </div>
     </div>
   );
 }

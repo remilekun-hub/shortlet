@@ -122,6 +122,7 @@ function Apartment() {
                 id={property?._id}
                 createdBy={property?.createdBy.id}
                 image={property?.images[0]}
+                reservations={[]}
               />
             </div>
           </div>
