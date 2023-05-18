@@ -12,8 +12,8 @@ function CategoryList() {
     return null;
   }
   return (
-    <div className="bg-white pt-4 md:px-[48px] lg:px-[50px] xl:px-[55px]">
-      <div className="mx-auto max-w-[1400px] justify-center flex space-x-2 overflow-x-auto">
+    <div className="bg-white pt-4 md:px-[48px] lg:px-[50px] xl:px-[55px] flex">
+      <div className="mx-auto max-w-[1800px] justify-center flex space-x-2 overflow-x-auto flex-1">
         {categories.map((item) => (
           <SingleCategory
             key={item.label}
@@ -22,6 +22,7 @@ function CategoryList() {
           />
         ))}
       </div>
+      <div>filter here</div>
     </div>
   );
 }

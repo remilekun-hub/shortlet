@@ -87,7 +87,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="flex items-center justify-center sm:justify-between mx-auto max-w-[1800px] px-4 py-4 sm:px-10 md:px-[50px] relative ">
+    <nav className=" flex items-center justify-between mx-auto max-w-[1800px] px-2 h-[80px] sm:px-10 md:px-[50px] relative ">
       <div
         className="absolute right-[160px] hidden lg:block cursor-pointer"
         onClick={handleCreate}
@@ -98,38 +98,35 @@ function NavBar() {
         logo here
       </Link>
 
-      <div className="relative">
-        <div className="flex border-[1px] rounded-full items-center h-[48px] pl-[8px] pr-[2px] py-4 shadow-md">
-          <input
-            type="search"
-            name=""
-            id=""
-            value={search}
-            placeholder="search by country"
-            onChange={(e) => setSearch(e.target.value)}
-            className="outline-none pl-1"
-          />
+      <div className="flex border-[1px] rounded-full items-center h-[46px] px-[5px] py-1 shadow-md">
+        <input
+          type="text"
+          value={search}
+          placeholder="search by country"
+          onChange={(e) => setSearch(e.target.value)}
+          className="outline-none px-1"
+        />
 
-          <span
-            onClick={handleSearch}
-            className="cursor-pointer w-8 h-8 rounded-full flex justify-center items-center bg-[#412db3]"
+        <div
+          onClick={handleSearch}
+          className="cursor-pointer w-8 h-8 rounded-full flex justify-center items-center bg-[#412db3]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={3.5}
+            stroke="white"
+            className="w-[14px] h-[14px]"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={3.5}
-              stroke="white"
-              className="w-[14px] h-[14px]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-          </span>
-          <span
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
+        </div>
+        {/* <div
             onClick={() => {
               setShowFilter(!showFilter);
               setIsMenu(false);
@@ -137,10 +134,10 @@ function NavBar() {
             className="cursor-pointer mx-1 w-8 h-8 rounded-full flex justify-center items-center bg-[#412db3] text-white"
           >
             f
-          </span>
-        </div>
+          </div> */}
+      </div>
 
-        {showFilter && (
+      {/* {showFilter && (
           <div className="absolute min-h-full bg-white shadow-xl p-2 border-[1px] w-full top-[59px] left-0 z-[300] rounded-lg">
             <ApartmentFilter
               value={userFilter.beds}
@@ -194,10 +191,9 @@ function NavBar() {
               </button>
             </div>
           </div>
-        )}
-      </div>
+        )} */}
 
-      <div className="hidden sm:block">
+      <div className="">
         <button
           onClick={() => {
             setIsMenu(!isMenu);
@@ -211,7 +207,7 @@ function NavBar() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-5 h-5 ml-[5px]"
+            className=" w-6 h-6 sm:w-5 sm:h-5 sm:ml-1"
           >
             <path
               strokeLinecap="round"
@@ -220,7 +216,12 @@ function NavBar() {
             />
           </svg>
 
-          <Avatar radius="xl" src={user?.image} size={"35px"} />
+          <Avatar
+            radius="xl"
+            src={user?.image}
+            size={"35px"}
+            className="hidden sm:block"
+          />
         </button>
       </div>
 

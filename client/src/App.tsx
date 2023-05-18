@@ -16,7 +16,7 @@ import useLoginModalState from "./zustand/UseLoginModal";
 const LazyHome = lazy(() => import("./pages/Home"));
 import { Apartment } from "./pages";
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
-const LazyTrip = lazy(()=> import("./pages/Trips"))
+const LazyTrip = lazy(() => import("./pages/Trips"));
 const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
 const LazyReservation = lazy(() => import("./pages/Reservations"));
 
@@ -127,38 +127,6 @@ function App() {
 
         <Route path="*" element={"route does not exist"} />
       </Routes>
-      {/* <footer className="fixed bottom-0 w-full sm:hidden border-t-[1px] border-black/20 bg-white">
-        {isMenu && (
-          <div className="bg-white rounded-[9px] overflow-hidden border-[1px] w-[180px] absolute right-4 bottom-[60px]">
-            {user.user ? (
-              <>
-                <UserLink url="/user/me/listing" title="My Listing" />
-                <UserLink url="/user/me/favourites" title="My Favourites" />
-                <UserLink url="/reservation" title="My Reservations" />
-                <MenuItem
-                  title="Shortlet my home"
-                  onClick={handleShortletClick}
-                />
-                <MenuItem title="Log out" onClick={handleLogOut} />
-              </>
-            ) : (
-              <>
-                <MenuItem title="Sign Up" onClick={handleSignUpItemClick} />
-                <MenuItem title="Log in" onClick={handleLoginItemClick} />
-              </>
-            )}
-          </div>
-        )}
-        <div className="px-4 flex justify-evenly items-center h-[55px]">
-          <div>1</div>
-          <div>2</div>
-          <div className="">
-            <button onClick={() => setIsMenu(!isMenu)}>
-              <Avatar radius="xl" src={user.user?.image} size={"35px"} />
-            </button>
-          </div>
-        </div>
-      </footer> */}
     </>
   );
 }
