@@ -33,6 +33,20 @@ function Apartment() {
     getProperty().then((data) => setProperty(data));
   }, []);
 
+  useEffect(() => {
+    const getReservations = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:5000/api/v1/reservations/${id}`
+        );
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getReservations().then((data) => console.log(data));
+  }, []);
+
   if (!property) {
     return <Heading title="wait..." subtitle="property Loading...." />;
   }
@@ -40,9 +54,9 @@ function Apartment() {
   if (property) {
     return (
       <section>
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-10 py-1 md:px-[48px] lg:px-[50px] xl:px-[65px]">
+        <div className="max-w-[1300px] mx-auto px-3 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px]">
           <div>
-            <div className="py-4 md:py-5">
+            <div className="py-2 sm:py-5">
               <h2 className="font-semibold text-[17px] sm:text-2xl">
                 {property?.title}
               </h2>
@@ -53,17 +67,17 @@ function Apartment() {
 
             <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
               <div className="md:basis-[55%] lg:basis-[58%]">
-                <div className="py-6 border-b-[1px] border-black/20">
-                  <h3 className="text-xl font-bold md:text-2xl mb-2">{`hosted by ${property.createdBy.name}`}</h3>
-                  <div>
-                    <Avatar
-                      radius="xl"
-                      src={property?.createdBy.img}
-                      size={"60px"}
-                    />
-                  </div>
-                  <div className="flex space-x-2">
-                    {/* <BedroomBedandBath
+                <div className="mt-3 py-4 md:py-6 border-b-[1px] border-black/20 w-full flex justify-between gap-4 items-center">
+                  <h3 className="text-[18px] font-bold sm:text-xl md:text-2xl mb-2">{`hosted by ${property.createdBy.name}`}</h3>
+
+                  <Avatar
+                    radius="xl"
+                    src={property?.createdBy.img}
+                    size={"60px"}
+                  />
+
+                  {/* <div className="flex space-x-2">
+                    <BedroomBedandBath
                           amount={property?.guests}
                           type="guests"
                         />
@@ -76,13 +90,13 @@ function Apartment() {
                           amount={property?.bathrooms}
                           type="bath"
                         />
-                        <BedroomBedandBath amount={property?.bed} type="bed" /> */}
-                  </div>
+                        <BedroomBedandBath amount={property?.bed} type="bed" />
+                  </div> */}
                 </div>
 
-                <div className="py-8 border-b-[1px] border-black/20">
+                <div className="py-5 sm:py-8 border-b-[1px] border-black/20">
                   <h2 className="text-3xl font-bold mb-4">
-                    <span className="text-rose-500">Shortlet</span> Cover
+                    <span className="text-[#412db3]">Shortlet</span> Cover
                   </h2>
                   <p>
                     Every booking includes free protection from Host
@@ -91,21 +105,16 @@ function Apartment() {
                   </p>
                 </div>
 
-                <p className="py-8 border-b-[1px] border-black/20">
+                <p className="py-5 sm:py-7 border-b-[1px] border-black/20">
                   {property?.description}
                 </p>
 
-                <div className="py-8 border-b-[1px] border-black/20">
-                  <h2 className="font-bold text-xl md:text-2xl">
-                    What this place offers
-                  </h2>
-                </div>
                 <div className="py-8 border-b-[1px] border-black/20">
                   <h3>{`${property?.reviews.length} reviews`}</h3>
                 </div>
                 <form className="flex flex-col gap-3">
                   <textarea
-                    className="p-2 outline-0 border-[1px] rounded-md border-rose-500"
+                    className="p-2 outline-0 border-[1px] rounded-md border-[#412db3]"
                     placeholder="Review..."
                   />
                   <Button

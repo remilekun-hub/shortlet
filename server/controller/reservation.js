@@ -8,6 +8,12 @@ const createReservation = async (req, res) => {
   res.status(201).json(reservation);
 };
 
+const getPropertyReservations = async (req, res) => {
+  const { propertyId } = req.params;
+  const reservations = await Reservation.find({ propertyId });
+  res.status(200).json(reservations);
+};
+
 const getMyReservations = async (req, res) => {
   const userID = req.user.userId;
   const reservations = await Reservation.find({ propertyOwner: userID });
@@ -41,6 +47,7 @@ const deleteMyTrip = async (req, res) => {
 
 module.exports = {
   createReservation,
+  getPropertyReservations,
   getMyReservations,
   getMyTrips,
   deleteMyTrip,

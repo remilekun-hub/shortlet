@@ -8,11 +8,8 @@ import {
   createSearchParams,
   Link,
 } from "react-router-dom";
-import ApartmentFilter from "./ApartmentFilter";
-import { RangeSlider } from "@mantine/core";
 import useLoginModalState from "../zustand/UseLoginModal";
 import useListingModalState from "../zustand/listingModal";
-import useFetch from "../util/useFetch";
 
 function NavBar() {
   const [isMenu, setIsMenu] = useState(false);

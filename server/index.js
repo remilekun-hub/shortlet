@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const notFound = require("./middleware/not-found");
 const errorHandler = require("./middleware/custom-errorHandler");
-const { authentication, verifyAdmin } = require("./middleware/authentication");
+const { authentication } = require("./middleware/authentication");
 const connectDB = require("./db/connect");
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
@@ -25,7 +25,7 @@ app.use("/api/v1/auth/", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/public/properties", publicPropertyRouter);
 app.use("/api/v1/properties", authentication, propertyRouter);
-app.use("/api/v1/reservations", authentication, reservationRouter);
+app.use("/api/v1/reservations", reservationRouter);
 
 app.use(notFound);
 app.use(errorHandler);

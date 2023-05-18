@@ -96,7 +96,11 @@ function Modal({
               <footer className="flex flex-col gap-3 pt-2 p-6">
                 <div className=" flex flex-row items-center gap-4 w-full">
                   {secondaryLabel && secondaryAction && (
-                    <Button label={secondaryLabel} onSubmit={secondaryAction} />
+                    <Button
+                      label={secondaryLabel}
+                      onSubmit={secondaryAction}
+                      secondary
+                    />
                   )}
                   <Button label={actionLabel} onSubmit={handleSubmit} />
                 </div>

@@ -24,7 +24,9 @@ function CategoryList() {
           />
         ))}
       </div>
-      <div onClick={filterModal.onOpen}>filter here</div>
+      <div onClick={filterModal.onOpen} className="cursor-pointer">
+        Filter
+      </div>
     </div>
   );
 }
