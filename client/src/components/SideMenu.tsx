@@ -3,7 +3,7 @@ import MenuItem from "./MenuItem";
 import useRegisterModalState from "../zustand/useRegisterModal";
 import useLoginModalState from "../zustand/UseLoginModal";
 import useListingModalState from "../zustand/listingModal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UserLink from "./UserLink";
 
 interface SideMenuProps {
@@ -15,6 +15,8 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
   const LoginModal = useLoginModalState();
   const listingModal = useListingModalState();
   const navigate = useNavigate();
+  const location = useLocation();
+  const apartmentPath = location.pathname.startsWith("/apartment");
 
   const user = userSlice((state) => state);
 
@@ -44,7 +46,7 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
     navigate(url);
   };
   return (
-    <aside className="absolute top-[75px] z-[500] right-2 sm:right-10 md:right-[48px] lg:right-[50px] w-full max-w-[190px] drop-shadow-xl">
+    <aside className="absolute top-[75px] z-[500] right-3 sm:right-10 md:right-[48px] lg:right-[60px] xl:right-[65px] w-full max-w-[190px] drop-shadow-xl">
       <div className="bg-white rounded-[9px] overflow-hidden border-[1px]">
         {user.user ? (
           <>

@@ -7,6 +7,7 @@ import {
   useSearchParams,
   createSearchParams,
   Link,
+  useLocation,
 } from "react-router-dom";
 import useLoginModalState from "../zustand/UseLoginModal";
 import useListingModalState from "../zustand/listingModal";
@@ -21,6 +22,8 @@ function NavBar() {
   const [showFilter, setShowFilter] = useState(false);
   const params = useSearchParams();
   const category = params?.[0].get("category");
+  const location = useLocation();
+  const apartmentPath = location.pathname.startsWith("/apartment");
 
   const [userFilter, setUserFilter] = useState({
     beds: 1,
@@ -71,7 +74,11 @@ function NavBar() {
   };
 
   return (
-    <nav className=" flex items-center justify-between mx-auto max-w-[1800px] px-2 h-[80px] sm:px-10 md:px-[50px] relative ">
+    <nav
+      className={`flex items-center justify-between mx-auto  px-3 h-[80px] sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px] relative ${
+        apartmentPath ? "max-w-[1250px]" : "max-w-[1800px]"
+      }`}
+    >
       <div
         className="absolute right-[160px] hidden lg:block cursor-pointer"
         onClick={handleCreate}

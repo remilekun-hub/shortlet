@@ -36,7 +36,7 @@ function Home() {
 
   if (!data) {
     return (
-      <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px]">
+      <section className="px-3 sm:px-10 md:px-[50px] mx-auto max-w-[1800px]">
         <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
           {Array.from({ length: 12 }).map((_, i) => (
             <div key={i}>
@@ -70,7 +70,7 @@ function Home() {
     );
   }
   return (
-    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px]">
+    <section className="px-3 sm:px-10 md:px-[50px] mx-auto max-w-[1800px]">
       <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {data.map((item: Property) => (
           <PropertyCard key={item._id} {...item} />
