@@ -89,13 +89,13 @@ function NavBar() {
         logo here
       </Link>
 
-      <div className="flex border-[1px] rounded-full items-center h-[46px] px-[5px] py-1 shadow-md">
+      <div className="flex border-[1px] rounded-full items-center h-[46px] px-[5px] md:px-[6px] py-1 shadow-md">
         <input
           type="text"
           value={search}
           placeholder="search by country"
           onChange={(e) => setSearch(e.target.value)}
-          className="outline-none px-1"
+          className="outline-none px-1 md:w-[250px]"
         />
 
         <div
@@ -142,7 +142,7 @@ function NavBar() {
             setIsMenu(!isMenu);
             setShowFilter(false);
           }}
-          className="border-[1px] flex items-center justify-center transition py-[4px] px-[5px] rounded-[25px] gap-2 hover:shadow-md"
+          className="border-[1px] flex items-center justify-center transition p-2 sm:py-[4px] sm:px-[5px] rounded-[25px] gap-2 hover:shadow-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
