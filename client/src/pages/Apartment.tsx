@@ -10,9 +10,14 @@ import ImageBlock from "../components/ImageBlock";
 import Heading from "../components/Heading";
 import { Avatar } from "@mantine/core";
 
+interface Reservation {
+  startDate: Date;
+  endDate: Date;
+}
 function Apartment() {
   const { id } = useParams();
   const [property, setProperty] = useState<SingleProperty | null>(null);
+  const [reservations, setReservations] = useState<Reservation[] | []>([]);
   const user = userSlice((state) => state.user);
   const handlereviewSubmit = () => {
     console.log("review submited");
@@ -43,7 +48,7 @@ function Apartment() {
         console.log(error);
       }
     };
-    getReservations().then((data) => console.log(data));
+    getReservations().then((data) => setReservations(data));
   }, []);
 
   if (!property) {
@@ -74,23 +79,6 @@ function Apartment() {
                     src={property.createdBy.img}
                     size={"60px"}
                   />
-
-                  {/* <div className="flex space-x-2">
-                    <BedroomBedandBath
-                          amount={property?.guests}
-                          type="guests"
-                        />
-  
-                        <BedroomBedandBath
-                          amount={property?.bedrooms}
-                          type="bedroom"
-                        />
-                        <BedroomBedandBath
-                          amount={property?.bathrooms}
-                          type="bath"
-                        />
-                        <BedroomBedandBath amount={property?.bed} type="bed" />
-                  </div> */}
                 </div>
 
                 <div className="py-5 sm:py-8 border-b-[1px] border-black/20">
@@ -130,7 +118,7 @@ function Apartment() {
                 id={property._id}
                 createdBy={property.createdBy.id}
                 image={property.images[0]}
-                reservations={[]}
+                reservations={reservations}
               />
             </div>
           </div>

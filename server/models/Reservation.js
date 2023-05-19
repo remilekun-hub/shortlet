@@ -18,11 +18,11 @@ const ReservationSchema = new mongoose.Schema({
     ref: "User",
   },
   startDate: {
-    type: String,
+    type: Date,
     required: [true, "Reservation Start date is required"],
   },
   endDate: {
-    type: String,
+    type: Date,
     required: [true, "Reservation Start date is required"],
   },
   price: {
