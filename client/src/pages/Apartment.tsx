@@ -70,7 +70,7 @@ function Apartment() {
             <ImageBlock images={property.images} />
 
             <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
-              <div className="md:basis-[55%] lg:basis-[58%]">
+              <div className="md:basis-[52%] lg:basis-[58%] mb-6">
                 <div className="mt-3 py-4 md:py-6 border-b-[1px] border-black/20 w-full flex justify-between gap-4 items-center">
                   <h3 className="text-[18px] font-bold sm:text-xl md:text-2xl mb-2">{`hosted by ${property.createdBy.name}`}</h3>
 

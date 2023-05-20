@@ -6,6 +6,7 @@ import { useForm } from "@mantine/form";
 import { TextInput, PasswordInput, FileInput, Loader } from "@mantine/core";
 import { useState } from "react";
 import { singleImageUpload } from "../../util/singleImageUpload";
+import LoginModal from "./LoginModal";
 
 function RegisterModal(): JSX.Element {
   const loginModal = useLoginModalState();
@@ -114,7 +115,7 @@ function RegisterModal(): JSX.Element {
       setTimeout(() => {
         form.reset(), setStatus({ message: "", color: "", isLoading: false });
         setFile(null);
-      }, 3000);
+      }, 2000);
     }
   };
 
