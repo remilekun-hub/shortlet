@@ -6,6 +6,7 @@ import Heading from "../components/Heading";
 import Button from "../components/Button";
 import useSWR from "swr";
 import { fetcher } from "../util/fetcher";
+import { Dispatch, SetStateAction } from "react";
 
 function Home() {
   const params = useSearchParams();

@@ -1,11 +1,10 @@
 import { useParams } from "react-router-dom";
-import { ReactElement, lazy, useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { SingleProperty } from "../typings";
 import axios from "axios";
 import Button from "../components/Button";
 import { userSlice } from "../zustand/user";
 const Reserve = lazy(() => import("../components/Reserve"));
-import BedroomBedandBath from "../components/BedroomBedandBath";
 import ImageBlock from "../components/ImageBlock";
 import Heading from "../components/Heading";
 import { Avatar } from "@mantine/core";

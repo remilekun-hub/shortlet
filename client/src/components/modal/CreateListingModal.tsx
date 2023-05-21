@@ -1,15 +1,16 @@
 import Modal from "./Modal";
 import useListingModalState from "../../zustand/listingModal";
-import { ReactElement, useCallback, useMemo, useState } from "react";
+import { ReactElement, useMemo, useState } from "react";
 import { categories } from "../../data/categories";
 import Heading from "../Heading";
-import { Select } from "@mantine/core";
 import Counter from "../Counter";
 import { imageUpload } from "../../util/imageUpload";
 import { userSlice } from "../../zustand/user";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreateListingModal() {
+  const navigete = useNavigate();
   enum STEPS {
     CATEGORY,
     LOCATION,
@@ -34,6 +35,7 @@ function CreateListingModal() {
     description: "",
     country: "",
     guests: 1,
+    state: "",
     bedrooms: 1,
     bathrooms: 1,
     bed: 1,
@@ -52,6 +54,7 @@ function CreateListingModal() {
       !data.bed ||
       !data.category ||
       !data.city ||
+      !data.state ||
       !data.description ||
       !data.guests ||
       !data.country ||
@@ -66,7 +69,7 @@ function CreateListingModal() {
 
     try {
       const cloudImages = await imageUpload(files);
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/v1/properties",
         {
           ...data,
@@ -78,7 +81,8 @@ function CreateListingModal() {
           },
         }
       );
-      console.log("listing successfylly created");
+      listingModal.onClose();
+      navigete(0);
     } catch (error) {
       console.log(error);
     } finally {
@@ -88,6 +92,7 @@ function CreateListingModal() {
         description: "",
         country: "",
         guests: 1,
+        state: "",
         bedrooms: 1,
         bathrooms: 1,
         bed: 1,
@@ -160,35 +165,32 @@ function CreateListingModal() {
               title="Where is your place located ?"
               subtitle="Help guests find you"
             />
-            <Select
-              placeholder="Country"
-              searchable
-              mt={20}
-              size="md"
-              defaultValue={data.country}
-              nothingFound="No options"
-              onSearchChange={(value) => setData({ ...data, country: value })}
-              transitionProps={{
-                transition: "pop",
-                duration: 80,
-                timingFunction: "ease",
-              }}
-              data={[
-                "Nigeria",
-                "USA",
-                "Germany",
-                "Ghana",
-                "Spain",
-                "Uk",
-                "Japan",
-                "Canada",
-              ]}
+            <input
+              type="text"
+              name="country"
+              placeholder="country e.g Nigeria"
+              value={data.country}
+              className="mt-5 w-full outline-none border-[1.5px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
+              onChange={(e) =>
+                setData({ ...data, [e.target.name]: e.target.value })
+              }
+            />
+            <hr />
+            <input
+              type="text"
+              name="state"
+              placeholder="State e.g Lagos"
+              value={data.state}
+              className="mt-5 w-full outline-none border-[1.5px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
+              onChange={(e) =>
+                setData({ ...data, [e.target.name]: e.target.value })
+              }
             />
             <hr />
             <input
               type="text"
               name="city"
-              placeholder="City e.g Victoria Island, Lagos"
+              placeholder="City e.g Victoria Island"
               value={data.city}
               className="mt-5 w-full outline-none border-[1.5px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
               onChange={(e) =>

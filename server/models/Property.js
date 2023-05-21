@@ -18,7 +18,7 @@ const reviewSchema = new mongoose.Schema({
 const PropertySchema = new mongoose.Schema({
   country: {
     type: String,
-    required: [true, "country is required"],
+    required: [true, "country where the property is located must be provided"],
   },
   category: {
     type: String,
@@ -59,6 +59,10 @@ const PropertySchema = new mongoose.Schema({
   bedrooms: {
     type: Number,
     required: [true, "number of bedrooms in the property must be provided"],
+  },
+  state: {
+    type: String,
+    required: [true, "country where the property is located must be provided"],
   },
   images: {
     type: [String],

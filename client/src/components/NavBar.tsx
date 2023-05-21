@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import SideMenu from "./SideMenu";
 import { Avatar } from "@mantine/core";
 import { userSlice } from "../zustand/user";
@@ -12,31 +12,32 @@ import {
 import useLoginModalState from "../zustand/UseLoginModal";
 import useListingModalState from "../zustand/listingModal";
 
-function NavBar() {
+interface NavBarProp {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+function NavBar({ search, setSearch }: NavBarProp) {
   const [isMenu, setIsMenu] = useState(false);
   const user = userSlice((state) => state.user);
   const loginModal = useLoginModalState();
   const listingModal = useListingModalState();
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
-  const [showFilter, setShowFilter] = useState(false);
   const params = useSearchParams();
   const category = params?.[0].get("category");
+
   const location = useLocation();
   const apartmentPath = location.pathname.startsWith("/apartment");
 
-  const [userFilter, setUserFilter] = useState({
+  const userFilter = {
     beds: 1,
-    guests: 1,
     baths: 1,
     bedrooms: 1,
+    guests: 1,
     minPrice: 0,
     maxPrice: 1000,
-  });
-  const [rangeValue, setRangeValue] = useState<[number, number]>([
-    userFilter.minPrice,
-    userFilter.maxPrice,
-  ]);
+  };
+
   const handleSearch = () => {
     let query: any = { ...userFilter };
     if (search) {
@@ -45,25 +46,14 @@ function NavBar() {
     if (category) {
       query = { category, ...query };
     }
+    if (search && category) {
+      query = { country: search, category, ...query };
+    }
+
     navigate({
       pathname: "/",
       search: `${createSearchParams(query)}`,
     });
-    setShowFilter(false);
-  };
-
-  const handleFilter = () => {
-    if (search) {
-      navigate(
-        `/?country=${search}&beds=${userFilter.beds}&bedrooms=${userFilter.bedrooms}&baths=${userFilter.baths}&guests=${userFilter.guests}&minPrice=${rangeValue[0]}&maxPrice=${rangeValue[1]}`
-      );
-      setSearch("");
-    } else {
-      navigate(
-        `/?beds=${userFilter.beds}&bedrooms=${userFilter.bedrooms}&baths=${userFilter.baths}&guests=${userFilter.guests}&minPrice=${rangeValue[0]}&maxPrice=${rangeValue[1]}`
-      );
-    }
-    setShowFilter(!showFilter);
   };
 
   const handleCreate = () => {
@@ -119,28 +109,10 @@ function NavBar() {
         </div>
       </div>
 
-      {/* {showFilter && (
-          <div className="absolute min-h-full bg-white shadow-xl p-2 border-[1px] w-full top-[59px] left-0 z-[300] rounded-lg">
-            
-
-            <div className="flex justify-between">
-              <button onClick={reset}>Clear</button>
-
-              <button
-                onClick={handleFilter}
-                className="text-white bg-black py-1 rounded-sm"
-              >
-                Filter
-              </button>
-            </div>
-          </div>
-        )} */}
-
       <div className="">
         <button
           onClick={() => {
             setIsMenu(!isMenu);
-            setShowFilter(false);
           }}
           className="border-[1px] flex items-center justify-center transition p-2 sm:py-[4px] sm:px-[5px] rounded-[25px] gap-2 hover:shadow-md"
         >

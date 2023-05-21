@@ -13,15 +13,21 @@ function SingleCategory({ label, selected }: Prop) {
   const params = useSearchParams();
   const navigate = useNavigate();
   const country = params?.[0].get("country");
+  const guests = params?.[0].get("guests");
+  const beds = params?.[0].get("beds");
+  const baths = params?.[0].get("baths");
+  const bedrooms = params?.[0].get("bedrooms");
+  const minPrice = params?.[0].get("minPrice");
+  const maxPrice = params?.[0].get("maxPrice");
 
   const handleClick = useCallback(() => {
     let updatedQuery: any = {
-      baths: 1,
-      guests: 1,
-      beds: 1,
-      bedrooms: 1,
-      minPrice: 0,
-      maxPrice: 1000,
+      beds: beds || 1,
+      baths: baths || 1,
+      bedrooms: bedrooms || 1,
+      guests: guests || 1,
+      minPrice: minPrice || 0,
+      maxPrice: maxPrice || 1000,
     };
     if (label) {
       updatedQuery = { category: label, ...updatedQuery };
@@ -29,7 +35,9 @@ function SingleCategory({ label, selected }: Prop) {
     if (country) {
       updatedQuery = { country: country, ...updatedQuery };
     }
-
+    if (country && label) {
+      updatedQuery = { country, category: label, ...updatedQuery };
+    }
     if (params?.[0].get("category") === label) {
       delete updatedQuery.category;
     }
