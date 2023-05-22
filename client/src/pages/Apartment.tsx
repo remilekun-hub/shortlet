@@ -124,17 +124,21 @@ function Apartment() {
                 </div>
 
                 <form
-                  className="flex flex-col gap-3"
+                  className="flex flex-col gap-3 mt-4"
                   onSubmit={(e) => {
                     e.preventDefault();
                     handlereviewSubmit(property._id);
                   }}
                 >
+                  <p className="mb-2">
+                    Tell us experience about this property and the host
+                  </p>
                   <textarea
-                    className="p-2 outline-0 border-[1px] rounded-md border-[#412db3]"
+                    className="p-2 mb-2 outline-0 border-[1px] rounded-md border-[#412db3]"
                     placeholder="Review..."
                     value={reviewMessage}
                     onChange={(e) => setReviewMessage(e.target.value)}
+                    disabled={true}
                   />
                   <Button label="Submit Review" disabled={!user} />
                 </form>
