@@ -96,7 +96,7 @@ function Reserve({ price, review, id, createdBy, image, reservations }: Prop) {
   }, [dateRange, price]);
 
   return (
-    <div className="border-[1px] shadow-xl rounded-[13px] md:basis-[35%] lg:basis-[32%] md:sticky md:top-[95px] lg:top-[100px] h-full">
+    <div className="border-[1px] shadow-xl rounded-[13px] md:basis-[35%] lg:basis-[32%] md:sticky md:top-[95px] lg:top-[105px] h-full shadow-lg">
       <div>
         <ReserveBlock
           price={price}

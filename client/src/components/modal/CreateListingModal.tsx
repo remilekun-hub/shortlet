@@ -1,6 +1,6 @@
 import Modal from "./Modal";
 import useListingModalState from "../../zustand/listingModal";
-import { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useMemo, useState, useEffect } from "react";
 import { categories } from "../../data/categories";
 import Heading from "../Heading";
 import Counter from "../Counter";
@@ -8,12 +8,14 @@ import { imageUpload } from "../../util/imageUpload";
 import { userSlice } from "../../zustand/user";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { MultiSelect } from "@mantine/core";
 
 function CreateListingModal() {
   const navigete = useNavigate();
   enum STEPS {
     CATEGORY,
     LOCATION,
+    FACILITIES,
     INFO,
     IMAGES,
     DESCRIPTION,
@@ -29,12 +31,18 @@ function CreateListingModal() {
     isLoading: false,
   });
   const user = userSlice((state) => state.user);
+  const [amenities, setAmenities] = useState<string[]>([]);
+  const [amenitiesData, setAmenitiesData] = useState([
+    { value: "Wi-Fi", label: "WI-FI" },
+    { value: "ng", label: "Angular" },
+  ]);
   const [data, setData] = useState({
     category: "",
     title: "",
     description: "",
     country: "",
     guests: 1,
+    amenities: amenities,
     state: "",
     bedrooms: 1,
     bathrooms: 1,
@@ -42,7 +50,6 @@ function CreateListingModal() {
     city: "",
     price: 1,
   });
-
   const handleSubmit = async () => {
     if (step !== STEPS.PRICE) {
       return onNext();
@@ -55,6 +62,7 @@ function CreateListingModal() {
       !data.category ||
       !data.city ||
       !data.state ||
+      !data.amenities ||
       !data.description ||
       !data.guests ||
       !data.country ||
@@ -92,6 +100,7 @@ function CreateListingModal() {
         description: "",
         country: "",
         guests: 1,
+        amenities: [],
         state: "",
         bedrooms: 1,
         bathrooms: 1,
@@ -192,7 +201,7 @@ function CreateListingModal() {
               name="city"
               placeholder="City e.g Victoria Island"
               value={data.city}
-              className="mt-5 w-full outline-none border-[1.5px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
+              className="mb-3 mt-5 w-full outline-none border-[1.5px] border-black/20 p-2 px-3 rounded-[4px] text-neutral-700 transition hover:border-black focus:border-black"
               onChange={(e) =>
                 setData({ ...data, [e.target.name]: e.target.value })
               }
@@ -201,6 +210,36 @@ function CreateListingModal() {
         );
         break;
       case 2:
+        bodyContent = (
+          <div>
+            <Heading
+              title="Share some basics about your place"
+              subtitle="choose the facilities available at your place"
+            />
+            <div className="mt-3">
+              <MultiSelect
+                data={amenitiesData}
+                label="Your favorite frameworks/libraries"
+                placeholder="Pick all that you like"
+                searchable
+                value={amenities}
+                onChange={(values) => {
+                  setAmenities(values);
+                  setData({ ...data, amenities: values });
+                }}
+                creatable
+                getCreateLabel={(query) => `+ Create ${query}`}
+                onCreate={(query) => {
+                  const item = { value: query, label: query };
+                  setAmenitiesData((current) => [...current, item]);
+                  return item;
+                }}
+              />
+            </div>
+          </div>
+        );
+        break;
+      case 3:
         bodyContent = (
           <div className="flex flex-col gap-6">
             <Heading
@@ -241,7 +280,7 @@ function CreateListingModal() {
           </div>
         );
         break;
-      case 3:
+      case 4:
         bodyContent = (
           <div className="flex flex-col gap-8">
             <Heading
@@ -258,7 +297,7 @@ function CreateListingModal() {
         );
         break;
 
-      case 4:
+      case 5:
         bodyContent = (
           <div className="flex flex-col gap-6">
             <Heading
@@ -291,7 +330,7 @@ function CreateListingModal() {
         );
         break;
 
-      case 5:
+      case 6:
         bodyContent = (
           <div className="flex flex-col gap-8">
             <Heading

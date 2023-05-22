@@ -30,7 +30,7 @@ function Review({
   };
 
   return (
-    <div className="p-3 flex flex-col mb-3">
+    <div className=" flex flex-col mb-3">
       <div className="flex items-center gap-3">
         <img
           src={image}

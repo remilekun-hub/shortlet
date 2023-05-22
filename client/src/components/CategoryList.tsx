@@ -28,14 +28,14 @@ function CategoryList() {
         onClick={filterModal.onOpen}
         className="cursor-pointer flex flex-col items-center"
       >
-        <div className="text-[14px] md:text-[16px]">Filter</div>
+        <div className="text-[14px] md:text-[14px]">Filter</div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-7 h-7"
+          className="w-6 h-6"
         >
           <path
             strokeLinecap="round"

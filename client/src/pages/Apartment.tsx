@@ -76,7 +76,7 @@ function Apartment() {
   if (property) {
     return (
       <section>
-        <div className="max-w-[1250px] mx-auto px-3 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px]">
+        <div className="max-w-[1250px] mx-auto px-3 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px] pb-10">
           <div>
             <div className="py-2 mb-4">
               <h2 className="font-semibold text-[17px] sm:text-2xl">
@@ -109,18 +109,20 @@ function Apartment() {
                     trouble checking in.
                   </p>
                 </div>
-
-                <p className="py-5 sm:py-7 border-b-[1px] border-black/20">
-                  {property.description}
-                </p>
-
-                <div className="py-8 border-b-[1px] border-black/20">
-                  <h3 className="mb-3">{`${property.reviews.length} reviews`}</h3>
-
-                  {property.reviews.map((r) => (
-                    <Review key={r._id} {...r} />
-                  ))}
+                <div className="py-5 sm:py-7 border-b-[1px] border-black/20">
+                  <p className="font-semibold mb-3 sm:text-[22px] text-black">
+                    About this place
+                  </p>
+                  <p>{property.description}</p>
                 </div>
+
+                <div className="py-5 sm:py-7 border-b-[1px] border-black/20">
+                  <p className="font-semibold mb-3 sm:text-[22px] text-black">
+                    What this place Offers
+                  </p>
+                  facilities here
+                </div>
+
                 <form
                   className="flex flex-col gap-3"
                   onSubmit={(e) => {
@@ -146,6 +148,16 @@ function Apartment() {
                 image={property.images[0]}
                 reservations={reservations}
               />
+            </div>
+          </div>
+
+          <div className="py-8 border-t-[1px] border-black/20 mt-8">
+            <h3 className="mb-3">{`${property.reviews.length} reviews`}</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-[12%] mt-[25px] max-w-[1000px]">
+              {property.reviews.map((r) => (
+                <Review key={r._id} {...r} />
+              ))}
             </div>
           </div>
         </div>
