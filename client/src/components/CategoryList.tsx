@@ -14,7 +14,7 @@ function CategoryList() {
     return null;
   }
   return (
-    <div className="bg-white pt-4 px-3 md:px-[48px] lg:px-[50px] xl:px-[65px] flex items-center mx-auto max-w-[1800px]">
+    <div className="bg-white pt-4 px-3 md:px-[50px] xl:px-[65px] flex items-center mx-auto max-w-[1800px]">
       <div className=" justify-center flex space-x-2 overflow-x-auto flex-1">
         {categories.map((item) => (
           <SingleCategory
