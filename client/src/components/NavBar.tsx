@@ -83,7 +83,7 @@ function NavBar({ search, setSearch }: NavBarProp) {
         <input
           type="text"
           value={search}
-          placeholder="search by country"
+          placeholder="destination e.g spain"
           onChange={(e) => setSearch(e.target.value)}
           className="outline-none px-1 md:w-[250px]"
         />

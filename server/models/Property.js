@@ -7,11 +7,19 @@ const reviewSchema = new mongoose.Schema({
   },
   message: {
     type: String,
-    required: [true, "message must be provided"],
+    required: [true, "review message must be provided"],
   },
   createdBy: {
     type: mongoose.Types.ObjectId,
     ref: "User",
+  },
+  image: {
+    type: String,
+    required: [true, "your image is required"],
+  },
+  propertyId: {
+    type: mongoose.Types.ObjectId,
+    ref: "Property",
   },
 });
 
@@ -28,6 +36,10 @@ const PropertySchema = new mongoose.Schema({
     type: String,
     required: [true, "please provide the city where the property is located"],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
   createdBy: {
     name: {
       type: String,
@@ -40,6 +52,7 @@ const PropertySchema = new mongoose.Schema({
       type: String,
     },
   },
+
   price: {
     type: Number,
     required: [true, "price per night must be provided"],
@@ -62,7 +75,7 @@ const PropertySchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    required: [true, "country where the property is located must be provided"],
+    required: [true, "state where the property is located must be provided"],
   },
   images: {
     type: [String],

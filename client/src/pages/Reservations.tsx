@@ -66,7 +66,7 @@ function Reservations() {
       <div className="flex justify-center items-center pt-[100px] text-center">
         <div className="flex flex-col gap-3">
           <Heading
-            title="No Reservations Found"
+            title="No Reservation Found"
             subtitle="You have no reservations on your properties"
           />
         </div>

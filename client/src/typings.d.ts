@@ -12,9 +12,18 @@ export interface Property {
   guests: number;
   description: string;
   ameneties: string[] | [];
-  reviews: any[];
+  reviews: ReviewProp[] | [];
   __v?: number;
 }
+
+export type ReviewProp = {
+  createdBy: string;
+  name: string;
+  image: string;
+  message: string;
+  _id: string;
+  propertyId: string;
+};
 
 export interface SingleProperty {
   _id: string;
@@ -35,7 +44,7 @@ export interface SingleProperty {
   guests: number;
   description: string;
   ameneties: string[] | [];
-  reviews: string[] | [];
+  reviews: ReviewProp[] | [];
   __v?: number;
 }
 

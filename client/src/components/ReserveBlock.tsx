@@ -26,7 +26,7 @@ function ReserveBlock({
 }: ReserveBlockProps) {
   return (
     <div>
-      <div className="flex justify-between p-3">
+      <div className="flex justify-between px-3 py-4">
         <div className="flex items-center justify-between gap-1">
           <div className="text-xl font-semibold">${price}</div>
           <div className="text-neutral-500 font-light">night</div>
@@ -43,7 +43,7 @@ function ReserveBlock({
         {" "}
         <Button label="Reserve" onSubmit={onSubmit} disabled={disabled} />
       </div>
-      <div className="flex justify-between font-semibold p-3 text-[18px]">
+      <div className="flex justify-between font-semibold px-3 py-4 text-[18px]">
         <div>Total</div>
         <div>${totalPrice}</div>
       </div>

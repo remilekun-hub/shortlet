@@ -56,7 +56,7 @@ const deleteProperty = async (req, res) => {
 };
 
 const createPropertyReview = async (req, res) => {
-  const { message, name } = req.body;
+  const { message } = req.body;
   const { id: propertyID } = req.params;
   const isPropertyExist = await Property.findById(propertyID);
 
@@ -64,10 +64,19 @@ const createPropertyReview = async (req, res) => {
     throw new NotFound(`no property with id ${propertyID}`);
   }
 
-  const review = await Review.create({ message, name });
   await Property.findByIdAndUpdate(
     propertyID,
-    { $push: { reviews: review } },
+    {
+      $push: {
+        reviews: {
+          message,
+          name: req.user.name,
+          image: req.user.image,
+          createdBy: req.user.userId,
+          propertyId: propertyID,
+        },
+      },
+    },
     { new: true, runValidators: true }
   );
 
@@ -86,13 +95,8 @@ const deletePropertyReview = async (req, res) => {
     {
       $pull: { reviews: { _id: reviewID } },
     },
-    { new: true }
+    { new: true, runValidators: true }
   );
-
-  const deletedReview = await Review.findByIdAndDelete(reviewID);
-  if (!deletedReview) {
-    throw new NotFound(`no review with id ${reviewID}`);
-  }
   res.status(200).send("review deleted");
 };
 

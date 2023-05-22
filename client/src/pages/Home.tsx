@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../typings";
 import { Skeleton } from "@mantine/core";
@@ -6,7 +6,6 @@ import Heading from "../components/Heading";
 import Button from "../components/Button";
 import useSWR from "swr";
 import { fetcher } from "../util/fetcher";
-import { Dispatch, SetStateAction } from "react";
 
 function Home() {
   const params = useSearchParams();
@@ -18,6 +17,7 @@ function Home() {
   const country = params?.[0].get("country");
   const minPrice = params?.[0].get("minPrice");
   const maxPrice = params?.[0].get("maxPrice");
+  const navigate = useNavigate();
 
   const { data, error } = useSWR(
     `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
@@ -65,7 +65,7 @@ function Home() {
             title="No Exact Matches"
             subtitle="Try changing your filters"
           />
-          <Button label="Remove All Filters" />
+          <Button label="Remove All Filters" onSubmit={() => navigate("/")} />
         </div>
       </div>
     );

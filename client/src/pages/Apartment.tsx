@@ -8,6 +8,8 @@ const Reserve = lazy(() => import("../components/Reserve"));
 import ImageBlock from "../components/ImageBlock";
 import Heading from "../components/Heading";
 import { Avatar } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
+import Review from "../components/Review";
 
 interface Reservation {
   startDate: Date;
@@ -18,9 +20,8 @@ function Apartment() {
   const [property, setProperty] = useState<SingleProperty | null>(null);
   const [reservations, setReservations] = useState<Reservation[] | []>([]);
   const user = userSlice((state) => state.user);
-  const handlereviewSubmit = () => {
-    console.log("review submited");
-  };
+  const [reviewMessage, setReviewMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProperty = async () => {
@@ -49,7 +50,25 @@ function Apartment() {
     };
     getReservations().then((data) => setReservations(data));
   }, []);
-
+  const handlereviewSubmit = async (propertyId: string) => {
+    if (!reviewMessage) return;
+    if (user) {
+      await axios
+        .post(
+          `http://localhost:5000/api/v1/properties/${propertyId}/review`,
+          {
+            message: reviewMessage,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        )
+        .then(() => navigate(0))
+        .finally(() => setReviewMessage(""));
+    }
+  };
   if (!property) {
     return <Heading title="wait..." subtitle="property Loading...." />;
   }
@@ -70,13 +89,13 @@ function Apartment() {
 
             <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
               <div className="md:basis-[52%] lg:basis-[58%] mb-6">
-                <div className="mt-3 py-4 md:py-6 border-b-[1px] border-black/20 w-full flex justify-between gap-4 items-center">
-                  <h3 className="text-[18px] font-bold sm:text-xl md:text-2xl mb-2">{`hosted by ${property.createdBy.name}`}</h3>
+                <div className="mt-3 py-4 md:py-5 border-b-[1px] border-black/20 w-full flex justify-between gap-4 items-center">
+                  <h3 className="text-[18px] font-semibold sm:text-xl md:text-[22px] mb-2">{`hosted by ${property.createdBy.name}`}</h3>
 
-                  <Avatar
-                    radius="xl"
+                  <img
                     src={property.createdBy.img}
-                    size={"60px"}
+                    className="w-14 h-14 rounded-full object-fit object-cover"
+                    loading="lazy"
                   />
                 </div>
 
@@ -96,18 +115,26 @@ function Apartment() {
                 </p>
 
                 <div className="py-8 border-b-[1px] border-black/20">
-                  <h3>{`${property.reviews.length} reviews`}</h3>
+                  <h3 className="mb-3">{`${property.reviews.length} reviews`}</h3>
+
+                  {property.reviews.map((r) => (
+                    <Review key={r._id} {...r} />
+                  ))}
                 </div>
-                <form className="flex flex-col gap-3">
+                <form
+                  className="flex flex-col gap-3"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handlereviewSubmit(property._id);
+                  }}
+                >
                   <textarea
                     className="p-2 outline-0 border-[1px] rounded-md border-[#412db3]"
                     placeholder="Review..."
+                    value={reviewMessage}
+                    onChange={(e) => setReviewMessage(e.target.value)}
                   />
-                  <Button
-                    label="Submit Review"
-                    disabled={!user}
-                    onSubmit={handlereviewSubmit}
-                  />
+                  <Button label="Submit Review" disabled={!user} />
                 </form>
               </div>
 

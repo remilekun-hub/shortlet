@@ -9,12 +9,15 @@ const reviewSchema = new mongoose.Schema({
     type: String,
     required: [true, "review message must be provided"],
   },
-  // createdby: {
-  //   type: mongoose.Types.ObjectId,
-  //   ref: "User",
-  //   //required: [true],
-  // },
-  property: {
+  createdBy: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
+  image: {
+    type: String,
+    required: [true, "your image is required"],
+  },
+  propertyId: {
     type: mongoose.Types.ObjectId,
     ref: "Property",
   },
