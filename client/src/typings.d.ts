@@ -11,7 +11,7 @@ export interface Property {
   images: string[];
   guests: number;
   description: string;
-  ameneties: string[] | [];
+  amenities: string[] | [];
   reviews: ReviewProp[] | [];
   __v?: number;
 }

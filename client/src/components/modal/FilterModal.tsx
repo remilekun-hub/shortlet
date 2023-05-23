@@ -111,7 +111,7 @@ function FilterModal({ setSearch }: FilterModalProp) {
   );
   return (
     <Modal
-      actionLabel="filter"
+      actionLabel="Filter"
       title="Filter Apartment"
       isOpen={filterModalState.isOpen}
       onClose={filterModalState.onClose}

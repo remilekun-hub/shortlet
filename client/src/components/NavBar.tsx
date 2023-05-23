@@ -65,7 +65,7 @@ function NavBar({ search, setSearch }: NavBarProp) {
 
   return (
     <nav
-      className={`flex items-center justify-between mx-auto  px-3 h-[80px] sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px] relative ${
+      className={`flex items-center justify-between mx-auto  px-3 h-[80px] sm:px-10 md:px-[40px] relative ${
         apartmentPath ? "max-w-[1250px]" : "max-w-[1800px]"
       }`}
     >

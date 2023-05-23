@@ -1,4 +1,5 @@
 import { favouritesSlice } from "../zustand/userFavourites";
+import { userSlice } from "../zustand/user";
 
 export const isFavourite = (id: string): boolean => {
   const favourites = favouritesSlice((state) => state.favourites);
@@ -6,9 +7,3 @@ export const isFavourite = (id: string): boolean => {
 
   return findFavourite?._id === id;
 };
-
-// const checkid = (movieid, bookmarks) => {
-//   const bookmark = bookmarks.find((m) => m.id === movieid);
-
-//   return movieid === bookmark?.id;
-// };

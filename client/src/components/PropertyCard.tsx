@@ -1,27 +1,27 @@
 import { Link } from "react-router-dom";
 import { Property } from "../typings";
-import { favouritesSlice } from "../zustand/userFavourites";
-import { isFavourite } from "../util/checkFavourites";
+import ToggleHearts from "./ToggleHearts";
+import { userSlice } from "../zustand/user";
+import HeartIcon from "./HeartIcon";
 
 function PropertyCard({ _id, city, country, images, price }: Property) {
-  const addFavourite = favouritesSlice((state) => state.addFavourite);
-  const removeFavourite = favouritesSlice((state) => state.removeFavourite);
+  const user = userSlice((state) => state.user);
   const singleImage = images[0];
 
   return (
     <div className="relative ">
-      {isFavourite(_id) ? (
-        <div
-          className="w-10 h-10 rounded-full top-5 right-5 bg-red-500 absolute cursor-pointer"
-          onClick={() => removeFavourite(_id)}
+      {user ? (
+        <ToggleHearts
+          _id={_id}
+          country={country}
+          city={city}
+          price={price}
+          singleImage={singleImage}
         />
       ) : (
-        <div
-          className="w-10 h-10 rounded-full top-5 right-5 bg-green-500 absolute cursor-pointer"
-          onClick={() =>
-            addFavourite({ _id, city, country, singleImage, price })
-          }
-        />
+        <div className="absolute top-4 right-[11px] cursor-pointer w-8 h-8 rounded-full">
+          <HeartIcon />
+        </div>
       )}
 
       <Link to={`/apartment/${_id}`} className="flex flex-col gap-3">
@@ -32,10 +32,11 @@ function PropertyCard({ _id, city, country, images, price }: Property) {
           />
         </div>
         <div className="">
-          <h3 className="text-[15px] text-black font-semibold">{`${city}, ${country}`}</h3>
+          <h3 className="text-[16px] text-black font-semibold">{`${city}, ${country}`}</h3>
           <p className="text-[16px] mt-1">
             <span className="font-semibold">{`$${price}`}</span>
-            <span className="text-neutral-800 ml-1">night</span>
+            <span className="text-neutral-600 ml-1">night</span>
+            <div></div>
           </p>
         </div>
       </Link>

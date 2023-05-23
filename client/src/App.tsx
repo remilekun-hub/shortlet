@@ -13,7 +13,7 @@ import { Apartment } from "./pages";
 import FilterModal from "./components/modal/FilterModal";
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
 const LazyTrip = lazy(() => import("./pages/Trips"));
-const LazyUserFavourites = lazy(() => import("./pages/UserFavourites"));
+const LazyUserFavourites = lazy(() => import("./pages/Favourites"));
 const LazyReservation = lazy(() => import("./pages/Reservations"));
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
   return (
     <>
       <header
-        className={`w-full bg-white sticky top-0 mb-4 z-[50] ${
+        className={`w-full bg-white sticky top-0 mb-5 z-[50] ${
           location.pathname === homepage && "shadow"
         }`}
       >

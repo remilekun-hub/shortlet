@@ -76,7 +76,7 @@ function Apartment() {
   if (property) {
     return (
       <section>
-        <div className="max-w-[1250px] mx-auto px-3 sm:px-10 md:px-[48px] lg:px-[50px] xl:px-[65px] pb-10">
+        <div className="max-w-[1300px] mx-auto px-3 sm:px-10 md:px-[40px] xl:px-[65px] pb-10">
           <div>
             <div className="py-2 mb-4">
               <h2 className="font-semibold text-[17px] sm:text-2xl">
