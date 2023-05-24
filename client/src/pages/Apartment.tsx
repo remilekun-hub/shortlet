@@ -7,7 +7,7 @@ import { userSlice } from "../zustand/user";
 const Reserve = lazy(() => import("../components/Reserve"));
 import ImageBlock from "../components/ImageBlock";
 import Heading from "../components/Heading";
-import { Avatar } from "@mantine/core";
+import { Skeleton } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import Review from "../components/Review";
 
@@ -22,7 +22,7 @@ function Apartment() {
   const user = userSlice((state) => state.user);
   const [reviewMessage, setReviewMessage] = useState("");
   const navigate = useNavigate();
-
+  const [error, setError] = useState(false);
   useEffect(() => {
     const getProperty = async () => {
       try {
@@ -30,8 +30,9 @@ function Apartment() {
           `http://localhost:5000/api/v1/public/properties/${id}`
         );
         return data;
-      } catch (error: any) {
-        console.log(error);
+      } catch (e) {
+        setError(true);
+        console.log(e);
       }
     };
     getProperty().then((data) => setProperty(data));
@@ -69,8 +70,27 @@ function Apartment() {
         .finally(() => setReviewMessage(""));
     }
   };
+  if (error) {
+    return (
+      <div className="flex justify-center items-center pt-[100px] text-center">
+        <Heading title="Oops!" subtitle="Error fetching data." />
+      </div>
+    );
+  }
   if (!property) {
-    return <Heading title="wait..." subtitle="property Loading...." />;
+    return (
+      <div className="max-w-[1300px] mx-auto px-3 sm:px-10 md:px-[40px] xl:px-[65px] pb-10">
+        <div className="mt-9 mb-4 max-w-[600px]">
+          <Skeleton height={27} />
+          <div className="mt-3 mb-7 max-w-[150px]">
+            <Skeleton height={20} />
+          </div>
+        </div>
+        <div className="h-[330px] md:h-[380px] rounded-[13px] overflow-hidden mt-3">
+          <Skeleton height={"100%"} />
+        </div>
+      </div>
+    );
   }
 
   if (property) {
@@ -168,7 +188,11 @@ function Apartment() {
       </section>
     );
   }
-  return <p>Looks like Something went wrong</p>;
+  return (
+    <div className="flex justify-center items-center pt-[100px] text-center">
+      <Heading title="Oops!" subtitle="Error fetching data." />
+    </div>
+  );
 }
 
 export default Apartment;

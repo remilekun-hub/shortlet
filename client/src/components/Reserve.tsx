@@ -18,7 +18,7 @@ interface Prop {
   id: string;
   createdBy: string;
   image: string;
-  reservations: Reservation[];
+  reservations: Reservation[] | undefined;
 }
 
 function Reserve({ price, review, id, createdBy, image, reservations }: Prop) {
@@ -34,17 +34,19 @@ function Reserve({ price, review, id, createdBy, image, reservations }: Prop) {
 
   const disabledDates = useMemo(() => {
     // map reservations to find reserved dates
-    let dates: Date[] = [];
 
-    reservations.forEach((r) => {
-      const range = eachDayOfInterval({
-        start: new Date(r.startDate),
-        end: new Date(r.endDate),
+    if (reservations) {
+      let dates: Date[] = [];
+      reservations.forEach((r) => {
+        const range = eachDayOfInterval({
+          start: new Date(r.startDate),
+          end: new Date(r.endDate),
+        });
+
+        dates = [...dates, ...range];
       });
-
-      dates = [...dates, ...range];
-    });
-    return dates;
+      return dates;
+    } else return [];
   }, [reservations]);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
   const [isLoading, setIsLoading] = useState(false);

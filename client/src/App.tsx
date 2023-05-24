@@ -60,7 +60,7 @@ function App() {
           path="/"
           element={
             <Suspense fallback="Loading...">
-              <LazyHome />
+              <LazyHome setSearch={setSearch} />
             </Suspense>
           }
         />

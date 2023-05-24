@@ -6,9 +6,12 @@ import Heading from "../components/Heading";
 import Button from "../components/Button";
 import useSWR from "swr";
 import { fetcher } from "../util/fetcher";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
-function Home() {
+interface HomeProp {
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+function Home({ setSearch }: HomeProp) {
   const params = useSearchParams();
   const category = params?.[0].get("category");
   const baths = params?.[0].get("baths");
@@ -20,7 +23,7 @@ function Home() {
   const maxPrice = params?.[0].get("maxPrice");
   const navigate = useNavigate();
 
-  const { data, error } = useSWR(
+  const { data, error } = useSWR<Property[], Error>(
     `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
       baths || 1
     }&guests=${guests || 1}&bedrooms=${bedrooms || 1}&minPrice=${
@@ -28,6 +31,7 @@ function Home() {
     }&maxPrice=${maxPrice || 1000}&country=${country}&category=${category}`,
     fetcher
   );
+
   if (error) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
@@ -66,7 +70,13 @@ function Home() {
             title="No Exact Matches"
             subtitle="Try changing your filters"
           />
-          <Button label="Remove All Filters" onSubmit={() => navigate("/")} />
+          <Button
+            label="Remove All Filters"
+            onSubmit={() => {
+              setSearch("");
+              navigate("/");
+            }}
+          />
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 const Property = require("../models/Property");
-
+const NotFound = require("../errors/notFoundError");
 const getProperties = async (req, res) => {
   const {
     country,

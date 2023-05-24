@@ -36,7 +36,6 @@ function PropertyCard({ _id, city, country, images, price }: Property) {
           <p className="text-[16px] mt-1">
             <span className="font-semibold">{`$${price}`}</span>
             <span className="text-neutral-600 ml-1">night</span>
-            <div></div>
           </p>
         </div>
       </Link>

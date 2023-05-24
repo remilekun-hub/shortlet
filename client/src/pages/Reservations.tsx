@@ -35,7 +35,7 @@ function Reservations() {
   }
   if (!data) {
     return (
-      <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px]">
+      <section className="px-4 sm:px-10 md:px-[40px] mx-auto max-w-[1800px]">
         <div className="w-[180px]">
           <Skeleton height={30} />
         </div>
@@ -74,7 +74,7 @@ function Reservations() {
     );
   }
   return (
-    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] pb-8 ">
+    <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px] pb-8">
       <Heading title="Reservations" subtitle="Bookings on your Properties" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mt-4">
         <div className="bg-red-700 h-[300px]">rem</div>

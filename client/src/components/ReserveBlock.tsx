@@ -10,7 +10,7 @@ interface ReserveBlockProps {
   review: number;
   onChangeDate: (value: Range) => void;
   onSubmit: () => void;
-  disabled?: boolean;
+  disabled: boolean;
   disabledDates: Date[];
 }
 
