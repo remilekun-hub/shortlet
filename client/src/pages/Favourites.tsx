@@ -3,13 +3,20 @@ import { favouritesSlice } from "../zustand/userFavourites";
 import Heading from "../components/Heading";
 import { Link } from "react-router-dom";
 import HeartIcon from "../components/HeartIcon";
+import useFetch from "../util/useFetch";
 
 function Favourites() {
   const favourites = favouritesSlice((state) => state.favourites);
   const removeFavourite = favouritesSlice((state) => state.removeFavourite);
-  const user = userSlice((state) => state);
+  const user = userSlice((state) => state.user);
 
-  if (!user?.user) {
+  const { data, error } = useFetch("http://localhost:5000/api/v1/favourites", {
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+  });
+  console.log(data);
+  if (!user) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
         <Heading
@@ -34,7 +41,10 @@ function Favourites() {
   return (
     <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px]">
       <div className="mb-4">
-        <Heading title="My Favourites" subtitle="Apartments you want to Book" />
+        <Heading
+          title="My Favourites"
+          subtitle="Apartments i would love to Book"
+        />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">

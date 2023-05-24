@@ -19,10 +19,10 @@ function ImageBlock({ images }: ImageBlockProp) {
           {imageLayout(images)}
         </div>
       ) : (
-        <div className="hidden md:block h-full rounded-[13px] overflow-hidden">
+        <div className="hidden md:block h-full rounded-[13px] overflow-hidden mx-auto max-w-[800px] max-h-[450px] ">
           <img
             src={images[0]}
-            className=" w-full object-cover object-center max-h-[450px]"
+            className=" w-full object-cover object-center "
           />
         </div>
       )}

@@ -44,7 +44,7 @@ function Trips() {
   }
 
   const { data, error } = useFetch<Trips[]>(
-    `http://localhost:5000/api/v1/reservations/trips/${user?.id}`,
+    "http://localhost:5000/api/v1/reservations/trips",
     {
       headers: {
         Authorization: `Bearer ${user?.token}`,

@@ -24,17 +24,7 @@ interface Prop {
   country: string;
 }
 
-function Reserve({
-  price,
-  review,
-  id,
-  createdBy,
-  image,
-  reservations,
-  city,
-  country,
-  state,
-}: Prop) {
+function Reserve({ price, review, id, createdBy, reservations }: Prop) {
   const navigate = useNavigate();
   const user = userSlice((state) => state.user);
   const LoginModal = useLoginModalState();
@@ -61,6 +51,7 @@ function Reserve({
       return dates;
     } else return [];
   }, [reservations]);
+
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(price);
@@ -76,12 +67,7 @@ function Reserve({
         {
           startDate: dateRange.startDate,
           endDate: dateRange.endDate,
-          image: image,
-          state: state,
           price: totalPrice,
-          city: city,
-          country: country,
-          reservedBy: user.id,
           propertyId: id,
           propertyOwner: createdBy,
         },

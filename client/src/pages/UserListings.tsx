@@ -5,7 +5,7 @@ import { Property } from "../typings";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function UserListings() {
   const user = userSlice((state) => state.user);
@@ -39,6 +39,7 @@ function UserListings() {
       },
     }
   );
+  console.log(data);
 
   if (error) {
     return (
@@ -66,19 +67,21 @@ function UserListings() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {data.map((listing) => (
           <div key={listing._id}>
-            <div className="mb-3 h-[250px]">
-              <img
-                src={listing.images[0]}
-                className=" object-center object-cover h-full w-full rounded-xl"
-              />
-            </div>
-            <div className="mb-2">
-              <h3 className="text-[16px] text-black font-semibold">{`${listing.city}, ${listing.country}`}</h3>
-              <p className="text-[16px] mt-1">
-                <span className="font-semibold">{`$${listing.price}`}</span>
-                <span className="text-neutral-600 ml-1">night</span>
-              </p>
-            </div>
+            <Link to={`/apartment/${listing._id}`}>
+              <div className="mb-3 h-[250px]">
+                <img
+                  src={listing.images[0]}
+                  className=" object-center object-cover h-full w-full rounded-xl"
+                />
+              </div>
+              <div className="mb-2">
+                <h3 className="text-[16px] text-black font-semibold">{`${listing.city}, ${listing.state}, ${listing.country}`}</h3>
+                <p className="text-[16px] mt-1">
+                  <span className="font-semibold">{`$${listing.price}`}</span>
+                  <span className="text-neutral-600 ml-1">night</span>
+                </p>
+              </div>
+            </Link>
             <Button
               label="Delete Property"
               onSubmit={() => handlePropertyDelete(listing._id)}

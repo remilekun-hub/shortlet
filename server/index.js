@@ -12,6 +12,7 @@ const userRouter = require("./routes/userRouter");
 const propertyRouter = require("./routes/propertyRouter");
 const publicPropertyRouter = require("./routes/publicPropertyRouter");
 const reservationRouter = require("./routes/reservationRouter");
+const favouritesRouter = require("./routes/favouritesRouter");
 const port = process.env.PORT || 5000;
 
 app.use(cors());
@@ -25,7 +26,7 @@ app.use("/api/v1/auth/", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/public/properties", publicPropertyRouter);
 app.use("/api/v1/properties", authentication, propertyRouter);
-app.use("/api/v1/reservations", reservationRouter);
+app.use("/api/v1/favourites", authentication, favouritesRouter);
 
 app.use(notFound);
 app.use(errorHandler);

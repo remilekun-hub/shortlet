@@ -3,23 +3,36 @@ import { Property } from "../typings";
 import ToggleHearts from "./ToggleHearts";
 import { userSlice } from "../zustand/user";
 import HeartIcon from "./HeartIcon";
+import axios from "axios";
+import useLoginModalState from "../zustand/UseLoginModal";
 
 function PropertyCard({ _id, city, country, images, price, state }: Property) {
   const user = userSlice((state) => state.user);
-  const singleImage = images[0];
+  const loginModal = useLoginModalState();
+
+  const addtoFavourite = async () => {
+    await axios.post(
+      "http://localhost:5000/api/v1/favourites",
+      {
+        propertyId: _id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      }
+    );
+  };
 
   return (
     <div className="relative ">
       {user ? (
-        <ToggleHearts
-          _id={_id}
-          country={country}
-          city={city}
-          price={price}
-          singleImage={singleImage}
-        />
+        <ToggleHearts id={_id} />
       ) : (
-        <div className="absolute top-4 right-[11px] cursor-pointer w-8 h-8 rounded-full">
+        <div
+          className="absolute top-4 right-[11px] cursor-pointer w-8 h-8 rounded-full"
+          onClick={loginModal.onOpen}
+        >
           <HeartIcon />
         </div>
       )}
