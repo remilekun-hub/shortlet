@@ -37,6 +37,7 @@ function Apartment() {
     };
     getProperty().then((data) => setProperty(data));
   }, []);
+  console.log({ property });
 
   useEffect(() => {
     const getReservations = async () => {
@@ -102,7 +103,7 @@ function Apartment() {
               <h2 className="font-semibold text-[17px] sm:text-2xl">
                 {property.title}
               </h2>
-              <p className="font-normal underline">{`${property.city}, ${property.country}`}</p>
+              <p className="font-normal underline">{`${property.city}, ${property.state}, ${property.country}`}</p>
             </div>
 
             <ImageBlock images={property.images} />
@@ -171,6 +172,9 @@ function Apartment() {
                 createdBy={property.createdBy.id}
                 image={property.images[0]}
                 reservations={reservations}
+                city={property.city}
+                country={property.country}
+                state={property.state}
               />
             </div>
           </div>

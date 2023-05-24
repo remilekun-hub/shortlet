@@ -10,6 +10,7 @@ export interface Property {
   bedrooms: number;
   images: string[];
   guests: number;
+  state: string;
   description: string;
   amenities: string[] | [];
   reviews: ReviewProp[] | [];
@@ -42,6 +43,7 @@ export interface SingleProperty {
   bedrooms: number;
   images: string[];
   guests: number;
+  state: string;
   description: string;
   ameneties: string[] | [];
   reviews: ReviewProp[] | [];

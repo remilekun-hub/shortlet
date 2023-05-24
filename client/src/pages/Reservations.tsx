@@ -2,8 +2,20 @@ import React from "react";
 import useFetch from "../util/useFetch";
 import { userSlice } from "../zustand/user";
 import Heading from "../components/Heading";
-import { Button, Skeleton } from "@mantine/core";
+import { Skeleton } from "@mantine/core";
+import Button from "../components/Button";
 
+interface Reservations {
+  startDate: string;
+  endDate: string;
+  _id: string;
+  price: number;
+  propertyId: string;
+  propertyOwner: string;
+  reservedBy: string;
+  image: string;
+  __v?: number;
+}
 function Reservations() {
   const user = userSlice((state) => state.user);
 
@@ -17,7 +29,7 @@ function Reservations() {
       </div>
     );
   }
-  const { data, error } = useFetch<[]>(
+  const { data, error } = useFetch<Reservations[]>(
     "http://localhost:5000/api/v1/reservations",
     {
       headers: {
@@ -25,6 +37,7 @@ function Reservations() {
       },
     }
   );
+  console.log(data);
 
   if (error) {
     return (
@@ -77,11 +90,14 @@ function Reservations() {
     <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px] pb-8">
       <Heading title="Reservations" subtitle="Bookings on your Properties" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mt-4">
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
-        <div className="bg-red-700 h-[300px]">rem</div>
+        {data.map((reservation) => (
+          <div key={reservation._id}>
+            <Button
+              label="cancel guest reservation"
+              onSubmit={() => alert("reservation cancelled")}
+            />
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import ToggleHearts from "./ToggleHearts";
 import { userSlice } from "../zustand/user";
 import HeartIcon from "./HeartIcon";
 
-function PropertyCard({ _id, city, country, images, price }: Property) {
+function PropertyCard({ _id, city, country, images, price, state }: Property) {
   const user = userSlice((state) => state.user);
   const singleImage = images[0];
 
@@ -32,7 +32,7 @@ function PropertyCard({ _id, city, country, images, price }: Property) {
           />
         </div>
         <div className="">
-          <h3 className="text-[16px] text-black font-semibold">{`${city}, ${country}`}</h3>
+          <h3 className="text-[16px] text-black font-semibold">{`${city}, ${state}, ${country}`}</h3>
           <p className="text-[16px] mt-1">
             <span className="font-semibold">{`$${price}`}</span>
             <span className="text-neutral-600 ml-1">night</span>

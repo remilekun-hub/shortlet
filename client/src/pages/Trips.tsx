@@ -85,6 +85,7 @@ function Trips() {
             {...trip}
             label="Cancel Reservation"
             onClick={() => handleCancelReservation(trip._id)}
+            key={trip._id}
           />
         ))}
       </div>
