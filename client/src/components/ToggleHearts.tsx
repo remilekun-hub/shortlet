@@ -3,6 +3,7 @@ import { userSlice } from "../zustand/user";
 import HeartIcon from "./HeartIcon";
 import axios from "axios";
 import useFetch from "../util/useFetch";
+import { favouritesSlice } from "../zustand/userFavourites";
 
 type ToggleHeartsProp = {
   id: string;
@@ -13,27 +14,7 @@ type dataType = {
 };
 function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
   const user = userSlice((state) => state.user);
-  const [favourites, setFavourites] = useState<dataType[] | null | undefined>();
-  useEffect(() => {
-    getFavourite().then((d: any) => setFavourites(d));
-    console.log({ favourites });
-  }, []);
-
-  const getFavourite = async () => {
-    try {
-      const { data } = await axios.get<dataType[]>(
-        `http://localhost:5000/api/v1/favourites`,
-        {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-          },
-        }
-      );
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const Myfavourites = favouritesSlice();
 
   const addToFavourite = async (id: string) => {
     await axios.post(
@@ -47,6 +28,7 @@ function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
         },
       }
     );
+    Myfavourites.addFavourite({ id: id });
   };
   const removeFavourite = async (id: string) => {
     await axios.delete(`http://localhost:5000/api/v1/favourites/${id}`, {
@@ -54,35 +36,22 @@ function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
         Authorization: `Bearer ${user?.token}`,
       },
     });
+    Myfavourites.removeFavourite(id);
   };
-  const isFav = favourites?.find((d) => d._id === id);
+
+  const myfav = Myfavourites.favourites?.find((fav) => fav.id === id);
+  console.log(myfav);
   return (
     <div className="w-8 h-8 rounded-full top-4 right-[11px] absolute cursor-pointer">
-      {isFav ? (
-        <div
-          onClick={() => {
-            removeFavourite(id);
-          }}
-        >
+      {myfav ? (
+        <div onClick={() => removeFavourite(id)}>
           <HeartIcon red />
         </div>
       ) : (
-        <div
-          onClick={() => {
-            addToFavourite(id);
-          }}
-        >
+        <div onClick={() => addToFavourite(id)}>
           <HeartIcon />
         </div>
       )}
-
-      {/* <div
-        onClick={() => {
-          addToFavourite(id);
-        }}
-      >
-        <HeartIcon />
-      </div> */}
     </div>
   );
 }

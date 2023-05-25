@@ -1,5 +1,4 @@
 const Property = require("../models/Property");
-const Review = require("../models/Review");
 const NotFound = require("../errors/notFoundError");
 
 const createProperty = async (req, res) => {

@@ -10,20 +10,6 @@ function PropertyCard({ _id, city, country, images, price, state }: Property) {
   const user = userSlice((state) => state.user);
   const loginModal = useLoginModalState();
 
-  const addtoFavourite = async () => {
-    await axios.post(
-      "http://localhost:5000/api/v1/favourites",
-      {
-        propertyId: _id,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-        },
-      }
-    );
-  };
-
   return (
     <div className="relative ">
       {user ? (

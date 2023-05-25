@@ -2,11 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage, devtools } from "zustand/middleware";
 
 interface property {
-  _id: string;
-  city: string;
-  country: string;
-  singleImage: string;
-  price: number;
+  id: string;
 }
 interface favouritesSlice {
   favourites: property[];
@@ -25,7 +21,7 @@ export const favouritesSlice = create<favouritesSlice>()(
         removeFavourite: (id) => {
           set((state) => ({
             favourites: [
-              ...state.favourites.filter((property) => property._id != id),
+              ...state.favourites.filter((property) => property.id != id),
             ],
           }));
         },
