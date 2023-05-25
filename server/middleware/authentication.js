@@ -29,20 +29,4 @@ const authentication = async (req, res, next) => {
   }
 };
 
-const verifyUser = async (req, res, next) => {
-  const isAdmin = req.user.isAdmin;
-
-  if (req.user.userId === req.params.id || isAdmin) next();
-  else {
-    throw new ForbiddenError("you are not allowed to perform this action");
-  }
-};
-
-const verifyAdmin = async (req, res, next) => {
-  const isAdmin = req.user.isAdmin;
-  if (isAdmin) next();
-  else {
-    throw new ForbiddenError("you are not allowed to perform this action");
-  }
-};
-module.exports = { authentication, verifyUser, verifyAdmin };
+module.exports = { authentication };

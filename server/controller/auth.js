@@ -37,7 +37,7 @@ const loginUser = async (req, res) => {
 
   res.status(StatusCodes.OK).json({
     name: user.name,
-    isAdmin: user.isAdmin,
+    favourites: user.favourites,
     id: user._id,
     image: user.image,
     token,

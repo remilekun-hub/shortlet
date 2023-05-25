@@ -1,18 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getAllUsers,
-  getSingleUser,
-  updateUser,
-  deleteUser,
+  updateUserFavourite,
+  deleteUserfavourite,
 } = require("../controller/user");
-const { verifyUser } = require("../middleware/authentication");
 
-router.route("/").get(getAllUsers);
-router
-  .route("/:id")
-  .get(verifyUser, getSingleUser)
-  .patch(verifyUser, updateUser)
-  .delete(verifyUser, deleteUser);
+router.route("/favourites").patch(updateUserFavourite);
+router.route("/favourites/:id").delete(deleteUserfavourite);
 
 module.exports = router;

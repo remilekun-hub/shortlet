@@ -2,55 +2,49 @@ const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
 const NotFoundError = require("../errors/notFoundError");
 
-const getAllUsers = async (req, res) => {
-  if (req.user.isAdmin) {
-    const users = await User.find({});
-    res.status(StatusCodes.OK).json({ users });
-  } else {
-    throw new ForbiddenError("you are not allowed access to this route");
-  }
-};
-
-const getSingleUser = async (req, res) => {
-  const { id: userID } = req.params;
-
-  const user = await User.findById(userID);
-
-  if (!user) {
-    throw new NotFoundError(`No user with ID ${userID}`);
-  }
-
-  res.status(StatusCodes.OK).json({ user });
-};
-
-const updateUser = async (req, res) => {
-  const { id: userID } = req.params;
-  const user = await User.findByIdAndUpdate(userID, req.body, {
-    new: true,
-    runValidators: true,
-  });
+const updateUserFavourite = async (req, res) => {
+  const { propertyId } = req.body;
+  const user = await User.findByIdAndUpdate(
+    req.user.userId,
+    {
+      $push: {
+        favourites: { propertyId },
+      },
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
   if (!user) {
-    throw new NotFoundError(`No user with ID ${userID}`);
+    throw new NotFoundError(`No user with ID ${req.user.userId}`);
   }
-  res.status(StatusCodes.OK).send("user updated");
+  res.status(StatusCodes.OK).send(user);
 };
 
-const deleteUser = async (req, res) => {
-  const { id: userID } = req.params;
-
-  const user = await User.findByIdAndDelete(userID);
-
+const deleteUserfavourite = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findByIdAndUpdate(
+    req.user.userId,
+    {
+      $pull: {
+        favourites: { propertyId: id },
+      },
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
   if (!user) {
-    throw new NotFoundError(`No user with ID ${userID}`);
+    throw new NotFoundError(
+      `No user with ID ${req.user.userId} or property with ID ${id}`
+    );
   }
-
-  res.status(StatusCodes.OK).send(`user deleted`);
+  res.status(StatusCodes.OK).send(user);
 };
-
 module.exports = {
-  getAllUsers,
-  getSingleUser,
-  deleteUser,
-  updateUser,
+  updateUserFavourite,
+  deleteUserfavourite,
 };

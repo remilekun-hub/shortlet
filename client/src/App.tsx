@@ -22,17 +22,25 @@ function App() {
   const location = useLocation();
   const homepage = "/";
 
+  interface favourite {
+    _id: string;
+    propertyId: string;
+  }
+
+  type UserType = {
+    name: string;
+    id: string;
+    token: string;
+    image: string;
+    favourites: favourite[];
+  };
+
   useEffect(() => {
     let storageUser = localStorage.getItem("user");
+    console.log(storageUser);
 
     if (storageUser != null) {
-      const parsedUser: {
-        name: string;
-        isAdmin: boolean;
-        id: string;
-        token: string;
-        image: string;
-      } = JSON.parse(storageUser);
+      const parsedUser: UserType = JSON.parse(storageUser);
       user.setUser({ ...parsedUser });
       return;
     }

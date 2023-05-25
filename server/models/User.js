@@ -2,6 +2,13 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const FavouriteSchema = new mongoose.Schema({
+  propertyId: {
+    type: mongoose.Types.ObjectId,
+    ref: "Property",
+  },
+});
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -21,10 +28,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "your image is required"],
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
+  favourites: [FavouriteSchema],
 });
 
 UserSchema.pre("save", async function () {
@@ -42,8 +46,8 @@ UserSchema.methods.createJWT = function () {
     {
       userId: this._id,
       name: this.name,
-      isAdmin: this.isAdmin,
       image: this.image,
+      favourites: this.favourites,
     },
     "remi",
     {

@@ -1,23 +1,23 @@
 import { create } from "zustand";
 
+interface favourite {
+  _id: string;
+  propertyId: string;
+}
+
 type UserType = {
-  name: string;
-  isAdmin: boolean;
-  id: string;
-  token: string;
-  image: string;
+  name?: string;
+  id?: string;
+  token?: string;
+  image?: string;
+  favourites?: favourite[];
 };
 
 interface UserInterface {
-  user: {
-    name: string;
-    isAdmin: boolean;
-    id: string;
-    token: string;
-    image: string;
-  } | null;
+  user: UserType | null;
   setUser: (user: UserType) => void;
   removeUser: () => void;
+  addFavourite?: (propertyID: favourite) => void;
 }
 
 export const userSlice = create<UserInterface>()((set) => ({

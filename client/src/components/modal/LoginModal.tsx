@@ -40,7 +40,7 @@ function LoginModal() {
   });
   const Login = async (values: { email: string; password: string }) => {
     setStatus({ ...status, isLoading: true });
-    console.log({ values });
+
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/auth/login",

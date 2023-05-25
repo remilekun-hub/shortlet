@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth/", authRouter);
-app.use("/api/v1/users", userRouter);
+app.use("/api/v1/users", authentication, userRouter);
 app.use("/api/v1/public/properties", publicPropertyRouter);
 app.use("/api/v1/properties", authentication, propertyRouter);
 app.use("/api/v1/favourites", authentication, favouritesRouter);

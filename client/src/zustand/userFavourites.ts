@@ -6,8 +6,8 @@ interface property {
 }
 interface favouritesSlice {
   favourites: property[];
-  addFavourite: (property: property) => void;
-  removeFavourite: (id: string) => void;
+  addFavourite: (propertyId: property) => void;
+  removeFavourite: (PropertyId: string) => void;
   removeAll: () => void;
 }
 export const favouritesSlice = create<favouritesSlice>()(
