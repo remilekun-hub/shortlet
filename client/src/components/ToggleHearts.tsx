@@ -72,7 +72,7 @@ function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
 
   const myfav = userFavourites?.find((fav) => fav.propertyId === id);
   return (
-    <div className="w-8 h-8 rounded-full top-4 right-[11px] absolute cursor-pointer">
+    <div className="w-8 h-8 rounded-full top-4 right-[8px] absolute cursor-pointer">
       {myfav ? (
         <div onClick={() => removeFavourite(id)}>
           <HeartIcon red />

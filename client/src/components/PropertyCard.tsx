@@ -31,7 +31,7 @@ function PropertyCard({ _id, city, country, images, price, state }: Property) {
           />
         </div>
         <div className="">
-          <h3 className="text-[16px] text-black font-semibold">{`${city}, ${state}, ${country}`}</h3>
+          <h3 className="text-[16px] text-black font-semibold capitalize">{`${city}, ${state}, ${country}`}</h3>
           <p className="text-[16px] mt-1">
             <span className="font-semibold">{`$${price}`}</span>
             <span className="text-neutral-600 ml-1">night</span>

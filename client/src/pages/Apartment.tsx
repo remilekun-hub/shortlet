@@ -37,7 +37,6 @@ function Apartment() {
     };
     getProperty().then((data) => setProperty(data));
   }, []);
-  console.log({ property });
 
   useEffect(() => {
     const getReservations = async () => {
@@ -159,7 +158,7 @@ function Apartment() {
                     placeholder="Review..."
                     value={reviewMessage}
                     onChange={(e) => setReviewMessage(e.target.value)}
-                    disabled={true}
+                    disabled={!user}
                   />
                   <Button label="Submit Review" disabled={!user} />
                 </form>

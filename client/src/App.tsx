@@ -37,7 +37,6 @@ function App() {
 
   useEffect(() => {
     let storageUser = localStorage.getItem("user");
-    console.log(storageUser);
 
     if (storageUser != null) {
       const parsedUser: UserType = JSON.parse(storageUser);

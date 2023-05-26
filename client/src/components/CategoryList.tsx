@@ -26,23 +26,19 @@ function CategoryList() {
       </div>
       <div
         onClick={filterModal.onOpen}
-        className="cursor-pointer flex flex-col items-center"
+        className="cursor-pointer flex gap-2 items-center p-3 border-[1px] rounded-xl"
       >
-        <div className="text-[14px] md:text-[14px]">Filter</div>
         <svg
+          viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
+          aria-hidden="true"
+          role="presentation"
+          focusable="false"
+          className="w-4 h-4"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
-          />
+          <path d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
         </svg>
+        <div className="text-[14px] md:text-[14px]">Filters</div>
       </div>
     </div>
   );
