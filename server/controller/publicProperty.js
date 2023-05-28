@@ -42,7 +42,7 @@ const getProperties = async (req, res) => {
   }
 
   let result = Property.find(propertyQuery);
-  const properties = await result;
+  const properties = await result.sort("-createdAt");
   res.status(200).json(properties);
 };
 

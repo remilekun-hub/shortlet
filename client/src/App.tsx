@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar";
 const LazyHome = lazy(() => import("./pages/Home"));
 import { Apartment } from "./pages";
 import FilterModal from "./components/modal/FilterModal";
+import ProtectedRoute from "./util/ProtectedRoute";
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
 const LazyTrip = lazy(() => import("./pages/Trips"));
 const LazyUserFavourites = lazy(() => import("./pages/Favourites"));
@@ -34,7 +35,6 @@ function App() {
     image: string;
     favourites: favourite[];
   };
-
   useEffect(() => {
     let storageUser = localStorage.getItem("user");
 
@@ -75,9 +75,11 @@ function App() {
         <Route
           path="/trips"
           element={
-            <Suspense fallback="Loading...">
-              <LazyTrip />
-            </Suspense>
+            <ProtectedRoute>
+              <Suspense fallback="Loading...">
+                <LazyTrip />
+              </Suspense>
+            </ProtectedRoute>
           }
         />
 
@@ -92,9 +94,11 @@ function App() {
         <Route
           path="/favourites"
           element={
-            <Suspense fallback="Loading...">
-              <LazyUserFavourites />
-            </Suspense>
+            <ProtectedRoute>
+              <Suspense fallback="Loading...">
+                <LazyUserFavourites />
+              </Suspense>
+            </ProtectedRoute>
           }
         />
         <Route

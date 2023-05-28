@@ -23,6 +23,7 @@ function Apartment() {
   const [reviewMessage, setReviewMessage] = useState("");
   const navigate = useNavigate();
   const [error, setError] = useState(false);
+
   useEffect(() => {
     const getProperty = async () => {
       try {
@@ -51,6 +52,7 @@ function Apartment() {
     };
     getReservations().then((data) => setReservations(data));
   }, []);
+
   const handlereviewSubmit = async (propertyId: string) => {
     if (!reviewMessage) return;
     if (user) {

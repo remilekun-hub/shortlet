@@ -21,11 +21,12 @@ function UserListings() {
       </div>
     );
   }
+
   const handlePropertyDelete = async (id: string) => {
     axios
       .delete(`http://localhost:5000/api/v1/properties/${id}`, {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${user?.token}`,
         },
       })
       .then(() => navigate(0))
@@ -35,7 +36,7 @@ function UserListings() {
     "http://localhost:5000/api/v1/properties",
     {
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${user?.token}`,
       },
     }
   );
@@ -91,6 +92,7 @@ function UserListings() {
       </div>
     </section>
   );
+
 }
 
 export default UserListings;

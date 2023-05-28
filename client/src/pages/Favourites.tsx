@@ -26,6 +26,7 @@ function Favourites() {
       },
     }
   );
+  console.log(data);
   if (error) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">

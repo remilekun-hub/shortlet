@@ -32,16 +32,16 @@ function Trips() {
     navigate(0);
   };
 
-  if (!user) {
-    return (
-      <div className="flex justify-center items-center pt-[100px] text-center">
-        <Heading
-          title="Please Log in"
-          subtitle="you must be logged in to access this page"
-        />
-      </div>
-    );
-  }
+  // if (!user) {
+  //   return (
+  //     <div className="flex justify-center items-center pt-[100px] text-center">
+  //       <Heading
+  //         title="Please Log in"
+  //         subtitle="you must be logged in to access this page"
+  //       />
+  //     </div>
+  //   );
+  // }
 
   const { data, error } = useFetch<Trips[]>(
     "http://localhost:5000/api/v1/reservations/trips",

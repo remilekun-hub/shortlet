@@ -4,18 +4,9 @@ import { userSlice } from "../zustand/user";
 import Heading from "../components/Heading";
 import { Skeleton } from "@mantine/core";
 import Button from "../components/Button";
+import PropertyCard from "../components/PropertyCard";
+import { Property } from "../typings";
 
-interface Reservations {
-  startDate: string;
-  endDate: string;
-  _id: string;
-  price: number;
-  propertyId: string;
-  propertyOwner: string;
-  reservedBy: string;
-  image: string;
-  __v?: number;
-}
 function Reservations() {
   const user = userSlice((state) => state.user);
 
@@ -29,7 +20,7 @@ function Reservations() {
       </div>
     );
   }
-  const { data, error } = useFetch<Reservations[]>(
+  const { data, error } = useFetch<Property[]>(
     "http://localhost:5000/api/v1/reservations",
     {
       headers: {
@@ -90,17 +81,19 @@ function Reservations() {
     <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px] pb-8">
       <Heading title="Reservations" subtitle="Bookings on your Properties" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mt-4">
-        {data.map((reservation) => (
-          <div key={reservation._id}>
-            <Button
-              label="cancel guest reservation"
-              onSubmit={() => alert("reservation cancelled")}
-            />
-          </div>
+        {data.map((property) => (
+          // <div key={reservation._id}>
+          //   <Button
+          //     label="cancel guest reservation"
+          //     onSubmit={() => alert("reservation cancelled")}
+          //   />
+          // </div>
+          <PropertyCard {...property} key={property._id} />
         ))}
       </div>
     </section>
   );
+  return <div>...</div>;
 }
 
 export default Reservations;

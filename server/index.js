@@ -27,6 +27,7 @@ app.use("/api/v1/users", authentication, userRouter);
 app.use("/api/v1/public/properties", publicPropertyRouter);
 app.use("/api/v1/properties", authentication, propertyRouter);
 app.use("/api/v1/favourites", authentication, favouritesRouter);
+app.use("/api/v1/reservations", reservationRouter);
 
 app.use(notFound);
 app.use(errorHandler);

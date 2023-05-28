@@ -5,8 +5,19 @@ import { userSlice } from "../zustand/user";
 import HeartIcon from "./HeartIcon";
 import axios from "axios";
 import useLoginModalState from "../zustand/UseLoginModal";
+import Button from "./Button";
 
-function PropertyCard({ _id, city, country, images, price, state }: Property) {
+function PropertyCard({
+  _id,
+  city,
+  country,
+  images,
+  price,
+  state,
+  reservation,
+  label,
+  onSubmit,
+}: Property) {
   const user = userSlice((state) => state.user);
   const loginModal = useLoginModalState();
 
@@ -38,6 +49,11 @@ function PropertyCard({ _id, city, country, images, price, state }: Property) {
           </p>
         </div>
       </Link>
+      {label && onSubmit && (
+        <div className="mt-2">
+          <Button label={label} onSubmit={onSubmit} />
+        </div>
+      )}
     </div>
   );
 }
