@@ -1,27 +1,38 @@
 export interface Property {
   _id: string;
   country: string;
-  category?: string;
+  category: string;
   city: string;
   price: number;
-  title?: string;
-  bed?: number;
-  bathrooms?: number;
-  bedrooms?: number;
+  title: string;
+  bed: number;
+  bathrooms: number;
+  bedrooms: number;
   images: string[];
-  guests?: number;
+  guests: number;
   state: string;
-  description?: string;
-  amenities?: string[] | [];
+  description: string;
+  amenities: string[] | [];
   reviews: ReviewProp[] | [];
   __v?: number;
-  reservation?: boolean;
-  startDate?: Date;
-  endDate?: Date;
-  label?: string;
-  reservationId?: string;
-  onSubmit?: () => void;
 }
+
+export type PropertyCardProps = {
+  data: Property;
+  reservation?: Reservation;
+  label?: string;
+  onSubmit?: () => void;
+};
+
+export type Reservation = {
+  _id: string;
+  propertyId: string;
+  propertyOwner: string;
+  reservedBy: string;
+  startDate: string;
+  endDate: string;
+  price: number;
+};
 
 export type ReviewProp = {
   createdBy: string;

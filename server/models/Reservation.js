@@ -14,6 +14,10 @@ const ReservationSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "User",
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
   startDate: {
     type: Date,
     required: [true, "Reservation Start date is required"],

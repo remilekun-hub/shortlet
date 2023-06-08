@@ -1,4 +1,3 @@
-import React from "react";
 import useFetch from "../util/useFetch";
 import { userSlice } from "../zustand/user";
 import Heading from "../components/Heading";
@@ -10,17 +9,7 @@ import { Property } from "../typings";
 function Reservations() {
   const user = userSlice((state) => state.user);
 
-  if (!user) {
-    return (
-      <div className="flex justify-center items-center pt-[100px] text-center">
-        <Heading
-          title="Please Log in"
-          subtitle="you must be logged in to access this page"
-        />
-      </div>
-    );
-  }
-  const { data, error } = useFetch<Property[]>(
+  const { data, error } = useFetch<[]>(
     "http://localhost:5000/api/v1/reservations",
     {
       headers: {
@@ -81,15 +70,15 @@ function Reservations() {
     <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px] pb-8">
       <Heading title="Reservations" subtitle="Bookings on your Properties" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mt-4">
-        {data.map((property) => (
+        {/* {data.map((property) => (
           // <div key={reservation._id}>
           //   <Button
           //     label="cancel guest reservation"
           //     onSubmit={() => alert("reservation cancelled")}
           //   />
           // </div>
-          <PropertyCard {...property} key={property._id} />
-        ))}
+          
+        ))} */}
       </div>
     </section>
   );

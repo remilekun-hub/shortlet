@@ -22,7 +22,8 @@ const getPropertyReservation = async (req, res) => {
 const getMyReservations = async (req, res) => {
   const reservation = await Reservation.find({
     propertyOwner: req.user.userId,
-  });
+  }).sort("-createdAt");
+
   if (!reservation) {
     return res.status(200).json([]);
   }
@@ -33,7 +34,7 @@ const getMyReservations = async (req, res) => {
       const property = await Property.findOne({
         _id: reservation[i].propertyId,
       });
-      console.log(property);
+
       const newPropertyDetails = {
         images: property.images,
         startDate: reservation[i].startDate,
@@ -51,11 +52,51 @@ const getMyReservations = async (req, res) => {
   };
 
   const result = await getProperties();
-  console.log(result);
   res.status(200).json(result);
+};
+
+const getMyTrips = async (req, res) => {
+  const trips = await Reservation.find({ reservedBy: req.user.userId }).sort(
+    "-createdAt"
+  );
+  if (!trips) {
+    return res.status(200).json([]);
+  }
+
+  const getProperties = async () => {
+    let prop = [];
+    for (let i = 0; i < trips.length; i++) {
+      const property = await Property.findOne({
+        _id: trips[i].propertyId,
+      });
+      const newPropertyDetails = {
+        reservation: trips[i],
+        reservationListing: property,
+      };
+      prop.push(newPropertyDetails);
+    }
+    return prop;
+  };
+  const result = await getProperties();
+  res.status(200).json(result);
+};
+
+const deleteTrip = async (req, res) => {
+  const deletedTrip = await Reservation.findOneAndDelete({
+    _id: req.params.id,
+  });
+
+  if (!deletedTrip) {
+    return res
+      .status(404)
+      .json({ msg: `you have no Trip with id ${req.params.id}` });
+  }
+  res.status(200).json({ msg: "trip cancelled" });
 };
 module.exports = {
   createReservation,
   getPropertyReservation,
   getMyReservations,
+  getMyTrips,
+  deleteTrip,
 };

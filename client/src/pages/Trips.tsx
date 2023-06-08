@@ -1,49 +1,30 @@
-import React from "react";
 import { userSlice } from "../zustand/user";
 import useFetch from "../util/useFetch";
 import Heading from "../components/Heading";
-import Reservation from "../components/Reservation";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import PropertyCard from "../components/PropertyCard";
+import { Property, Reservation } from "../typings";
 
-interface Trips {
-  endDate: string;
-  startDate: string;
-  price: number;
-  _id: string;
-  __v: number;
-  reservedBy: string;
-  propertyId: string;
-  propertyOwner: string;
-  image: string;
-}
 function Trips() {
   const user = userSlice((state) => state.user);
   const navigate = useNavigate();
-  const handleCancelReservation = async (id: string) => {
-    await axios.delete(
-      `http://localhost:5000/api/v1/reservations/trips/${id}`,
-      {
+
+  const handleCancelTrip = async (id: string) => {
+    await axios
+      .delete(`http://localhost:5000/api/v1/reservations/trips/${id}`, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },
-      }
-    );
-    navigate(0);
+      })
+      .then(() => alert("deleted"));
   };
 
-  // if (!user) {
-  //   return (
-  //     <div className="flex justify-center items-center pt-[100px] text-center">
-  //       <Heading
-  //         title="Please Log in"
-  //         subtitle="you must be logged in to access this page"
-  //       />
-  //     </div>
-  //   );
-  // }
-
-  const { data, error } = useFetch<Trips[]>(
+  type TripsProp = {
+    reservation: Reservation;
+    reservationListing: Property;
+  };
+  const { data, error } = useFetch<TripsProp[]>(
     "http://localhost:5000/api/v1/reservations/trips",
     {
       headers: {
@@ -51,7 +32,6 @@ function Trips() {
       },
     }
   );
-  console.log({ data });
   if (error) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
@@ -60,7 +40,7 @@ function Trips() {
     );
   }
   if (!data) {
-    return <p>Loading.....d,fsd</p>;
+    return <p>Loading...</p>;
   }
 
   if (data.length == 0) {
@@ -81,11 +61,12 @@ function Trips() {
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mt-4">
         {data.map((trip) => (
-          <Reservation
-            {...trip}
-            label="Cancel Reservation"
-            onClick={() => handleCancelReservation(trip._id)}
-            key={trip._id}
+          <PropertyCard
+            key={trip.reservation._id}
+            data={trip.reservationListing}
+            reservation={trip.reservation}
+            label="Cancel Trip"
+            onSubmit={() => handleCancelTrip(trip.reservation._id)}
           />
         ))}
       </div>

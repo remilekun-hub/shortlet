@@ -1,6 +1,6 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
-import { Property } from "../typings";
+import { PropertyCardProps, Property } from "../typings";
 import { Skeleton } from "@mantine/core";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
@@ -85,12 +85,7 @@ function Home({ setSearch }: HomeProp) {
     <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px]">
       <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {data.map((item: Property) => (
-          <PropertyCard
-            key={item._id}
-            {...item}
-            label="cancel reservation"
-            onSubmit={() => {}}
-          />
+          <PropertyCard key={item._id} data={item} />
         ))}
       </div>
     </section>

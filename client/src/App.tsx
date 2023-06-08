@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { userSlice } from "./zustand/user";
 import RegisterModal from "./components/modal/RegisterModal";
@@ -7,13 +7,12 @@ import CreateListingModal from "./components/modal/CreateListingModal";
 import { lazy, Suspense } from "react";
 import CategoryList from "./components/CategoryList";
 import NavBar from "./components/NavBar";
-
-const LazyHome = lazy(() => import("./pages/Home"));
-import { Apartment } from "./pages";
 import FilterModal from "./components/modal/FilterModal";
 import ProtectedRoute from "./util/ProtectedRoute";
+const LazyHome = lazy(() => import("./pages/Home"));
 const LazyUserListings = lazy(() => import("./pages/UserListings"));
 const LazyTrip = lazy(() => import("./pages/Trips"));
+const LazyApartment = lazy(() => import("./pages/Apartment"));
 const LazyUserFavourites = lazy(() => import("./pages/Favourites"));
 const LazyReservation = lazy(() => import("./pages/Reservations"));
 
@@ -71,7 +70,14 @@ function App() {
             </Suspense>
           }
         />
-        <Route path="/apartment/:id" element={<Apartment />} />
+        <Route
+          path="/apartment/:id"
+          element={
+            <Suspense fallback="Loading...">
+              <LazyApartment />
+            </Suspense>
+          }
+        />
         <Route
           path="/trips"
           element={
@@ -86,9 +92,11 @@ function App() {
         <Route
           path="/listing"
           element={
-            <Suspense fallback="Loading...">
-              <LazyUserListings />
-            </Suspense>
+            <ProtectedRoute>
+              <Suspense fallback="Loading...">
+                <LazyUserListings />
+              </Suspense>
+            </ProtectedRoute>
           }
         />
         <Route
@@ -104,9 +112,11 @@ function App() {
         <Route
           path="/reservations"
           element={
-            <Suspense fallback="Loading...">
-              <LazyReservation />
-            </Suspense>
+            <ProtectedRoute>
+              <Suspense fallback="Loading...">
+                <LazyReservation />
+              </Suspense>
+            </ProtectedRoute>
           }
         />
 
