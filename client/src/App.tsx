@@ -10,10 +10,10 @@ import NavBar from "./components/NavBar";
 import FilterModal from "./components/modal/FilterModal";
 import ProtectedRoute from "./util/ProtectedRoute";
 const LazyHome = lazy(() => import("./pages/Home"));
-const LazyUserListings = lazy(() => import("./pages/UserListings"));
+const LazyListings = lazy(() => import("./pages/Listings"));
 const LazyTrip = lazy(() => import("./pages/Trips"));
 const LazyApartment = lazy(() => import("./pages/Apartment"));
-const LazyUserFavourites = lazy(() => import("./pages/Favourites"));
+const LazyFavourites = lazy(() => import("./pages/Favourites"));
 const LazyReservation = lazy(() => import("./pages/Reservations"));
 
 function App() {
@@ -94,7 +94,7 @@ function App() {
           element={
             <ProtectedRoute>
               <Suspense fallback="Loading...">
-                <LazyUserListings />
+                <LazyListings />
               </Suspense>
             </ProtectedRoute>
           }
@@ -104,7 +104,7 @@ function App() {
           element={
             <ProtectedRoute>
               <Suspense fallback="Loading...">
-                <LazyUserFavourites />
+                <LazyFavourites />
               </Suspense>
             </ProtectedRoute>
           }

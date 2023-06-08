@@ -4,7 +4,7 @@ const Property = require("../models/Property");
 const createReservation = async (req, res) => {
   const newReservation = req.body;
 
-  const reservation = await Reservation.create({
+  await Reservation.create({
     ...newReservation,
     reservedBy: req.user.userId,
   });
@@ -19,32 +19,39 @@ const getPropertyReservation = async (req, res) => {
   res.status(200).json(reservation);
 };
 
-const getMyReservations = async (req, res) => {
-  const reservation = await Reservation.find({
+const deleteReservation = async (req, res) => {
+  const deletedReservation = await Reservation.findOneAndDelete({
+    _id: req.params.id,
     propertyOwner: req.user.userId,
-  }).sort("-createdAt");
+  });
+  if (!deletedReservation) {
+    return res
+      .status(404)
+      .json({ msg: `you have no reservation with id ${req.params.id}` });
+  }
+  res.status(200).send("reservation deleted");
+};
 
-  if (!reservation) {
+const getMyReservations = async (req, res) => {
+  const reservation = Reservation.find({
+    propertyOwner: req.user.userId,
+  });
+  const sortedReservation = await reservation.sort("-createdAt");
+
+  if (!sortedReservation) {
     return res.status(200).json([]);
   }
 
   const getProperties = async () => {
     let prop = [];
-    for (let i = 0; i < reservation.length; i++) {
+    for (let i = 0; i < sortedReservation.length; i++) {
       const property = await Property.findOne({
-        _id: reservation[i].propertyId,
+        _id: sortedReservation[i].propertyId,
       });
 
       const newPropertyDetails = {
-        images: property.images,
-        startDate: reservation[i].startDate,
-        endDate: reservation[i].endDate,
-        price: reservation[i].price,
-        state: property.state,
-        city: property.city,
-        country: property.country,
-        _id: property._id,
-        reservationId: reservation[i]._id,
+        reservation: sortedReservation[i],
+        reservationListing: property,
       };
       prop.push(newPropertyDetails);
     }
@@ -56,21 +63,21 @@ const getMyReservations = async (req, res) => {
 };
 
 const getMyTrips = async (req, res) => {
-  const trips = await Reservation.find({ reservedBy: req.user.userId }).sort(
-    "-createdAt"
-  );
-  if (!trips) {
+  const trips = Reservation.find({ reservedBy: req.user.userId });
+  const sortedTrips = await trips.sort("-createdAt");
+
+  if (!sortedTrips) {
     return res.status(200).json([]);
   }
 
   const getProperties = async () => {
     let prop = [];
-    for (let i = 0; i < trips.length; i++) {
+    for (let i = 0; i < sortedTrips.length; i++) {
       const property = await Property.findOne({
-        _id: trips[i].propertyId,
+        _id: sortedTrips[i].propertyId,
       });
       const newPropertyDetails = {
-        reservation: trips[i],
+        reservation: sortedTrips[i],
         reservationListing: property,
       };
       prop.push(newPropertyDetails);
@@ -97,6 +104,7 @@ module.exports = {
   createReservation,
   getPropertyReservation,
   getMyReservations,
+  deleteReservation,
   getMyTrips,
   deleteTrip,
 };

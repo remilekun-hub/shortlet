@@ -12,19 +12,11 @@ interface favourite {
 type ToggleHeartsProp = {
   id: string;
 };
-type UserType = {
-  name?: string;
-  id?: string;
-  token?: string;
-  image?: string;
-  favourites?: favourite[];
-};
 
 function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
   const user = userSlice((state) => state.user);
   const userState = userSlice((state) => state);
   const userFavourites = userSlice((state) => state.user?.favourites);
-  const navigate = useNavigate();
 
   const addToFavourite = async (id: string) => {
     const { data } = await axios.patch(
@@ -65,7 +57,7 @@ function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
       image: data.image,
       favourites: [...data.favourites],
     };
-    console.log({ updateUser });
+
     localStorage.setItem("user", JSON.stringify(updateUser));
     userState.setUser(updateUser);
   };

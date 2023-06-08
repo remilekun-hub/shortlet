@@ -3,21 +3,10 @@ import Heading from "../components/Heading";
 import useFetch from "../util/useFetch";
 import { Property } from "../typings";
 import PropertyCard from "../components/PropertyCard";
-import { useNavigate } from "react-router-dom";
 
 function Favourites() {
   const user = userSlice((state) => state.user);
 
-  if (!user) {
-    return (
-      <div className="flex justify-center items-center pt-[100px] text-center">
-        <Heading
-          title="Please Log in"
-          subtitle="you must be logged in to access this route"
-        />
-      </div>
-    );
-  }
   const { data, error } = useFetch<Property[]>(
     "http://localhost:5000/api/v1/favourites",
     {
@@ -26,7 +15,6 @@ function Favourites() {
       },
     }
   );
-  console.log(data);
   if (error) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
@@ -59,7 +47,7 @@ function Favourites() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {data.map((property) => (
-          <PropertyCard key={property._id} {...property} />
+          <PropertyCard key={property._id} data={property} />
         ))}
       </div>
     </section>

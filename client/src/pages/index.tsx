@@ -1,6 +1,6 @@
 import Home from "./Home";
 import Apartment from "./Apartment";
-import UserListings from "./UserListings";
+import UserListings from "./Listings";
 import UserFavourites from "./Favourites";
 import Reservations from "./Reservations";
 

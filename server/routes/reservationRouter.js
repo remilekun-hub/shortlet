@@ -4,6 +4,7 @@ const {
   createReservation,
   getPropertyReservation,
   getMyReservations,
+  deleteReservation,
   getMyTrips,
   deleteTrip,
 } = require("../controller/reservation");
@@ -15,6 +16,9 @@ router
   .post(authentication, createReservation);
 router.route("/trips").get(authentication, getMyTrips);
 router.route("/trips/:id").delete(authentication, deleteTrip);
-router.route("/:id").get(getPropertyReservation);
+router
+  .route("/:id")
+  .get(getPropertyReservation)
+  .delete(authentication, deleteReservation);
 
 module.exports = router;

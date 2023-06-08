@@ -16,6 +16,7 @@ function PropertyCard({
 }: PropertyCardProps) {
   const user = userSlice((state) => state.user);
   const loginModal = useLoginModalState();
+
   const reservationDate = useMemo(() => {
     if (!reservation) return null;
 

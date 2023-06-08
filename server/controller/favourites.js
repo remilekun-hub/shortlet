@@ -13,7 +13,7 @@ const getFavourites = async (req, res) => {
     for (i = 0; i < user.favourites.length; i++) {
       const property = await Property.findOne({
         _id: user.favourites[i].propertyId,
-      });
+      }).select("-createdBy");
       props.push(property);
     }
     return props;
