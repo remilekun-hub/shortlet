@@ -1,11 +1,12 @@
 import { Navigate } from "react-router-dom";
-import { userSlice } from "../zustand/user";
 
 type Prop = {
   children: JSX.Element;
 };
+
 const ProtectedRoute = ({ children }: Prop) => {
-  const user = userSlice((state) => state.user);
+  const user = localStorage.getItem("user");
+
   if (!user) {
     return (
       <>

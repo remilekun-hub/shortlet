@@ -21,6 +21,7 @@ function Listings() {
       .then(() => navigate(0))
       .catch((error) => console.log(error));
   };
+
   const { data, error } = useFetch<Property[]>(
     "http://localhost:5000/api/v1/properties",
     {
