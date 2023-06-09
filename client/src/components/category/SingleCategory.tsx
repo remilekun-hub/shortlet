@@ -7,9 +7,10 @@ import {
 interface Prop {
   label: string;
   selected?: boolean;
+  image: string;
 }
 
-function SingleCategory({ label, selected }: Prop) {
+function SingleCategory({ label, selected, image }: Prop) {
   const params = useSearchParams();
   const navigate = useNavigate();
   const country = params?.[0].get("country");
@@ -50,7 +51,7 @@ function SingleCategory({ label, selected }: Prop) {
 
   return (
     <div
-      className={`flex flex-col items-center cursor-pointer p-2 text-[14px] group transition
+      className={`flex flex-col items-center cursor-pointer p-2 text-[13px] group transition group
       ${
         selected
           ? "border-b-[2px] border-black text-black"
@@ -58,8 +59,16 @@ function SingleCategory({ label, selected }: Prop) {
       }`}
       onClick={handleClick}
     >
-      <p className="group-hover:text-black">{label}</p>
-      <p>icon here</p>
+      <div>
+        <img
+          src={image}
+          alt={`${label} image`}
+          className={`w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] group-hover:opacity-100 transition ${
+            selected ? "opacity-100" : "opacity-60"
+          }`}
+        />
+      </div>
+      <p className="group-hover:text-black mt-[10px] transition">{label}</p>
     </div>
   );
 }

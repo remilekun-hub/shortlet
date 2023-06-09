@@ -79,7 +79,7 @@ function RegisterModal(): JSX.Element {
         />
       </form>
       <div className="mt-3 flex flex-col items-center">
-        {status.isLoading && <Loader size={"sm"} color="#F43F5E" />}
+        {status.isLoading && <Loader size={"sm"} color="#412db3" />}
         <p className={`${status.color}`}>{status.message}</p>
       </div>
     </>
@@ -114,7 +114,7 @@ function RegisterModal(): JSX.Element {
       setTimeout(() => {
         form.reset(), setStatus({ message: "", color: "", isLoading: false });
         setFile(null);
-      }, 2000);
+      }, 3000);
     }
   };
 

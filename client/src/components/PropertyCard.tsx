@@ -31,9 +31,9 @@ function PropertyCard({
   }, [reservation]);
 
   return (
-    <div className="relative ">
+    <div className="relative cursor-pointer">
       <div
-        className="flex flex-col gap-3"
+        className="flex flex-col gap-3 "
         onClick={() => navigate(`/apartment/${data._id}`)}
       >
         <div className="h-[300px]">

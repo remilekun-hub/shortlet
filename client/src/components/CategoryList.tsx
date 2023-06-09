@@ -14,19 +14,20 @@ function CategoryList() {
     return null;
   }
   return (
-    <div className="bg-white pt-4 px-3 md:px-[50px] xl:px-[65px] flex items-center mx-auto max-w-[1800px]">
-      <div className=" justify-center flex space-x-2 overflow-x-auto flex-1">
+    <div className="bg-white pt-4 px-3 sm:px-10 md:px-[40px] flex items-center mx-auto max-w-[1800px]">
+      <div className=" justify-start lg:justify-center flex gap-x-2 sm:gap-x-4 md:gap-x-6 overflow-x-auto flex-1">
         {categories.map((item) => (
           <SingleCategory
             key={item.label}
             label={item.label}
+            image={item.image}
             selected={category == item.label}
           />
         ))}
       </div>
       <div
         onClick={filterModal.onOpen}
-        className="cursor-pointer flex gap-2 items-center p-[4px] md:p-2 border-0 md:border-[1px] rounded-xl"
+        className="cursor-pointer flex gap-2 items-center p-[4px] md:p-3 border-0 md:border-[1px] rounded-xl"
       >
         <svg
           viewBox="0 0 16 16"

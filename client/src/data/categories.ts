@@ -1,30 +1,53 @@
-import { ReactElement } from "react";
+import arctic from "../assets/arctic.jpg";
+import beach from "../assets/beach.jpg";
+import containers from "../assets/containers.jpg";
+import windmills from "../assets/windmills.jpg";
+import pools from "../assets/pools.jpg";
+import islands from "../assets/islands.jpg";
+import tropical from "../assets/tropical.jpg";
+import Houseboats from "../assets/Houseboats.jpg";
+import mansion from "../assets/mansion.jpg";
 
 interface category {
   label: string;
-  description: string;
-  icon?: ReactElement;
+  image: string;
 }
 
 export const categories: category[] = [
   {
+    label: "Arctic",
+    image: arctic,
+  },
+  {
     label: "Beach",
-    description: "This property is close to the beach",
+    image: beach,
   },
   {
-    label: "Mountain",
-    description: "This property is close to the Mountain",
+    label: "Containers",
+    image: containers,
   },
   {
-    label: "Modern",
-    description: "This property is modern",
+    label: "Houseboats",
+    image: Houseboats,
   },
   {
-    label: "Windmills",
-    description: "This property is close to the Sky",
+    label: "Islands",
+    image: islands,
+  },
+  {
+    label: "Mansion",
+    image: mansion,
   },
   {
     label: "Pools",
-    description: "This property has a pool",
+    image: pools,
+  },
+  {
+    label: "Tropical",
+    image: tropical,
+  },
+  {
+    label: "Windmills",
+    image: windmills,
   },
 ];
