@@ -2,7 +2,6 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { userSlice } from "../zustand/user";
 import HeartIcon from "./HeartIcon";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 interface favourite {
   _id: string;
