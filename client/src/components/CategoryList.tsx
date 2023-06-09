@@ -26,7 +26,7 @@ function CategoryList() {
       </div>
       <div
         onClick={filterModal.onOpen}
-        className="cursor-pointer flex gap-2 items-center p-3 border-[1px] rounded-xl"
+        className="cursor-pointer flex gap-2 items-center p-[4px] md:p-2 border-0 md:border-[1px] rounded-xl"
       >
         <svg
           viewBox="0 0 16 16"
@@ -38,7 +38,9 @@ function CategoryList() {
         >
           <path d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
         </svg>
-        <div className="text-[14px] md:text-[14px]">Filters</div>
+        <div className="hidden text-[14px] md:text-[14px] sm:block">
+          Filters
+        </div>
       </div>
     </div>
   );

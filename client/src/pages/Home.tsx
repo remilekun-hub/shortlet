@@ -31,7 +31,7 @@ function Home({ setSearch }: HomeProp) {
     }&maxPrice=${maxPrice || 1000}&country=${country}&category=${category}`,
     fetcher
   );
-
+  console.log(import.meta.env.VITE_BASE_URL);
   if (error) {
     return (
       <div className="flex justify-center items-center pt-[100px] text-center">
