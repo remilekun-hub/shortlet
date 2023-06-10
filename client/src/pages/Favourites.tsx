@@ -42,7 +42,7 @@ function Favourites() {
   }
 
   return (
-    <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px] pb-[50px]">
+    <section className="px-3 sm:px-10 md:px-[40px] mx-auto max-w-[1800px] pb-[30px]">
       <div className="mb-4">
         <Heading
           title="My Favourites"
@@ -50,7 +50,7 @@ function Favourites() {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-6 gap-y-7">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {data.map((property) => (
           <PropertyCard key={property._id} data={property} />
         ))}

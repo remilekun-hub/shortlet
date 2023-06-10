@@ -1,6 +1,6 @@
 import Modal from "./Modal";
 import useListingModalState from "../../zustand/listingModal";
-import { ReactElement, useMemo, useState, useEffect } from "react";
+import { ReactElement, useMemo, useState } from "react";
 import { categories } from "../../data/categories";
 import Heading from "../Heading";
 import Counter from "../Counter";

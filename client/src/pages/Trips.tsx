@@ -59,12 +59,12 @@ function Trips() {
     );
   }
   return (
-    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] pb-[50px] ">
+    <section className="px-4 sm:px-10 md:px-[50px] mx-auto max-w-[1800px] pb-[30px] ">
       <Heading
         title="Trips"
         subtitle="where you're going and where you've been"
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-6 gap-y-7 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mt-4">
         {data.map((trip) => (
           <PropertyCard
             key={trip.reservation._id}
