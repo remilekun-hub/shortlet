@@ -56,7 +56,9 @@ function PropertyCard({
             <span className="font-semibold">{`$${
               reservation?.price || data.price
             }`}</span>
-            <span className="text-neutral-600 ml-[6px]">night</span>
+            {!reservation && (
+              <span className="text-neutral-600 ml-[6px]">night</span>
+            )}
           </p>
         </div>
         <div onClick={(e) => e.stopPropagation()}>
@@ -73,7 +75,7 @@ function PropertyCard({
         </div>
       </div>
       {label && onSubmit && (
-        <div className="mt-2">
+        <div>
           <Button label={label} onSubmit={onSubmit} />
         </div>
       )}

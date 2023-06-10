@@ -8,7 +8,7 @@ import { imageUpload } from "../../util/imageUpload";
 import { userSlice } from "../../zustand/user";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { MultiSelect } from "@mantine/core";
+import { Loader, MultiSelect } from "@mantine/core";
 
 function CreateListingModal() {
   const navigete = useNavigate();
@@ -94,22 +94,24 @@ function CreateListingModal() {
     } catch (error) {
       console.log(error);
     } finally {
-      setData({
-        category: "",
-        title: "",
-        description: "",
-        country: "",
-        guests: 1,
-        amenities: [],
-        state: "",
-        bedrooms: 1,
-        bathrooms: 1,
-        bed: 1,
-        city: "",
-        price: 1,
-      });
-      setFiles(null);
-      setStatus({ ...status, isLoading: false });
+      setTimeout(() => {
+        setData({
+          category: "",
+          title: "",
+          description: "",
+          country: "",
+          guests: 1,
+          amenities: [],
+          state: "",
+          bedrooms: 1,
+          bathrooms: 1,
+          bed: 1,
+          city: "",
+          price: 1,
+        });
+        setFiles(null);
+        setStatus({ ...status, isLoading: false });
+      }, 3000);
     }
     // call
   };
@@ -351,6 +353,11 @@ function CreateListingModal() {
               }}
             />
 
+            {status.isLoading && (
+              <div className="flex justify-center items-center mb-2">
+                <Loader size={"sm"} color="#412db3" />
+              </div>
+            )}
             {error && (
               <p className="text-red-700 text-center">
                 All fields must be filled!
