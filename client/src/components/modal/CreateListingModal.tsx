@@ -149,7 +149,7 @@ function CreateListingModal() {
               {categories.map((item) => (
                 <div
                   key={item.label}
-                  className={`col-span-1 border-2 hover:border-black rounded-xl flex flex-col p-4 transition cursor-pointer ${
+                  className={`col-span-1 border-2 hover:border-black rounded-xl gap-2 flex flex-col p-4 transition cursor-pointer ${
                     data.category === item.label && "border-black"
                   }`}
                   onClick={() => {
@@ -160,7 +160,10 @@ function CreateListingModal() {
                     setData({ ...data, category: item.label });
                   }}
                 >
-                  {item.label}
+                  <div>
+                    <img src={item.image} className="w-[22px] h-[22px]" />
+                  </div>
+                  <p>{item.label}</p>
                 </div>
               ))}
             </div>
