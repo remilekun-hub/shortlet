@@ -1,7 +1,7 @@
 import Home from "./Home";
 import Apartment from "./Apartment";
-import UserListings from "./Listings";
-import UserFavourites from "./Favourites";
+import Listings from "./Listings";
+import Favourites from "./Favourites";
 import Reservations from "./Reservations";
 
-export { Home, Apartment, Reservations, UserListings, UserFavourites };
+export { Home, Apartment, Reservations, Listings, Favourites };

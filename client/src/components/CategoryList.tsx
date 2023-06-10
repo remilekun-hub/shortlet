@@ -14,8 +14,8 @@ function CategoryList() {
     return null;
   }
   return (
-    <div className="bg-white pt-4 px-3 sm:px-10 md:px-[40px] flex items-center mx-auto max-w-[1800px]">
-      <div className=" justify-start 2xl:justify-center flex gap-x-2 sm:gap-x-4 md:gap-x-6 overflow-x-auto flex-1">
+    <div className=" bg-white pt-4 px-3 sm:px-10 md:px-[40px] flex items-center mx-auto max-w-[1800px]">
+      <div className=" scrollbar scrollbar-h-[4px] scrollbar-thumb-rounded-[10px] scrollbar-thumb-gray-500 justify-start 2xl:justify-center flex gap-x-2 sm:gap-x-4 md:gap-x-6 overflow-x-auto flex-1">
         {categories.map((item) => (
           <SingleCategory
             key={item.label}
