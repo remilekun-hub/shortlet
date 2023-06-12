@@ -12,17 +12,21 @@ const FavouriteSchema = new mongoose.Schema({
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "username must be provided"],
+    required: [true, "please provide name"],
   },
   email: {
     type: String,
-    // pattern: [],
-    required: [true, "email is required"],
+    required: [true, "please provide email"],
+    match: [
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "please provide a valid email",
+    ],
+
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "password is required"],
+    required: [true, "please provide password"],
   },
   image: {
     type: String,
@@ -49,7 +53,7 @@ UserSchema.methods.createJWT = function () {
       image: this.image,
       favourites: this.favourites,
     },
-    "remi",
+    process.env.JWT_SECRET,
     {
       expiresIn: process.env.JWT_LIFETIME,
     }
