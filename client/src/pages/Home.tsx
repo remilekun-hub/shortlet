@@ -1,6 +1,6 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
-import { PropertyCardProps, Property } from "../typings";
+import { Property } from "../typings";
 import { Skeleton } from "@mantine/core";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
@@ -24,11 +24,13 @@ function Home({ setSearch }: HomeProp) {
   const navigate = useNavigate();
 
   const { data, error } = useSWR<Property[], Error>(
-    `http://localhost:5000/api/v1/public/properties?beds=${beds || 1}&baths=${
-      baths || 1
-    }&guests=${guests || 1}&bedrooms=${bedrooms || 1}&minPrice=${
-      minPrice || 0
-    }&maxPrice=${maxPrice || 1000}&country=${country}&category=${category}`,
+    `${import.meta.env.VITE_BACKEND_URL}/api/v1/public/properties?beds=${
+      beds || 1
+    }&baths=${baths || 1}&guests=${guests || 1}&bedrooms=${
+      bedrooms || 1
+    }&minPrice=${minPrice || 0}&maxPrice=${
+      maxPrice || 10000
+    }&country=${country}&category=${category}`,
     fetcher
   );
   if (error) {

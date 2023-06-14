@@ -28,7 +28,7 @@ function SingleCategory({ label, selected, image }: Prop) {
       bedrooms: bedrooms || 1,
       guests: guests || 1,
       minPrice: minPrice || 0,
-      maxPrice: maxPrice || 1000,
+      maxPrice: maxPrice || 10000,
     };
     if (label) {
       updatedQuery = { category: label, ...updatedQuery };

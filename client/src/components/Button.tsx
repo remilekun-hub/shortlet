@@ -8,7 +8,7 @@ interface ButtonProps {
 function Button({ label, onSubmit, disabled, secondary }: ButtonProps) {
   return (
     <button
-      className={` w-full p-3 py-2 sm:py-3 text-center bg-[#412db3] rounded-md font-medium disabled:bg-[#412db3/50] ${
+      className={` w-full p-3 py-2 sm:py-3 text-center bg-[#412db3] rounded-md font-medium disabled:bg-[#412db3]/70 ${
         secondary
           ? "bg-white border-black border-[1px] text-black"
           : "text-white"

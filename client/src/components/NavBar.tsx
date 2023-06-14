@@ -35,7 +35,7 @@ function NavBar({ search, setSearch }: NavBarProp) {
     bedrooms: 1,
     guests: 1,
     minPrice: 0,
-    maxPrice: 1000,
+    maxPrice: 10000,
   };
 
   const handleSearch = () => {

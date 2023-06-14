@@ -38,7 +38,7 @@ function Apartment() {
     };
     getProperty().then((data) => setProperty(data));
   }, []);
-
+  console.log(property);
   useEffect(() => {
     const getReservations = async () => {
       try {
@@ -142,7 +142,12 @@ function Apartment() {
                   <p className="font-semibold mb-3 sm:text-[22px] text-black">
                     What this place Offers
                   </p>
-                  facilities here
+
+                  <div className="grid grid-cols-2 max-w-[300px]">
+                    {property.amenities.map((item) => (
+                      <li className="list-none">{item}</li>
+                    ))}
+                  </div>
                 </div>
 
                 <form

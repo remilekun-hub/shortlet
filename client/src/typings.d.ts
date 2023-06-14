@@ -62,7 +62,7 @@ export interface SingleProperty {
   guests: number;
   state: string;
   description: string;
-  ameneties: string[] | [];
+  amenities: string[] | [];
   reviews: ReviewProp[] | [];
   __v?: number;
 }

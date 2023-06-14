@@ -16,7 +16,6 @@ function SideMenu({ setIsMenu }: SideMenuProps) {
   const listingModal = useListingModalState();
   const navigate = useNavigate();
   const location = useLocation();
-  const apartmentPath = location.pathname.startsWith("/apartment");
 
   const user = userSlice((state) => state);
 

@@ -25,7 +25,7 @@ function FilterModal({ setSearch }: FilterModalProp) {
     bedrooms: 1,
     guests: 1,
     minPrice: 0,
-    maxPrice: 1000,
+    maxPrice: 10000,
   });
   const [rangeValue, setRangeValue] = useState<[number, number]>([
     userFilter.minPrice,
@@ -38,7 +38,7 @@ function FilterModal({ setSearch }: FilterModalProp) {
       bedrooms: 1,
       guests: 1,
       minPrice: 0,
-      maxPrice: 1000,
+      maxPrice: 10000,
     });
     setRangeValue([userFilter.minPrice, userFilter.maxPrice]);
     setSearch("");
@@ -98,12 +98,12 @@ function FilterModal({ setSearch }: FilterModalProp) {
 
       <div className="flex items-center justify-between">
         <span className="mr-3 font-bold">Price</span>
-        <div className="w-[50%]">
+        <div className="w-[70%]">
           <RangeSlider
             value={rangeValue}
             onChange={setRangeValue}
             min={0}
-            max={1000}
+            max={10000}
           />
         </div>
       </div>
