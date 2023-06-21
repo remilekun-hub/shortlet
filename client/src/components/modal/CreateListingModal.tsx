@@ -40,6 +40,11 @@ function CreateListingModal() {
     { value: "Beachfront", label: "Beachfront" },
     { value: "Kitchen", label: "kitchen" },
     { value: "Patio", label: "Patio" },
+    { value: "Pool", label: "Pool" },
+    { value: "Air condition", label: "Air condition" },
+    { value: "Backyard", label: "Backyard" },
+    { value: "Bathtub", label: "Bathtub" },
+    { value: "Parking", label: "Parking" },
   ]);
   const [data, setData] = useState({
     category: "",

@@ -10,6 +10,7 @@ import Heading from "../components/Heading";
 import { Skeleton } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import Review from "../components/Review";
+import { Baseurl } from "../baseurl";
 
 interface Reservation {
   startDate: Date;
@@ -28,7 +29,7 @@ function Apartment() {
     const getProperty = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/v1/public/properties/${id}`
+          `${Baseurl}/api/v1/public/properties/${id}`
         );
         return data;
       } catch (e) {
@@ -38,12 +39,11 @@ function Apartment() {
     };
     getProperty().then((data) => setProperty(data));
   }, []);
-  console.log(property);
   useEffect(() => {
     const getReservations = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/v1/reservations/${id}`
+          `${Baseurl}/api/v1/reservations/${id}`
         );
         return data;
       } catch (error) {
@@ -58,7 +58,7 @@ function Apartment() {
     if (user) {
       await axios
         .post(
-          `http://localhost:5000/api/v1/properties/${propertyId}/review`,
+          `${Baseurl}/api/v1/properties/${propertyId}/review`,
           {
             message: reviewMessage,
           },
@@ -143,9 +143,9 @@ function Apartment() {
                     What this place Offers
                   </p>
 
-                  <div className="grid grid-cols-2 max-w-[300px]">
+                  <div className="grid grid-cols-2 max-w-[450px]">
                     {property.amenities.map((item) => (
-                      <li className="list-none">{item}</li>
+                      <li className="list-none m-1">{item}</li>
                     ))}
                   </div>
                 </div>
