@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import useSWR from "swr";
 import { fetcher } from "../util/fetcher";
 import { Dispatch, SetStateAction } from "react";
+import { Baseurl } from "../baseurl";
 
 interface HomeProp {
   setSearch: Dispatch<SetStateAction<string>>;
@@ -24,13 +25,11 @@ function Home({ setSearch }: HomeProp) {
   const navigate = useNavigate();
 
   const { data, error } = useSWR<Property[], Error>(
-    `${import.meta.env.VITE_BACKEND_URL}/api/v1/public/properties?beds=${
-      beds || 1
-    }&baths=${baths || 1}&guests=${guests || 1}&bedrooms=${
-      bedrooms || 1
-    }&minPrice=${minPrice || 0}&maxPrice=${
-      maxPrice || 10000
-    }&country=${country}&category=${category}`,
+    `${Baseurl}/api/v1/public/properties?beds=${beds || 1}&baths=${
+      baths || 1
+    }&guests=${guests || 1}&bedrooms=${bedrooms || 1}&minPrice=${
+      minPrice || 0
+    }&maxPrice=${maxPrice || 10000}&country=${country}&category=${category}`,
     fetcher
   );
   if (error) {

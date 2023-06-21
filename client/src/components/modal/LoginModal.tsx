@@ -6,6 +6,7 @@ import { userSlice } from "../../zustand/user";
 import { useForm } from "@mantine/form";
 import { TextInput, PasswordInput, Loader } from "@mantine/core";
 import { useState } from "react";
+import { Baseurl } from "../../baseurl";
 
 function LoginModal() {
   const loginModaLState = useLoginModalState();
@@ -42,10 +43,10 @@ function LoginModal() {
     setStatus({ ...status, isLoading: true });
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
-        { email: values.email, password: values.password }
-      );
+      const { data } = await axios.post(`${Baseurl}/api/v1/auth/login`, {
+        email: values.email,
+        password: values.password,
+      });
       localStorage.setItem("user", JSON.stringify(data));
       user.setUser(data);
       loginModaLState.onClose();

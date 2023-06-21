@@ -9,6 +9,7 @@ import { userSlice } from "../../zustand/user";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Loader, MultiSelect } from "@mantine/core";
+import { Baseurl } from "../../baseurl";
 
 function CreateListingModal() {
   const navigete = useNavigate();
@@ -34,7 +35,11 @@ function CreateListingModal() {
   const [amenities, setAmenities] = useState<string[]>([]);
   const [amenitiesData, setAmenitiesData] = useState([
     { value: "Wi-Fi", label: "WI-FI" },
-    { value: "ng", label: "Angular" },
+    { value: "TV", label: "TV" },
+    { value: "Washer", label: "Washer" },
+    { value: "Beachfront", label: "Beachfront" },
+    { value: "Kitchen", label: "kitchen" },
+    { value: "Patio", label: "Patio" },
   ]);
   const [data, setData] = useState({
     category: "",
@@ -50,6 +55,7 @@ function CreateListingModal() {
     city: "",
     price: 1,
   });
+  console.log(user);
   const handleSubmit = async () => {
     if (step !== STEPS.PRICE) {
       return onNext();
@@ -78,7 +84,7 @@ function CreateListingModal() {
     try {
       const cloudImages = await imageUpload(files);
       await axios.post(
-        "http://localhost:5000/api/v1/properties",
+        `${Baseurl}/api/v1/properties`,
         {
           ...data,
           images: cloudImages,
@@ -109,6 +115,7 @@ function CreateListingModal() {
           city: "",
           price: 1,
         });
+        setAmenitiesData([]);
         setFiles(null);
         setStatus({ ...status, isLoading: false });
       }, 3000);

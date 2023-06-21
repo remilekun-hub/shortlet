@@ -15,7 +15,7 @@ const authentication = async (req, res, next) => {
   const token = auth.split(" ")[1];
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_LIFETIME);
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
     if (!payload) {
       throw new ForbiddenError("token is not valid");
     }

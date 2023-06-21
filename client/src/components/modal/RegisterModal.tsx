@@ -6,6 +6,7 @@ import { useForm } from "@mantine/form";
 import { TextInput, PasswordInput, FileInput, Loader } from "@mantine/core";
 import { useState } from "react";
 import { singleImageUpload } from "../../util/singleImageUpload";
+import { Baseurl } from "../../baseurl";
 
 function RegisterModal(): JSX.Element {
   const loginModal = useLoginModalState();
@@ -93,7 +94,7 @@ function RegisterModal(): JSX.Element {
     setStatus({ ...status, isLoading: true });
     try {
       const url = await singleImageUpload(file);
-      await axios.post("http://localhost:5000/api/v1/auth/register", {
+      await axios.post(`${Baseurl}/api/v1/auth/register`, {
         name: values.name,
         email: values.email,
         password: values.password,
