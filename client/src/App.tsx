@@ -46,11 +46,7 @@ function App() {
 
   return (
     <>
-      <header
-        className={`w-full bg-white sticky top-0 mb-5 z-[50] ${
-          location.pathname === homepage && "shadow"
-        }`}
-      >
+      <header className={`w-full bg-white sticky top-0 mb-5 z-[50] `}>
         <div className="border-b-[1px] border-black/10">
           <NavBar search={search} setSearch={setSearch} />
         </div>

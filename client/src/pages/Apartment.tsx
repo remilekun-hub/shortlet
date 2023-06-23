@@ -112,8 +112,15 @@ function Apartment() {
             <div className="md:pt-9 lg:pt-12 md:flex md:justify-between">
               <div className="md:basis-[52%] lg:basis-[58%] mb-6">
                 <div className="mt-3 py-4 md:py-5 border-b-[1px] border-black/20 w-full flex justify-between gap-4 items-center">
-                  <h3 className="text-[18px] font-semibold sm:text-xl md:text-[22px] mb-2">{`hosted by ${property.createdBy.name}`}</h3>
-
+                  <div className="flex flex-col">
+                    <h3 className="text-[18px] font-semibold sm:text-xl md:text-[22px] mb-2">{`hosted by ${property.createdBy.name}`}</h3>
+                    <div className="flex flex-wrap gap-x-3">
+                      <p>{property.guests} guests</p>
+                      <p>{property.bedrooms} bedrooms</p>
+                      <p>{property.bed} beds</p>
+                      <p>{property.bathrooms} bath </p>
+                    </div>
+                  </div>
                   <img
                     src={property.createdBy.img}
                     className="w-14 h-14 rounded-full object-fit object-cover"

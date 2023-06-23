@@ -60,7 +60,7 @@ function CreateListingModal() {
     city: "",
     price: 1,
   });
-  console.log(user);
+
   const handleSubmit = async () => {
     if (step !== STEPS.PRICE) {
       return onNext();
