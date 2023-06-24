@@ -4,13 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@fontsource/nunito": "^4.5.12",
-    "@mantine/carousel": "^6.0.13",
     "@mantine/core": "^6.0.13",
     "@mantine/form": "^6.0.13",
     "@types/react-lazy-load-image-component": "^1.5.3",

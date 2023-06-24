@@ -77,7 +77,7 @@ function NavBar({ search, setSearch }: NavBarProp) {
       </div>
       <Link
         to={"/"}
-        className="hidden md:block  text-[#412db3] font-extrabold text-[22px] tracking-[1px]"
+        className="hidden md:block  text-[#412db3] font-extrabold text-[25px] tracking-[1px]"
       >
         Shortlet
       </Link>
