@@ -54,8 +54,8 @@ function SingleCategory({ label, selected, image }: Prop) {
       className={`flex flex-col items-center cursor-pointer p-2 text-[13px] group transition group
       ${
         selected
-          ? "border-b-[2px] border-black text-black"
-          : "text-neutral-500 border-b-[2px] border-transparent hover:border-black/10"
+          ? "border-b-[2px] border-black font-bold text-black"
+          : "text-neutral-600 border-b-[2px] border-transparent hover:border-black/10"
       }`}
       onClick={handleClick}
     >
