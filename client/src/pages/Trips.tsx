@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { userSlice } from "../zustand/user";
 import useFetch from "../util/useFetch";
 import Heading from "../components/Heading";
@@ -6,19 +7,24 @@ import { useNavigate } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import { Property, Reservation } from "../typings";
 import { Loader } from "@mantine/core";
+import { Baseurl } from "../baseurl";
 
 function Trips() {
   const user = userSlice((state) => state.user);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleCancelTrip = async (id: string) => {
+    setIsLoading(true);
     await axios
-      .delete(`http://localhost:5000/api/v1/reservations/trips/${id}`, {
+      .delete(`${Baseurl}/api/v1/reservations/trips/${id}`, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },
       })
-      .then(() => navigate(0));
+      .then(() => navigate(0))
+      .catch((error) => console.log(error))
+      .finally(() => setIsLoading(false));
   };
 
   type TripsProp = {
@@ -26,7 +32,7 @@ function Trips() {
     reservationListing: Property;
   };
   const { data, error } = useFetch<TripsProp[]>(
-    "http://localhost:5000/api/v1/reservations/trips",
+    `${Baseurl}/api/v1/reservations/trips`,
     {
       headers: {
         Authorization: `Bearer ${user?.token}`,
@@ -71,6 +77,7 @@ function Trips() {
             data={trip.reservationListing}
             reservation={trip.reservation}
             label="Cancel Trip"
+            isLoading={isLoading}
             onSubmit={() => handleCancelTrip(trip.reservation._id)}
           />
         ))}

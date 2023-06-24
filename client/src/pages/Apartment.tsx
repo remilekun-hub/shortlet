@@ -146,13 +146,15 @@ function Apartment() {
                 </div>
 
                 <div className="py-5 sm:py-7 border-b-[1px] border-black/20">
-                  <p className="font-semibold mb-3 sm:text-[22px] text-black">
+                  <p className="font-semibold mb-3 text-[18px] sm:text-[22px] text-black">
                     What this place Offers
                   </p>
 
                   <div className="grid grid-cols-2 max-w-[450px]">
-                    {property.amenities.map((item) => (
-                      <li className="list-none m-1">{item}</li>
+                    {property.amenities.map((item, i) => (
+                      <li className="list-none m-1" key={i}>
+                        {item}
+                      </li>
                     ))}
                   </div>
                 </div>
@@ -164,7 +166,7 @@ function Apartment() {
                     handlereviewSubmit(property._id);
                   }}
                 >
-                  <p className="mb-2">
+                  <p className="font-semibold mb-3 text-[18px] sm:text-[22px] text-black">
                     Tell us experience about this property and the host
                   </p>
                   <textarea

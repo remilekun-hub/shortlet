@@ -67,7 +67,7 @@ const getMyTrips = async (req, res) => {
   const sortedTrips = await trips.sort("-createdAt");
 
   if (!sortedTrips) {
-    return res.status(200).json([]);
+    return res.status(404).json([]);
   }
 
   const getProperties = async () => {

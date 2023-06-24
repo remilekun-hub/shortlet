@@ -48,7 +48,7 @@ function ImageBlock({ images }: ImageBlockProp) {
             />
           </div>
           <div
-            className={`cursor-pointer z-[50] rounded-full  bg-black/30 w-7 h-7 justify-center items-center absolute left-2 top-[48%] ${
+            className={`cursor-pointer z-[5] rounded-full  bg-black/30 w-7 h-7 justify-center items-center absolute left-2 top-[48%] ${
               currentImage === 0 || images.length < 2 ? "hidden" : "flex"
             }`}
             onClick={() =>
@@ -72,7 +72,7 @@ function ImageBlock({ images }: ImageBlockProp) {
           </div>
 
           <div
-            className={`cursor-pointer z-[50] rounded-full  bg-black/30 w-7 h-7 justify-center items-center absolute right-2 top-[48%] ${
+            className={`cursor-pointer z-[5] rounded-full  bg-black/30 w-7 h-7 justify-center items-center absolute right-2 top-[48%] ${
               currentImage === images.length - 1 || images.length < 2
                 ? "hidden"
                 : "flex"

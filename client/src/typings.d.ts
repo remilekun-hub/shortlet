@@ -22,6 +22,7 @@ export type PropertyCardProps = {
   reservation?: Reservation;
   label?: string;
   onSubmit?: () => void;
+  isLoading?: boolean;
 };
 
 export type Reservation = {

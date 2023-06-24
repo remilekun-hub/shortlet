@@ -14,7 +14,7 @@ const createProperty = async (req, res) => {
 const getProperties = async (req, res) => {
   const properties = await Property.find({
     "createdBy.id": req.user.userId,
-  }).select("_id price images city country state");
+  }).sort("-createdAt");
   res.status(200).json(properties);
 };
 

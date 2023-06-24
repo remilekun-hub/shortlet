@@ -7,6 +7,7 @@ import { eachDayOfInterval, differenceInCalendarDays } from "date-fns";
 import { Range } from "react-date-range";
 import ReserveBlock from "./ReserveBlock";
 import { useNavigate } from "react-router-dom";
+import { Baseurl } from "../baseurl";
 
 interface Reservation {
   startDate: Date;
@@ -63,7 +64,7 @@ function Reserve({ price, review, id, createdBy, reservations }: Prop) {
     setIsLoading(true);
     axios
       .post(
-        "http://localhost:5000/api/v1/reservations",
+        `${Baseurl}/api/v1/reservations`,
         {
           startDate: dateRange.startDate,
           endDate: dateRange.endDate,

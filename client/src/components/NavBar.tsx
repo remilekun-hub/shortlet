@@ -137,7 +137,7 @@ function NavBar({ search, setSearch }: NavBarProp) {
           {user ? (
             <img
               src={user.image}
-              className="hidden sm:block object-cover object-center rounded-full h-[35px] w-[35px]"
+              className="hidden sm:block object-cover object-center rounded-full h-[32px] w-[32px]"
             />
           ) : (
             <Avatar radius="xl" size={"35px"} className="hidden sm:block" />

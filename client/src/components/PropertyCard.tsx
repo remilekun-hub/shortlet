@@ -16,6 +16,7 @@ function PropertyCard({
   onSubmit,
   data,
   reservation,
+  isLoading,
 }: PropertyCardProps) {
   const user = userSlice((state) => state.user);
   const loginModal = useLoginModalState();
@@ -76,7 +77,7 @@ function PropertyCard({
       </div>
       {label && onSubmit && (
         <div>
-          <Button label={label} onSubmit={onSubmit} />
+          <Button label={label} onSubmit={onSubmit} disabled={isLoading} />
         </div>
       )}
     </div>
