@@ -47,6 +47,7 @@ function CreateListingModal() {
     { value: "Parking", label: "Parking" },
     { value: "Garden", label: "Garden" },
     { value: "CourtYard", label: "CourtYard" },
+    { value: "Heater", label: "Heater" },
   ]);
   const [data, setData] = useState({
     category: "",
@@ -238,8 +239,7 @@ function CreateListingModal() {
             <div className="mt-3">
               <MultiSelect
                 data={amenitiesData}
-                label="Your favorite frameworks/libraries"
-                placeholder="Pick all that you like"
+                placeholder="Select amenities"
                 searchable
                 value={amenities}
                 onChange={(values) => {

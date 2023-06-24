@@ -60,7 +60,7 @@ function App() {
     <>
       <header
         className={`w-full bg-white sticky transition ease-in-out top-0 mb-5 z-[50] ${
-          location.pathname === homepage && scrollNumber > 22 && "shadow-md"
+          location.pathname === homepage && scrollNumber > 21 && "shadow-md"
         } `}
       >
         <div className="border-b-[1px] border-black/10">
