@@ -36,7 +36,7 @@ function PropertyCard({
         className="flex flex-col gap-3 "
         onClick={() => navigate(`/apartment/${data._id}`)}
       >
-        <div className="h-[285px]">
+        <div className="h-[295px]">
           <LazyLoadImage
             src={data.images[0]}
             className="object-cover h-full w-full rounded-xl absolute z-[-200]"
