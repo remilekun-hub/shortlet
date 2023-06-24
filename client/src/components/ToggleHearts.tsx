@@ -1,12 +1,8 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import { userSlice } from "../zustand/user";
 import HeartIcon from "./HeartIcon";
 import axios from "axios";
-
-interface favourite {
-  _id: string;
-  propertyId: string;
-}
+import { Baseurl } from "../baseurl";
 
 type ToggleHeartsProp = {
   id: string;
@@ -19,7 +15,7 @@ function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
 
   const addToFavourite = async (id: string) => {
     const { data } = await axios.patch(
-      "http://localhost:5000/api/v1/users/favourites",
+      `${Baseurl}/api/v1/users/favourites`,
       {
         propertyId: id,
       },
@@ -42,7 +38,7 @@ function ToggleHearts({ id }: ToggleHeartsProp): ReactElement {
 
   const removeFavourite = async (id: string) => {
     const { data } = await axios.delete(
-      `http://localhost:5000/api/v1/users/favourites/${id}`,
+      `${Baseurl}/api/v1/users/favourites/${id}`,
       {
         headers: {
           Authorization: `Bearer ${user?.token}`,

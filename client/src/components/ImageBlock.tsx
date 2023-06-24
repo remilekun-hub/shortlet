@@ -19,7 +19,7 @@ function ImageBlock({ images }: ImageBlockProp) {
           {imageLayout(images)}
         </div>
       ) : (
-        <div className="hidden md:block h-full rounded-[13px] overflow-hidden mx-auto max-w-[800px] max-h-[450px] ">
+        <div className="hidden md:block rounded-[13px] overflow-hidden mx-auto h-[300px] sm:h-[400px]">
           <img
             src={images[0]}
             className=" w-full object-cover object-center "
@@ -27,7 +27,7 @@ function ImageBlock({ images }: ImageBlockProp) {
         </div>
       )}
 
-      <div className="md:hidden rounded-xl overflow-hidden max-h-[450px]">
+      <div className="md:hidden rounded-xl overflow-hidden max-h-[300px]">
         <Carousel
           maw={"100%"}
           mx="auto"

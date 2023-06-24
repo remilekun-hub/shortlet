@@ -18,9 +18,21 @@ const LazyReservation = lazy(() => import("./pages/Reservations"));
 
 function App() {
   const user = userSlice((state) => state);
+  const [scrollNumber, setScrollNumber] = useState(0);
   const [search, setSearch] = useState("");
   const location = useLocation();
   const homepage = "/";
+
+  useEffect(() => {
+    const handleScrollHeight = () => {
+      setScrollNumber(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScrollHeight);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollHeight);
+    };
+  }, []);
 
   interface favourite {
     _id: string;
@@ -46,7 +58,11 @@ function App() {
 
   return (
     <>
-      <header className={`w-full bg-white sticky top-0 mb-5 z-[50] `}>
+      <header
+        className={`w-full bg-white sticky transition ease-in-out top-0 mb-5 z-[50] ${
+          location.pathname === homepage && scrollNumber > 22 && "shadow-md"
+        } `}
+      >
         <div className="border-b-[1px] border-black/10">
           <NavBar search={search} setSearch={setSearch} />
         </div>

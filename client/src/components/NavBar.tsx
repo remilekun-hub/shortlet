@@ -65,7 +65,7 @@ function NavBar({ search, setSearch }: NavBarProp) {
 
   return (
     <nav
-      className={`flex items-center justify-between mx-auto  px-3 h-[80px] sm:px-10 md:px-[40px] relative ${
+      className={`flex items-center justify-between mx-auto  px-4 h-[80px] sm:px-10 md:px-[40px] relative ${
         apartmentPath ? "max-w-[1250px]" : "max-w-[1800px]"
       }`}
     >
@@ -75,8 +75,11 @@ function NavBar({ search, setSearch }: NavBarProp) {
       >
         Shortlet your home
       </div>
-      <Link to={"/"} className="hidden md:block">
-        logo here
+      <Link
+        to={"/"}
+        className="hidden md:block  text-[#412db3] font-extrabold text-[22px] tracking-[1px]"
+      >
+        Shortlet
       </Link>
 
       <div className="flex border-[1px] rounded-full items-center h-[46px] px-[5px] md:px-[6px] py-1 shadow-md">

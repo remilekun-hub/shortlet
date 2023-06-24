@@ -45,6 +45,8 @@ function CreateListingModal() {
     { value: "Backyard", label: "Backyard" },
     { value: "Bathtub", label: "Bathtub" },
     { value: "Parking", label: "Parking" },
+    { value: "Garden", label: "Garden" },
+    { value: "CourtYard", label: "CourtYard" },
   ]);
   const [data, setData] = useState({
     category: "",
